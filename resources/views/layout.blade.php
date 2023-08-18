@@ -9,6 +9,14 @@
     <!-- Start Side Bar -->
     @include('sideBar')
     <!-- End Side Bar -->
+
+    <!-- Start of Main content -->
     @yield('content')
+    <!-- End of Main content -->
+
+    <!-- Start of Right Side Bar -->
+    
+    <!-- End of Right Side Bar -->
+
 </body>
 </html>

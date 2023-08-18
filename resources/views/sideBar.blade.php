@@ -1,5 +1,5 @@
 @section('sideBar')
-<aside class="sticky w-60 overflow-y-auto bg-yellow-200">
+<aside class="sticky w-80 overflow-y-auto bg-yellow-200">
     <div class="text-gray-100 text-xl">
         <div class="p-2.5 mt-4 flex items-center text-center">
             <h1 class="font-semiboldtext-2xl ml-3 text-yellow-950 italic">Instagram</h1>
