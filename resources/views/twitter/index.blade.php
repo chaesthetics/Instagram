@@ -76,8 +76,94 @@
         </div>
     
     </div>
-   <div class="bg-stone-100 sticky h-screen top-0 bottom-0">
-    <h1></h1>
+   <div class="sticky h-screen top-0 bottom-0">
+    <div class="sidebar-card w-10/12 mt-10">
+        <div class="card-header flex items-center justify-between">
+            <div class="personal-info flex space-x-4">
+                <img class="h-11 w-11 rounded-full" src="{{ asset('img/post.jpg') }}"> 
+                <div>
+                  <span class="font-semibold">chaesthetics</span>
+                  <p class="text-sm opacity-70">Auriel</p>
+                </div>
+            </div>
+            <div class="action-button">
+                <span class="font-semibold text-blue-600 text-sm">switch</span>
+            </div>
+        </div>
+        <div class="card-content flex justify-between mt-5 mb-5 items-center">
+           <span class="font-semibold text-sm text-gray-600">Suggested for you</span>
+           <p class="text-sm font-semibold">See all</p>
+        </div>
+        <div class="card-content flex mt-3 items-center justify-between">
+            <div class="personal-info flex space-x-4">
+                <img class="h-11 w-11 rounded-full" src="{{ asset('img/post.jpg') }}"> 
+                <div>
+                  <span class="font-semibold">chaesthetics</span>
+                  <p class="text-xs opacity-70">Followed by issalokiii + 25 more</p>
+                </div>
+            </div>
+            <div class="action-button">
+                <span class="font-semibold text-blue-600 text-sm">switch</span>
+            </div>
+        </div>
+        <div class="card-content flex mt-3 items-center justify-between">
+            <div class="personal-info flex space-x-4">
+                <img class="h-11 w-11 rounded-full" src="{{ asset('img/post.jpg') }}"> 
+                <div>
+                  <span class="font-semibold">chaesthetics</span>
+                  <p class="text-xs opacity-70">Followed by issalokiii + 25 more</p>
+                </div>
+            </div>
+            <div class="action-button">
+                <span class="font-semibold text-blue-600 text-sm">switch</span>
+            </div>
+        </div>
+        <div class="card-content flex mt-3 items-center justify-between">
+            <div class="personal-info flex space-x-4">
+                <img class="h-11 w-11 rounded-full" src="{{ asset('img/post.jpg') }}"> 
+                <div>
+                  <span class="font-semibold">chaesthetics</span>
+                  <p class="text-xs opacity-70">Followed by issalokiii + 25 more</p>
+                </div>
+            </div>
+            <div class="action-button">
+                <span class="font-semibold text-blue-600 text-sm">switch</span>
+            </div>
+        </div>
+        <div class="card-content flex mt-3 items-center justify-between">
+            <div class="personal-info flex space-x-4">
+                <img class="h-11 w-11 rounded-full" src="{{ asset('img/post.jpg') }}"> 
+                <div>
+                  <span class="font-semibold">chaesthetics</span>
+                  <p class="text-xs opacity-70">Followed by issalokiii + 25 more</p>
+                </div>
+            </div>
+            <div class="action-button">
+                <span class="font-semibold text-blue-600 text-sm">switch</span>
+            </div>
+        </div>
+        <div class="card-content flex mt-3 items-center justify-between">
+            <div class="personal-info flex space-x-4">
+                <img class="h-11 w-11 rounded-full" src="{{ asset('img/post.jpg') }}"> 
+                <div>
+                  <span class="font-semibold">chaesthetics</span>
+                  <p class="text-xs opacity-70">Followed by issalokiii + 25 more</p>
+                </div>
+            </div>
+            <div class="action-button">
+                <span class="font-semibold text-blue-600 text-sm">switch</span>
+            </div>
+        </div>
+        <div class="card-footer mt-10 text-xs font-semibold opacity-40">
+            <p>About . Help . Press . API . Jobs . Privacy . Terms.</p>
+            <p>Locations . Language . Meta Verified</p>
+        </div>
+        <div class="card-footer mt-3 text-xs font-bold opacity-30">
+            <p>© 2023 FERNANDEZ AURIEL</p>
+      
+        </div>
+
+    </div>
    </div>
 </div>
 @endsection
