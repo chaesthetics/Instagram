@@ -18,4 +18,4 @@ Route::get('/', function () {
 });
 
 
-Route::resource('/homepage', UserController::class);
+Route::resource('/twitter', UserController::class);
