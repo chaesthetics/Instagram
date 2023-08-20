@@ -1,0 +1,10 @@
+@section('content')
+<html>
+<head>
+    <title>Signup</title>
+</head>
+<body>
+    <p>HELLOOOOOO</p>
+</body>
+</html>
+@endsection
