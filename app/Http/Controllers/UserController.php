@@ -14,7 +14,7 @@ class UserController extends Controller
     public function index()
     {
         $users = UserInfo::all();
-        return view('instagram/index')->with('users', $users);
+        return view('instagram.index')->with('users', $users);
     }
 
     /**
@@ -23,6 +23,11 @@ class UserController extends Controller
     public function create()
     {
         //
+    }
+
+    public function signup()
+    {
+        return view('instagram.signup');
     }
 
     /**
