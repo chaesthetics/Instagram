@@ -7,7 +7,7 @@
 <div class="flex min-h-screen">
   
     <!-- Start Side Bar -->
-    @include('twitter/sideBar')
+    @include('instagram/sideBar')
     <!-- End Side Bar -->
 
     <!-- Start of Main content -->

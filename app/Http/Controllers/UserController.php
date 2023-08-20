@@ -14,7 +14,7 @@ class UserController extends Controller
     public function index()
     {
         $users = UserInfo::all();
-        return view('twitter/index')->with('users', $users);
+        return view('instagram/index')->with('users', $users);
     }
 
     /**
