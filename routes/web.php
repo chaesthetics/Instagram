@@ -18,4 +18,7 @@ Route::get('/', function () {
 });
 
 
-Route::resource('/instagram', UserController::class);
+Route::get('signup', [UserController::class, 'signup']);
+
+Route::resource('/home', UserController::class);
+
