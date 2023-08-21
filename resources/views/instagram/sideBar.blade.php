@@ -111,7 +111,7 @@
             </li>
             <hr class="mt-2 mb-2">
             <li class="">
-                <a href="{{ url('/signup') }}" class="font-semibold text-sm space-x-3 block px-4 py-2 pt-5 pb-5 duration-300 cursor-pointer hover:bg-yellow-500 items-center dark:hover:bg-gray-600 dark:hover:text-white w-11/12 ml-auto mr-auto rounded-md flex">Log out</a>
+                <a href="{{ url('/signin') }}" class="font-semibold text-sm space-x-3 block px-4 py-2 pt-5 pb-5 duration-300 cursor-pointer hover:bg-yellow-500 items-center dark:hover:bg-gray-600 dark:hover:text-white w-11/12 ml-auto mr-auto rounded-md flex">Log out</a>
             </li>
         </ul>
     </div>
