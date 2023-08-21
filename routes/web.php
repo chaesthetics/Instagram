@@ -18,9 +18,11 @@ Route::get('/', function () {
 });
 
 
-Route::get('signup', [UserController::class, 'signup']);
+Route::get('/signup', [UserController::class, 'signup']);
 
-Route::get('signin', [UserController::class, 'signin']);
+Route::post('/signUpPost', [UserController::class, 'signUpPost']);
+
+Route::get('/signin', [UserController::class, 'signin']);
 
 Route::resource('/home', UserController::class);
 
