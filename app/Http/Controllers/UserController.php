@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\UserInfo;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -34,6 +35,16 @@ class UserController extends Controller
     public function signin()
     {
         return view('instagram.signin');
+    }
+
+    public function signInPost(Request $request)
+    {
+        $credentials = $request->only('username', 'password');
+        if (Auth::attempt($credentials)) {
+            return redirect()->intended('home');
+        } else {
+            return redirect('signin')->withErrors(['username' => 'Invalid credentials']);
+        }
     }
 
     public function signUpPost(Request $request)
