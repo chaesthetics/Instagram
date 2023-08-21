@@ -25,9 +25,12 @@ class UserController extends Controller
         //
     }
 
-    public function signup()
-    {
+    public function signup(){
         return view('instagram.signup');
+    }
+
+    public function signin(){
+        return view('instagram.signin');
     }
 
     /**

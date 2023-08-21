@@ -20,5 +20,7 @@ Route::get('/', function () {
 
 Route::get('signup', [UserController::class, 'signup']);
 
+Route::get('signin', [UserController::class, 'signin']);
+
 Route::resource('/home', UserController::class);
 
