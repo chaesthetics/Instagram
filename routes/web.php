@@ -18,7 +18,13 @@ Route::get('/', function () {
 });
 
 
-Route::get('signup', [UserController::class, 'signup']);
+Route::get('/signup', [UserController::class, 'signup']);
+Route::post('/signUpPost', [UserController::class, 'signUpPost']);
+Route::get('/signin', [UserController::class, 'signin']);
+Route::post('/signInPost', [UserController::class, 'signInPost']);
 
-Route::resource('/home', UserController::class);
+Route::middleware(['auth'])->group(function () {
+    // Your protected routes go here
+    Route::resource('/home', UserController::class);
+});
 
