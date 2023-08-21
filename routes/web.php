@@ -28,3 +28,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/home', UserController::class);
 });
 
+
+Auth::routes();
+
+Route::get('/post', [App\Http\Controllers\HomeController::class, 'index'])->name('post');

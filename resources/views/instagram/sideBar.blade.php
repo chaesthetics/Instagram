@@ -65,7 +65,7 @@
     </div>
    </div>
 
-   <div id="dropdown" class="hidden bg-neutral-800 divide-y-6 drop-shadow-xl rounded-xl shadow w-[280px] ">
+   <div id="dropdown" class="hidden  ml-[0px]  bg-neutral-800 divide-y-6 drop-shadow-xl rounded-xl shadow w-[280px] ">
     <ul class="py-2 text-sm text-white dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
       <li class="">
         <a href="#" class="font-semibold text-md space-x-3 block px-4 py-2 pt-4 pb-4 duration-300 cursor-pointer hover:bg-yellow-600 hover:text-white items-center dark:hover:bg-gray-600 dark:hover:text-white w-11/12 ml-auto mr-auto rounded-md flex">
