@@ -49,11 +49,11 @@
     <span class="text-[15px] ml-4 font-semibold">Create</span>
     </div>
 
-    <div class="p-2.5  flex items-center rounded-md px-4 duration-300 cursor-pointer z-0
-    hover:bg-yellow-600 hover:text-white text-neutral-300">
+    <a class="p-2.5  flex items-center rounded-md px-4 duration-300 cursor-pointer z-0
+    hover:bg-yellow-600 hover:text-white text-neutral-300" href="{{ url('profile') }}">
     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16"> <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/> <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/> </svg>
     <span class="text-[15px] ml-4 font-semibold">Profile</span>
-    </div>
+    </a>
 
     <div class="absolute mt-50 inset-x-0 bottom-8">
     <button class="p-2.5  flex w-full items-center rounded-md px-4 duration-300 cursor-pointer 

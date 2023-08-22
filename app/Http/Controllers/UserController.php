@@ -27,6 +27,12 @@ class UserController extends Controller
         //
     }
 
+    public function profile()
+    {
+        $users = UserInfo::all();
+        return view('instagram.profile')->with('users', $users);
+    }
+
     public function signup()
     {
         return view('instagram.signup');

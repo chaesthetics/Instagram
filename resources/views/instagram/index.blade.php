@@ -6,7 +6,7 @@
             <div class="card-header flex justify-between items-center">
                 <div class="header-info flex items-center">
                     <img class="h-9 w-9 rounded-full" src="{{ asset('img/post.jpg') }}">  
-                    <span class="font-bold text-sm text-gray-700 ml-3">hv_nara</span> 
+                    <span class="font-bold text-sm text-gray-700 ml-3">{{ Auth::user()->fullname }}</span> 
                     <span class="ml-1 text-gray-500 ">•  6h</span>
                 </div>
                 <div class="header-button text-grey-600">
