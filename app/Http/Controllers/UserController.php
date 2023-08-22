@@ -61,6 +61,10 @@ class UserController extends Controller
         return redirect('signin')->with('flash_message', 'User is Added!');
     }
 
+    public function logout()
+    {
+        return redirect('login')->with(Auth::logout());
+    }
     /**
      * Store a newly created resource in storage.
      */
