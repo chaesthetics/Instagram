@@ -27,7 +27,7 @@ Route::get('/logout', [UserController::class, 'logout']);
 Route::middleware(['auth'])->group(function () {
     // Your protected routes go here
     Route::resource('/home', UserController::class);
-    Route::resource('/profile', UserController::class);
+    Route::get('/profile', [UserController::class, 'profile']);
 });
 
 

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\UserInfo;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = UserInfo::all();
+        $users = User::all();
         return view('instagram.index')->with('users', $users);
     }
 
@@ -29,7 +29,7 @@ class UserController extends Controller
 
     public function profile()
     {
-        $users = UserInfo::all();
+        $users = User::all();
         return view('instagram.profile')->with('users', $users);
     }
 
@@ -55,7 +55,7 @@ class UserController extends Controller
 
     public function signUpPost(Request $request)
     {
-        $user = new UserInfo; 
+        $user = new User; 
 
         $passwordHash = Hash::make($request->password);
         
@@ -77,7 +77,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        UserInfo::create($input);
+        User::create($input);
         return redirect('instagram')->with('flash_message', 'User is added!');
     }
 
