@@ -1,12 +1,12 @@
 @extends('instagram.layout')
 @section('content')
-<div class="grid grid-cols-3 w-full divide-y">
+<div class="grid grid-cols-3 w-full">
     <div class="posts space-y-6 w-full col-span-2">
-        <div class="mr-auto ml-auto mt-10 w-3/5">
+        <div class="mr-auto ml-auto mt-10 w-4/6">
             <div class="card-header flex justify-between items-center">
                 <div class="header-info flex items-center">
                     <img class="h-9 w-9 rounded-full" src="{{ asset('img/post.jpg') }}">  
-                    <span class="font-bold text-sm text-gray-700 ml-3">hv_nara</span> 
+                    <span class="font-bold text-sm text-gray-700 ml-3">{{ Auth::user()->fullname }}</span> 
                     <span class="ml-1 text-gray-500 ">•  6h</span>
                 </div>
                 <div class="header-button text-grey-600">
@@ -189,8 +189,8 @@
 
     </div>
 
-   <div class="sticky h-screen top-0 bottom-0">
-    <div class="sidebar-card w-10/12 mt-10">
+   <div class="sticky h-screen top-10">
+    <div class="sidebar-card w-10/12">
         <div class="card-header flex items-center justify-between">
             <div class="personal-info flex space-x-4">
                 <img class="h-11 w-11 rounded-full" src="{{ asset('img/post4.jpg') }}"> 

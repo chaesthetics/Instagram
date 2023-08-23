@@ -7,7 +7,6 @@
 <body>
     <div class="grid grid-cols-1 sm:grid-cols-2 h-screen w-full items-center">
         <div class="hidden sm:block relative">
-        
           <img class="w-full h-full object-cover brightness-50" src="{{ asset('img/bg.png')}}">  
           <h1 class="absolute text-4xl text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">Capture the moment.</h1>
         </div>
