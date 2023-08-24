@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Post;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -49,8 +50,9 @@ class UserController extends Controller
         if (Auth::attempt($credentials)) {
             return redirect()->intended('home');
         } else {
-            return redirect('signin')->withErrors(['username' => 'Invalid credentials']);
+            return redirect('login')->withErrors(['username' => 'Invalid credentials']);
         }
+       
     }
 
     public function signUpPost(Request $request)
@@ -69,7 +71,21 @@ class UserController extends Controller
 
     public function logout()
     {
-        return redirect('login')->with(Auth::logout());
+        return redirect('login')->with(Auth::logout()); 
+    }
+
+    public function userPost(Request $request)
+    {
+        $post = new Post;
+        
+        $post->user_id = Auth::user()->id;                   // ITO OHHHHH
+        $post->text = $request->text;
+        $post->image = null;
+        
+        $post->save();
+        
+        $users = User::all();
+        return redirect('home')->with('users', $users);
     }
     /**
      * Store a newly created resource in storage.

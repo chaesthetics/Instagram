@@ -24,10 +24,12 @@ Route::get('/signin', [UserController::class, 'signin']);
 Route::post('/signInPost', [UserController::class, 'signInPost']);
 Route::get('/logout', [UserController::class, 'logout']);
 
+
 Route::middleware(['auth'])->group(function () {
     // Your protected routes go here
     Route::resource('/home', UserController::class);
     Route::get('/profile', [UserController::class, 'profile']);
+    Route::post('/userPost', [UserController::class, 'userPost']);
 });
 
 
