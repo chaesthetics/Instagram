@@ -74,15 +74,33 @@ class UserController extends Controller
         return redirect('login')->with(Auth::logout()); 
     }
 
-    public function userPost(Request $request)
+    public function userPost(Request $request, User $user)
     {
-        $post = new Post;
         
-        $post->user_id = Auth::user()->id;                   // ITO OHHHHH
-        $post->text = $request->text;
-        $post->image = null;
+        // $post = new Post([
+        //     'user_id' => Auth::user()->id, 
+        //     'text' => $request->input('text'),
+        //     'image' => $request->input('image'),
+        // ]);
         
-        $post->save();
+        // $user->posts()->save($post);
+
+        $data= $request->all();
+        $data['user_id'] = Auth::user()->id;
+        $data['text'] = $request->input('text');
+        
+        $status=Post::create($data);
+
+        if($status)
+        {
+
+        }
+
+
+        // $post->user_id = Auth::user()->id;                   
+        // $post->text = $request->text;
+        // $post->image = null;
+        // $post->save();
         
         $users = User::all();
         return redirect('home')->with('users', $users);
