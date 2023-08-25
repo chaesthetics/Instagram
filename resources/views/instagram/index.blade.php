@@ -7,14 +7,14 @@
             <div class="card-header flex justify-between items-center">
                 <div class="header-info flex items-center">
                     <img class="h-9 w-9 rounded-full" src="{{ asset('img/post.jpg') }}">  
-                    <span class="font-bold text-sm text-gray-700 ml-3">{{ Auth::user()->fullname }}</span> 
+                    <span class="font-bold text-sm text-gray-700 ml-3">{{ $item->user->username }}</span> 
                     <span class="ml-1 text-gray-500 ">•  6h</span>
                 </div>
                 <div class="header-button text-grey-600">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16"><path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/> </svg>
                 </div>
             </div>
-            <h3 class="text-lg text-gray-600 mb-4 mt-4">{{ $item->text }}</h3>
+            <h3 class="text-lg text-gray-600 mb-4 mt-4 break-words">{{ $item->text }}</h3>
             <div class="card-footer flex justify-between items-center mt-3">
                 <div class="interaction flex text-bold">
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16"> <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/> </svg>

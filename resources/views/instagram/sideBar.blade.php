@@ -4,7 +4,7 @@
 <aside class="sticky w-70 h-screen top-0 bg-gradient-to-r from-neutral-700 to-neutral-800">
     <div class="text-gray-100 text-xl mb-10">
         <div class="p-2.5 mt-4 flex items-center text-center">
-            <h1 class="font-semiboldtext-2xl ml-3 text-yellow-500 italic">Instagram</h1>
+            <h1 class="font-bold text-xl ml-3 text-white italic">Pウェt❓</h1>
         </div>
     </div>
     <div>
