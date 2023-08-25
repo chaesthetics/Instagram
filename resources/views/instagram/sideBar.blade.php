@@ -18,7 +18,7 @@
     <div class="p-0.5 flex items-center rounded-md px-4 duration-300 cursor-pointer
     hover:bg-yellow-600 text-white placeholder-white hover:text-white text-white bg-transparent border-none outline-none">
     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16"> <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/> </svg>
-    <input type="text" placeholder="Search" class="border-none ring-current placeholder-white ml-4 text-white w-full bg-transparent" >
+    <input type="text" placeholder="Search" class="border-none ring-current placeholder-white ml-4 text-white w-full bg-transparent focus:ring-0 focus:ring-offset-0">
     </div>
 
     <div class="p-2.5  flex items-center rounded-md px-4 duration-300 cursor-pointer
@@ -123,7 +123,7 @@
 <!-- Main modal -->
 <form method="post" action="{{ url('userPost') }}" id="postModal" tabindex="-1" aria-hidden="true" class="fixed left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
     {!! csrf_field() !!}
-    <div class="relative w-full max-w-2xl max-h-full">
+    <div class="relative w-full max-w-2xl max-h-full mb-60">
         <!-- Modal content -->
         <div class="relative bg-white rounded-lg shadow-xl dark:bg-gray-700">
             <!-- Modal header -->
@@ -140,7 +140,7 @@
             </div>
             <!-- Modal body -->
             <div class="p-6 space-y-6">
-                <textarea placeholder="What's on your mind?" class="outline outline-none w-full h-auto outline-none border-none focus:outline-none" name="text" id="text"></textarea>
+                <textarea placeholder="What's on your mind?!" class="outline text-gray-600 text-lg font-semibold outline-none w-full h-auto outline-none border-none focus:outline-none focus:ring-0 focus:ring-offset-0" name="text" id="text"></textarea>
             </div>
             <!-- Modal footer -->
             <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">

@@ -16,8 +16,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return view('instagram.index')->with('users', $users);
+        $posts = Post::all();
+        return view('instagram.index')->with('posts', $posts);
     }
 
     /**
@@ -95,8 +95,6 @@ class UserController extends Controller
         {
 
         }
-
-
         // $post->user_id = Auth::user()->id;                   
         // $post->text = $request->text;
         // $post->image = null;
@@ -105,6 +103,7 @@ class UserController extends Controller
         $users = User::all();
         return redirect('home')->with('users', $users);
     }
+
     /**
      * Store a newly created resource in storage.
      */
