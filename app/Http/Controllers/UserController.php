@@ -16,8 +16,13 @@ class UserController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
-        return view('instagram.index')->with('posts', $posts);
+        //$posts = Post::all();
+
+        // $user_id = Auth::user()->id;                        // dinefine ko ito
+        //$post = Post::with('user')->find($user_post);        // kasi di niya kilala si user_id
+        $allPost = Post::with('user')->get();
+                    
+        return view('instagram.index')->with('posts', $allPost); // return view ng home
     }
 
     /**
@@ -66,7 +71,7 @@ class UserController extends Controller
 		$user->password = $passwordHash;
 		$user->save();  
 
-        return redirect('signin')->with('flash_message', 'User is Added!');
+        return redirect('login')->with('flash_message', 'User is Added!');
     }
 
     public function logout()
