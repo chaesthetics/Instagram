@@ -91,15 +91,20 @@ class UserController extends Controller
         // $user->posts()->save($post);
 
         $data= $request->all();
+
+        $filename = '';
+
+        if($request->hasFile('image')){
+            $filename = $request->getSchemeAndHttpHost() . '/assets/img/' . time() . '.' . $request->image->extension();
+            $request->image->move(public_path('/assets/img/'), $filename);
+        }
+
         $data['user_id'] = Auth::user()->id;
         $data['text'] = $request->input('text');
+        $data['image'] = $filename;
         
         $status=Post::create($data);
 
-        if($status)
-        {
-
-        }
         // $post->user_id = Auth::user()->id;                   
         // $post->text = $request->text;
         // $post->image = null;
