@@ -4,7 +4,7 @@
 <aside class="sticky w-70 h-screen top-0 bg-gradient-to-r from-neutral-700 to-neutral-800">
     <div class="text-gray-100 text-xl mb-10">
         <div class="p-2.5 mt-4 flex items-center text-center">
-            <h1 class="font-semiboldtext-2xl ml-3 text-yellow-500 italic">Instagram</h1>
+            <h1 class="font-bold text-xl ml-3 text-white italic">Pウェt❓</h1>
         </div>
     </div>
     <div>
@@ -18,7 +18,7 @@
     <div class="p-0.5 flex items-center rounded-md px-4 duration-300 cursor-pointer
     hover:bg-yellow-600 text-white placeholder-white hover:text-white text-white bg-transparent border-none outline-none">
     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16"> <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/> </svg>
-    <input type="text" placeholder="Search" class="border-none ring-current placeholder-white ml-4 text-white w-full bg-transparent" >
+    <input type="text" placeholder="Search" class="border-none ring-current placeholder-white ml-4 text-white w-full bg-transparent focus:ring-0 focus:ring-offset-0">
     </div>
 
     <div class="p-2.5  flex items-center rounded-md px-4 duration-300 cursor-pointer
@@ -121,8 +121,9 @@
 </div>
   </aside>
 <!-- Main modal -->
-<div id="postModal" tabindex="-1" aria-hidden="true" class="fixed  top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="relative w-full max-w-2xl max-h-full">
+<form method="post" action="{{ url('userPost') }}" id="postModal" tabindex="-1" enctype="multipart/form-data" aria-hidden="true" class="fixed left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    {!! csrf_field() !!}
+    <div class="relative w-full max-w-2xl max-h-full mb-60">
         <!-- Modal content -->
         <div class="relative bg-white rounded-lg shadow-xl dark:bg-gray-700">
             <!-- Modal header -->
@@ -139,15 +140,16 @@
             </div>
             <!-- Modal body -->
             <div class="p-6 space-y-6">
-                <input type="file">
-                <input type="text">
+                <textarea placeholder="What's on your mind?!" class="outline text-gray-600 text-lg font-semibold outline-none w-full h-auto outline-none border-none focus:outline-none focus:ring-0 focus:ring-offset-0" name="text" id="text"></textarea>
             </div>
             <!-- Modal footer -->
-            <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                <button data-modal-hide="postModal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>
-                <button data-modal-hide="postModal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Decline</button>
+            <div>
+                <div class="flex items-center flex justify-between p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                    <input type="file" name="image" id="image">
+                    <button data-modal-hide="postModal" type="submit" value="submit" class="text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800">Post</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</form>
 @show

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Post;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,8 +16,13 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return view('instagram.index')->with('users', $users);
+        //$posts = Post::all();
+
+        // $user_id = Auth::user()->id;                        // dinefine ko ito
+        //$post = Post::with('user')->find($user_post);        // kasi di niya kilala si user_id
+        $allPost = Post::with('user')->get();
+                    
+        return view('instagram.index')->with('posts', $allPost); // return view ng home
     }
 
     /**
@@ -49,8 +55,9 @@ class UserController extends Controller
         if (Auth::attempt($credentials)) {
             return redirect()->intended('home');
         } else {
-            return redirect('signin')->withErrors(['username' => 'Invalid credentials']);
+            return redirect('login')->withErrors(['username' => 'Invalid credentials']);
         }
+       
     }
 
     public function signUpPost(Request $request)
@@ -64,13 +71,49 @@ class UserController extends Controller
 		$user->password = $passwordHash;
 		$user->save();  
 
-        return redirect('signin')->with('flash_message', 'User is Added!');
+        return redirect('login')->with('flash_message', 'User is Added!');
     }
 
     public function logout()
     {
-        return redirect('login')->with(Auth::logout());
+        return redirect('login')->with(Auth::logout()); 
     }
+
+    public function userPost(Request $request, User $user)
+    {
+        
+        // $post = new Post([
+        //     'user_id' => Auth::user()->id, 
+        //     'text' => $request->input('text'),
+        //     'image' => $request->input('image'),
+        // ]);
+        
+        // $user->posts()->save($post);
+
+        $data= $request->all();
+
+        $filename = '';
+
+        if($request->hasFile('image')){
+            $filename = $request->getSchemeAndHttpHost() . '/assets/img/' . time() . '.' . $request->image->extension();
+            $request->image->move(public_path('/assets/img/'), $filename);
+        }
+
+        $data['user_id'] = Auth::user()->id;
+        $data['text'] = $request->input('text');
+        $data['image'] = $filename;
+        
+        $status=Post::create($data);
+
+        // $post->user_id = Auth::user()->id;                   
+        // $post->text = $request->text;
+        // $post->image = null;
+        // $post->save();
+        
+        $users = User::all();
+        return redirect('home')->with('users', $users);
+    }
+
     /**
      * Store a newly created resource in storage.
      */
