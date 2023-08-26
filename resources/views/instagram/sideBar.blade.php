@@ -121,7 +121,7 @@
 </div>
   </aside>
 <!-- Main modal -->
-<form method="post" action="{{ url('userPost') }}" id="postModal" tabindex="-1" aria-hidden="true" class="fixed left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+<form method="post" action="{{ url('userPost') }}" id="postModal" tabindex="-1" enctype="multipart/form-data" aria-hidden="true" class="fixed left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
     {!! csrf_field() !!}
     <div class="relative w-full max-w-2xl max-h-full mb-60">
         <!-- Modal content -->
@@ -143,8 +143,11 @@
                 <textarea placeholder="What's on your mind?!" class="outline text-gray-600 text-lg font-semibold outline-none w-full h-auto outline-none border-none focus:outline-none focus:ring-0 focus:ring-offset-0" name="text" id="text"></textarea>
             </div>
             <!-- Modal footer -->
-            <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                <button data-modal-hide="postModal" type="submit" value="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Post</button>
+            <div>
+                <div class="flex items-center flex justify-between p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                    <input type="file" name="image" id="image">
+                    <button data-modal-hide="postModal" type="submit" value="submit" class="text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800">Post</button>
+                </div>
             </div>
         </div>
     </div>
