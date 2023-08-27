@@ -1,6 +1,6 @@
 @extends('instagram.layout')
 @section('content')
-<div class="w-full">
+<div class="w-full min-w-[100px]">
     <div class="w-[900px] ml-auto mr-auto">
         <div class="card-header flex items-center justify-center justify-between ml-10 mt-8 mr-auto w-9/12">
             <div class="profilepicture">
@@ -14,7 +14,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather ml-2 feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>       
                 </div>
                 <div class="interactions flex text-md space-x-5 mt-3">
-                    <p><b>20</b> posts</p>
+                    <p><b>{{ $posts->count(); }}</b> posts</p>
                     <p><b>1.2M</b> followers</p>
                     <p><b>0</b> following</p>
                 </div>
@@ -43,10 +43,10 @@
             </button>  
         </div>
 
-        <div class="grid grid-cols-3 gap-3">
+        <div class="grid grid-cols-3 gap-1">
         @foreach($posts->reverse() as $item)
-            <div class="relative group">
-                <div class=""><img class="group-hover:brightness-50 duration-300"src="{{ $item->image }}"></div>
+            <button class="relative group">
+                <div class=""><img class="group-hover:brightness-50 duration-300 object-cover h-[300px] w-[400px]" src="{{ $item->image }}"></div>
                 <div class="absolute flex w-2/4 justify-between items-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white flex opacity-0 group-hover:opacity-100 duration-300 space-x-1">
                     <div class="flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill text-white" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/> </svg>
@@ -57,10 +57,29 @@
                         <p class="ml-1">931</p>
                     </div>
                 </div>
-            </div>
+            </button>
         @endforeach
         </div>
-
+        <div class="flex mt-5 text-gray-500 text-xs justify-around w-full">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Blog</a>
+            <a href="#">Jobs</a>
+            <a href="#">Help</a>
+            <a href="#">API</a>
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">Top Accounts</a>
+            <a href="#">Home</a>
+            <a href="#">Locations</a>
+            <a href="#">Instagram Lite</a>
+            <a href="#">Threads</a>
+            <a href="#">Contact Uploading & Non-Users</a>
+            <a href="#">Meta Verified</a>
+        </div>
+        <div class="text-gray-500 text-xs flex mt-5 justify-center h-20">
+            <a href="#">© 2023 FERNANDEZ AURIEL</a>
+        </div>
     </div>
 </div>
 @endsection

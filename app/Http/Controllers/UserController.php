@@ -28,7 +28,7 @@ class UserController extends Controller
     public function profile()
     {
         $posts = User::find(Auth::user()->id)->posts;
-        
+
         return view('instagram.profile')->with('posts', $posts);
     }
 
