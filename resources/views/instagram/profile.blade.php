@@ -4,9 +4,13 @@
     <div class="w-[900px] ml-auto mr-auto">
         <div class="card-header flex items-center justify-center justify-between ml-10 mt-8 mr-auto w-9/12">
             <div class="profilepicture">
+                @if(Auth::user()->image)
+                {
                 <!--<img class="h-[150px] w-[150px] rounded-full" src="{{ asset('img/bg.jpg') }}"> -->
-                <div class="h-[150px] w-[150px] rounded-full bg-yellow-600 text-white text-5xl font-semibold  inline-flex items-center justify-center">{{ $author }}
-                </div>
+                }
+                @else
+                 <button class="h-[150px] w-[150px] rounded-full bg-yellow-600 text-white text-5xl font-semibold  inline-flex items-center justify-center">{{ $author }}</button>
+                @endif   
             </div>
             <div class="cardinfo">
                 <div class="flex ">

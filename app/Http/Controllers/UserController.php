@@ -21,7 +21,14 @@ class UserController extends Controller
         // $user_id = Auth::user()->id;                        // dinefine ko ito
         //$post = Post::with('user')->find($userPost);        // kasi di niya kilala si user_id
         $allPost = Post::with('user')->get();
-        return view('instagram.index')->with('posts', $allPost); // return view ng home
+
+        $full_name = Auth::user()->fullname;
+        $initial = explode(' ', $full_name);
+        $first = mb_substr($initial[0], 0, 1);
+        $last = mb_substr(end($initial), 0, 1);
+        $initial = $first.$last;
+       
+        return view('instagram.index')->with('posts', $allPost)->withAuthor($initial); // return view ng home
     }
 
     public function profile()
