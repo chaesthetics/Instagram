@@ -19,9 +19,8 @@ class UserController extends Controller
         //$posts = Post::all();
 
         // $user_id = Auth::user()->id;                        // dinefine ko ito
-        //$post = Post::with('user')->find($user_post);        // kasi di niya kilala si user_id
+        //$post = Post::with('user')->find($userPost);        // kasi di niya kilala si user_id
         $allPost = Post::with('user')->get();
-
         return view('instagram.index')->with('posts', $allPost); // return view ng home
     }
 
@@ -92,7 +91,7 @@ class UserController extends Controller
         // ]);
         
         // $user->posts()->save($post);
-
+        
         $data= $request->all();
 
         $filename = '';
@@ -114,7 +113,8 @@ class UserController extends Controller
         // $post->save();
         
         $users = User::all();
-        return redirect('home')->with('users', $users);
+    
+        return redirect()->back()->with('users', $users);
     }
 
     /**
