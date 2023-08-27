@@ -1,6 +1,6 @@
 @extends('instagram.layout')
 @section('content')
-<div class="grid grid-cols-3">
+<div class="grid w-full grid-cols-3">
     <div class="posts space-y-6 w-full mx-auto inset-x-0 col-span-2">
          @foreach($posts->reverse() as $item)
         <div class="mr-auto ml-auto  mt-10 w-4/6">
@@ -49,12 +49,12 @@
             <div class="personal-info flex space-x-4">
                 <img class="h-11 w-11 rounded-full" src="{{ asset('img/post4.jpg') }}"> 
                 <div>
-                  <span class="font-semibold">chaesthetics</span>
-                  <p class="text-sm opacity-70">Auriel</p>
+                  <span class="font-semibold">{{ Auth::user()->username }}</span>
+                  <p class="text-sm opacity-70">{{ Auth::user()->fullname }}</p>
                 </div>
             </div>
             <div class="action-button">
-                <span class="font-semibold text-blue-600 text-sm">switch</span>
+                <span class="font-semibold text-blue-600 text-sm">Switch</span>
             </div>
         </div>
         <div class="card-content flex justify-between mt-5 mb-5 items-center">
