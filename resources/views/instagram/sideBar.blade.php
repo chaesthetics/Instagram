@@ -54,13 +54,13 @@
 
     <a class="p-2.5  flex items-center rounded-md px-4 duration-300 cursor-pointer z-0
     hover:bg-yellow-600 hover:text-white text-neutral-300" href="{{ url('profile') }}">
-    @if(Auth::user()->image)
-                {
-                <!--<img class="h-[30px] w-[30px] rounded-full" src="{{ asset('img/bg.jpg') }}"> -->
-                }
-                @else
-                 <button class="h-[30px] w-[30px] rounded-full bg-yellow-600 text-white text-[10px] font-semibold  inline-flex items-center justify-center">{{ $author }}</button>
-                @endif   
+        @if(Auth::user()->image)
+            {
+            <!--<img class="h-[30px] w-[30px] rounded-full" src="{{ asset('img/bg.jpg') }}"> -->
+            }
+            @else
+                <button class="h-[30px] w-[30px] rounded-full bg-yellow-600 text-white text-[10px] font-semibold  inline-flex items-center justify-center">{{ $author }}</button>
+            @endif   
     <span class="text-[15px] ml-3 font-semibold">Profile</span>
     </a>
 
