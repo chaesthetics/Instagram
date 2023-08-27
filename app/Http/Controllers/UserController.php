@@ -27,8 +27,13 @@ class UserController extends Controller
     public function profile()
     {
         $posts = User::find(Auth::user()->id)->posts;
-
-        return view('instagram.profile')->with('posts', $posts);
+        $full_name = Auth::user()->fullname;
+        $initial = explode(' ', $full_name);
+        $first = mb_substr($initial[0], 0, 1);
+        $last = mb_substr(end($initial), 0, 1);
+        $initial = $first.$last;
+        
+        return view('instagram.profile')->with('posts', $posts)->withAuthor($initial);
     }
 
     /**
