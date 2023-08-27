@@ -1,7 +1,7 @@
 @section('sideBar')
 <!-- Modal toggle -->
 
-<aside class="sticky w-70 h-screen top-0 bg-gradient-to-r from-neutral-700 to-neutral-800">
+<aside class="sticky w-70 h-screen top-0 bg-stone-900">
     <div class="text-gray-100 text-xl mb-10">
         <div class="p-2.5 mt-4 flex items-center text-center">
             <h1 class="font-bold text-xl ml-3 text-white italic">Pウェt❓</h1>
@@ -61,14 +61,14 @@
     <div class="absolute mt-50 inset-x-0 bottom-8">
     <button class="p-2.5  flex w-full items-center rounded-md px-4 duration-300 cursor-pointer 
     hover:bg-yellow-600 hover:text-white text-white focus:z-10 focus:ring-2 focus:ring-yellow-700 focus:bg-yellow-700 focus:text-white" id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-white bg-blue-700">
-    <svg height="25px" id="Layer_1" style="enable-background:new 0 0 32 32;" version="1.1" viewBox="0 0 32 32" width="25px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M4,10h24c1.104,0,2-0.896,2-2s-0.896-2-2-2H4C2.896,6,2,6.896,2,8S2.896,10,4,10z M28,14H4c-1.104,0-2,0.896-2,2 s0.896,2,2,2h24c1.104,0,2-0.896,2-2S29.104,14,28,14z M28,22H4c-1.104,0-2,0.896-2,2s0.896,2,2,2h24c1.104,0,2-0.896,2-2 S29.104,22,28,22z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40" zoomAndPan="magnify" viewBox="0 0 30 30.000001" height="40" preserveAspectRatio="xMidYMid meet" version="1.0"><defs><clipPath id="id1"><path d="M 3.386719 7.164062 L 26.613281 7.164062 L 26.613281 22.40625 L 3.386719 22.40625 Z M 3.386719 7.164062 " clip-rule="nonzero"/></clipPath></defs><g clip-path="url(#id1)"><path fill="rgb(255%, 255%, 255%)" d="M 3.398438 22.40625 L 26.601562 22.40625 L 26.601562 19.867188 L 3.398438 19.867188 Z M 3.398438 16.054688 L 26.601562 16.054688 L 26.601562 13.515625 L 3.398438 13.515625 Z M 3.398438 7.164062 L 3.398438 9.703125 L 26.601562 9.703125 L 26.601562 7.164062 Z M 3.398438 7.164062 " fill-opacity="1" fill-rule="nonzero"/></g></svg>
     <span class="text-[15px] ml-4 font-semibold">Menu</span>
     </hr>
     </button>
     </div>
    </div>
 
-   <div id="dropdown" class="hidden  ml-[0px]  bg-neutral-800 divide-y-6 drop-shadow-xl rounded-xl shadow w-[280px] ">
+   <div id="dropdown" class="hidden  ml-[0px]  bg-stone-800 divide-y-6 drop-shadow-xl rounded-xl shadow w-[280px] ">
     <ul class="py-2 text-sm text-white dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
       <li class="">
         <a href="#" class="font-semibold text-md space-x-3 block px-4 py-2 pt-4 pb-4 duration-300 cursor-pointer hover:bg-yellow-600 hover:text-white items-center dark:hover:bg-gray-600 dark:hover:text-white w-11/12 ml-auto mr-auto rounded-md flex">

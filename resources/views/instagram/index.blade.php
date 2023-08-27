@@ -1,9 +1,9 @@
 @extends('instagram.layout')
 @section('content')
-<div class="grid grid-cols-3 w-full">
-    <div class="posts space-y-6 w-full col-span-2">
+<div class="grid grid-cols-3">
+    <div class="posts space-y-6 w-full mx-auto inset-x-0 col-span-2">
          @foreach($posts->reverse() as $item)
-        <div class="mr-auto ml-auto mt-10 w-4/6">
+        <div class="mr-auto ml-auto  mt-10 w-4/6">
             <div class="card-header flex justify-between items-center">
                 <div class="header-info flex items-center">
                     <img class="h-9 w-9 rounded-full " src="{{ asset('img/post.jpg') }}">  
@@ -121,11 +121,11 @@
                 <span class="font-semibold text-blue-600 hover:text-black text-sm">Follow</span>
             </div>
         </div>
-        <div class="card-footer mt-10 text-xs font-semibold opacity-40">
+        <div class="card-footer mt-10 text-gray-500 text-xs ">
             <p>About . Help . Press . API . Jobs . Privacy . Terms.</p>
             <p>Locations . Language . Meta Verified</p>
         </div>
-        <div class="card-footer mt-3 text-xs text-gray-1000 font-bold opacity-30">
+        <div class="card-footer mt-3 text-gray-500 text-xs ">
             <p>© 2023 FERNANDEZ AURIEL</p>
       
         </div>
