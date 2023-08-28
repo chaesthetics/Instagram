@@ -123,8 +123,8 @@
                 <div class="col-span-1 labels flex justify-end items-center">
                     <label class="text-black-600 font-semibold"></label>
                 </div>
-                <div class="col-span-3 ml-10 items-center flex justify-between ">
-                    <button class="bg-yellow-600 rounded-md text-white pt-1 pb-1 pr-4 font-semibold pl-4 mt-5 ">Submit<button>
+                <div class="col-span-3 ml-10 items-center flex justify-between items-center">
+                    <button class="bg-yellow-600 rounded-md text-sm  text-white pt-2 pb-2 pr-4 font-semibold pl-4 mt-5 ">Submit<button>
                     <span class="font-semibold text-sm text-yellow-600 mr-20">Temporarily deactivate account</span>
                 </div>
                 
