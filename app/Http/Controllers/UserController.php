@@ -19,17 +19,28 @@ class UserController extends Controller
         //$posts = Post::all();
 
         // $user_id = Auth::user()->id;                        // dinefine ko ito
-        //$post = Post::with('user')->find($user_post);        // kasi di niya kilala si user_id
+        //$post = Post::with('user')->find($userPost);        // kasi di niya kilala si user_id
         $allPost = Post::with('user')->get();
 
-        return view('instagram.index')->with('posts', $allPost); // return view ng home
+        $full_name = Auth::user()->fullname;
+        $initial = explode(' ', $full_name);
+        $first = mb_substr($initial[0], 0, 1);
+        $last = mb_substr(end($initial), 0, 1);
+        $initial = $first.$last;
+       
+        return view('instagram.index')->with('posts', $allPost)->withAuthor($initial); // return view ng home
     }
 
     public function profile()
     {
         $posts = User::find(Auth::user()->id)->posts;
-
-        return view('instagram.profile')->with('posts', $posts);
+        $full_name = Auth::user()->fullname;
+        $initial = explode(' ', $full_name);
+        $first = mb_substr($initial[0], 0, 1);
+        $last = mb_substr(end($initial), 0, 1);
+        $initial = $first.$last;
+        
+        return view('instagram.profile')->with('posts', $posts)->withAuthor($initial);
     }
 
     /**
@@ -40,7 +51,30 @@ class UserController extends Controller
         //
     }
 
-    
+    public function edit_profile()
+    {
+        $user = User::all();
+        
+        $full_name = Auth::user()->fullname;
+        $initial = explode(' ', $full_name);
+        $first = mb_substr($initial[0], 0, 1);
+        $last = mb_substr(end($initial), 0, 1);
+        $initial = $first.$last;
+        
+        return view('instagram.edit_profile')->with('user', $user)->withAuthor($initial);
+    }
+
+    public function change_password()
+    {
+        $user = User::all();
+        $full_name = Auth::user()->fullname;
+        $initial = explode(' ', $full_name);
+        $first = mb_substr($initial[0], 0, 1);
+        $last = mb_substr(end($initial), 0, 1);
+        $initial = $first.$last;
+        
+        return view('instagram.change_password')->with('user', $user)->withAuthor($initial);
+    }
 
     public function signup()
     {
@@ -66,7 +100,6 @@ class UserController extends Controller
     public function signUpPost(Request $request)
     {
         $user = new User; 
-
         $passwordHash = Hash::make($request->password);
         
         $user->username = $request->username;
@@ -85,18 +118,10 @@ class UserController extends Controller
     public function userPost(Request $request, User $user)
     {
         
-        // $post = new Post([
-        //     'user_id' => Auth::user()->id, 
-        //     'text' => $request->input('text'),
-        //     'image' => $request->input('image'),
-        // ]);
-        
-        // $user->posts()->save($post);
-
         $data= $request->all();
 
         $filename = '';
-
+    
         if($request->hasFile('image')){
             $filename = $request->getSchemeAndHttpHost() . '/assets/img/' . time() . '.' . $request->image->extension();
             $request->image->move(public_path('/assets/img/'), $filename);
@@ -107,24 +132,41 @@ class UserController extends Controller
         $data['image'] = $filename;
         
         $status=Post::create($data);
-
-        // $post->user_id = Auth::user()->id;                   
-        // $post->text = $request->text;
-        // $post->image = null;
-        // $post->save();
         
         $users = User::all();
-        return redirect('home')->with('users', $users);
+    
+        return redirect()->back()->with('users', $users);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function update_user(Request $request)
     {
-        $input = $request->all();
-        User::create($input);
-        return redirect('instagram')->with('flash_message', 'User is added!');
+        $user = User::all();
+        $user = User::find(Auth::user()->id);
+        
+        $filename = '';
+        
+        if($request->hasFile('avatar')){
+            $filename = $request->getSchemeAndHttpHost() . '/assets/img/' . time() . '.' . $request->avatar->extension();
+            $request->avatar->move(public_path('/assets/img/'), $filename);
+        }
+
+        
+        $user->update([
+            'username' => $request->username,
+            'fullname' => $request->fullname,
+            'bio' => $request->bio,
+            'email' => $request->email,
+            'avatar' => $filename,
+        ]);
+
+        $posts = User::find(Auth::user()->id)->posts;
+        $full_name = Auth::user()->fullname;
+        $initial = explode(' ', $full_name);
+        $first = mb_substr($initial[0], 0, 1);
+        $last = mb_substr(end($initial), 0, 1);
+        $initial = $first.$last;
+        return redirect('profile')->with('posts', $posts)->withAuthor($initial);
+
     }
 
     /**

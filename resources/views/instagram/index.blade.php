@@ -1,20 +1,20 @@
 @extends('instagram.layout')
 @section('content')
-<div class="grid grid-cols-3 w-full">
-    <div class="posts space-y-6 w-full col-span-2">
+<div class="grid w-full grid-cols-3">
+    <div class="posts space-y-6 w-full mx-auto inset-x-0 col-span-2">
          @foreach($posts->reverse() as $item)
-        <div class="mr-auto ml-auto mt-10 w-4/6">
+        <div class="mr-auto ml-auto  mt-10 w-4/6">
             <div class="card-header flex justify-between items-center">
                 <div class="header-info flex items-center">
                     <img class="h-9 w-9 rounded-full " src="{{ asset('img/post.jpg') }}">  
                     <span class="font-bold text-sm text-gray-700 ml-3">{{ $item->user->username }}</span> 
-                    <span class="ml-1 text-gray-500 ">•  1 min</span>
+                    <span class="ml-1 text-sm text-gray-500 ">•  {{ $item->created_at->diffForHumans() }}</span>
                 </div>
                 <div class="header-button text-grey-600">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16"><path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/> </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16"><path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/> </svg>
                 </div>
             </div>
-            <img class="mt-2 mb-2 rounded-md max-h-[600px] object-cover" src="{{ $item->image }}">
+            <img class="mt-2 mb-2 rounded-md max-h-[600px] w-full object-cover" src="{{ $item->image }}">
             <div class="card-footer flex justify-between items-center mt-3">
                 <div class="interaction flex text-bold">
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16"> <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/> </svg>
@@ -47,14 +47,18 @@
     <div class="sidebar-card w-10/12 mt-10">
         <div class="card-header flex items-center justify-between">
             <div class="personal-info flex space-x-4">
-                <img class="h-11 w-11 rounded-full" src="{{ asset('img/post4.jpg') }}"> 
+                @if(Auth::user()->avatar)
+                    <img class="h-[45px] w-[45px] rounded-full object-cover" src="{{ Auth::user()->avatar }}">
+                @else
+                 <button class="h-[45px] w-[45px] rounded-full bg-yellow-600 text-white text-[15px] font-semibold  inline-flex items-center justify-center">{{ $author }}</button>
+                @endif   
                 <div>
-                  <span class="font-semibold">chaesthetics</span>
-                  <p class="text-sm opacity-70">Auriel</p>
+                  <span class="font-semibold">{{ Auth::user()->username }}</span>
+                  <p class="text-sm opacity-70">{{ Auth::user()->fullname }}</p>
                 </div>
             </div>
             <div class="action-button">
-                <span class="font-semibold text-blue-600 text-sm">switch</span>
+                <span class="font-semibold text-blue-600 text-sm">Switch</span>
             </div>
         </div>
         <div class="card-content flex justify-between mt-5 mb-5 items-center">
@@ -121,11 +125,11 @@
                 <span class="font-semibold text-blue-600 hover:text-black text-sm">Follow</span>
             </div>
         </div>
-        <div class="card-footer mt-10 text-xs font-semibold opacity-40">
+        <div class="card-footer mt-10 text-gray-500 text-xs ">
             <p>About . Help . Press . API . Jobs . Privacy . Terms.</p>
             <p>Locations . Language . Meta Verified</p>
         </div>
-        <div class="card-footer mt-3 text-xs text-gray-1000 font-bold opacity-30">
+        <div class="card-footer mt-3 text-gray-500 text-xs ">
             <p>© 2023 FERNANDEZ AURIEL</p>
       
         </div>
