@@ -45,7 +45,7 @@
             
         </aside>
         <div class="col-span-5 w-full">
-            <div class="grid grid-cols-4 mt-8 space-y-4">
+            <div class="grid grid-cols-4 mt-8 space-y-4 mb-7">
 
                 <div class="col-span-1 labels flex justify-end items-center">
                 @if(Auth::user()->image)
@@ -60,7 +60,12 @@
                     <p class="leading-none">{{ Auth::user()->username }}</p>
                     <button class="text-sm leading-none hover:text-black font-semibold text-yellow-500">Change profile photo</button>
                 </div>
-                
+
+
+            </div>
+
+            <form class="grid grid-cols-4 mt-8 space-y-4 mb-7">
+
                 <div class="col-span-1 labels flex justify-end items-center">
                     <label class="text-black-600 font-semibold">Username</label>
                 </div>
@@ -118,10 +123,11 @@
                 <div class="col-span-1 labels flex justify-end items-center">
                     <label class="text-black-600 font-semibold"></label>
                 </div>
-                <div class="col-span-3 ml-10 items-center flex justify-between">
-                    <button class="bg-yellow-600 rounded-md text-white pt-1 pb-1 pr-2 pl-2">Submit<button>
+                <div class="col-span-3 ml-10 items-center flex justify-between ">
+                    <button class="bg-yellow-600 rounded-md text-white pt-1 pb-1 pr-4 font-semibold pl-4 mt-5 ">Submit<button>
                     <span class="font-semibold text-sm text-yellow-600 mr-20">Temporarily deactivate account</span>
                 </div>
+                
 
                 
                 <!-- <div class="col-span-1 labels flex justify-end items-center">
@@ -130,7 +136,7 @@
                 <div class="col-span-3 ml-10 bg-red-600 flex items-center">
                     <input type="text">
                 </div> -->
-            </div>
+            </form>
         </div>
     </div>
     <div class="w-[900px] ml-auto mr-auto">
