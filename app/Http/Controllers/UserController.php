@@ -99,7 +99,6 @@ class UserController extends Controller
     public function signUpPost(Request $request)
     {
         $user = new User; 
-
         $passwordHash = Hash::make($request->password);
         
         $user->username = $request->username;
@@ -118,14 +117,6 @@ class UserController extends Controller
     public function userPost(Request $request, User $user)
     {
         
-        // $post = new Post([
-        //     'user_id' => Auth::user()->id, 
-        //     'text' => $request->input('text'),
-        //     'image' => $request->input('image'),
-        // ]);
-        
-        // $user->posts()->save($post);
-        
         $data= $request->all();
 
         $filename = '';
@@ -140,25 +131,32 @@ class UserController extends Controller
         $data['image'] = $filename;
         
         $status=Post::create($data);
-
-        // $post->user_id = Auth::user()->id;                   
-        // $post->text = $request->text;
-        // $post->image = null;
-        // $post->save();
         
         $users = User::all();
     
         return redirect()->back()->with('users', $users);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function update_user(Request $request)
     {
-        $input = $request->all();
-        User::create($input);
-        return redirect('instagram')->with('flash_message', 'User is added!');
+        $user = User::all();
+        $user = User::find(Auth::user()->id);
+        
+        $user->update([
+            'username' => $request->username,
+            'fullname' => $request->fullname,
+            'bio' => $request->bio,
+            'email' => $request->email,
+        ]);
+
+        $posts = User::find(Auth::user()->id)->posts;
+        $full_name = Auth::user()->fullname;
+        $initial = explode(' ', $full_name);
+        $first = mb_substr($initial[0], 0, 1);
+        $last = mb_substr(end($initial), 0, 1);
+        $initial = $first.$last;
+        return redirect('profile')->with('posts', $posts)->withAuthor($initial);
+
     }
 
     /**
