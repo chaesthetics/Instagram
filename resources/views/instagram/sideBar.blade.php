@@ -59,7 +59,7 @@
             <!--<img class="h-[30px] w-[30px] rounded-full" src="{{ asset('img/bg.jpg') }}"> -->
             }
             @else
-                <button class="h-[30px] w-[30px] rounded-full bg-yellow-600 text-white text-[10px] font-semibold  inline-flex items-center justify-center">{{ $author }}</button>
+                <button class="h-[30px] w-[30px] rounded-full bg-yellow-800 text-white text-[10px] font-semibold  inline-flex items-center justify-center">{{ $author }}</button>
             @endif   
     <span class="text-[15px] ml-3 font-semibold">Profile</span>
     </a>

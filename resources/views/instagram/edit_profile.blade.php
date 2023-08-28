@@ -91,8 +91,39 @@
                     </p>
                 </div>
 
+                <div class="col-span-1 labels flex justify-end items-center">
+                    <label class="text-black-600 font-semibold">Bio</label>
+                </div>
+                <div class="col-span-3 ml-10 items-center justify-start">
+                    <textarea class="text-sm w-[320px] border-gray-300 focus:ring-0 focus:ring-offset-0" placeholder="Wag masyadong mahaba, hayop ka." type="text"></textarea>
+                </div>
 
+                <div class="col-span-1 labels flex justify-end items-center">
+                    <label class="text-black-600 font-semibold">Email</label>
+                </div>
+                <div class="col-span-3 ml-10 items-center justify-start">
+                    <input class="text-sm h-8 w-[320px] border-gray-300 focus:ring-0 focus:ring-offset-0" type="email">
+                </div>
 
+                <div class="col-span-1 labels flex justify-end items-center">
+                    <label class="text-black-600 font-semibold"></label>
+                </div>
+                <div class="col-span-3 ml-10 items-center justify-start">
+                    <p class="w-[320px] text-sm text-gray-600 font-semibold">Personal information
+                    </p>
+                    <p class="w-[320px] text-xs text-gray-500">Provide your personal information, even if the account is used for a business, a pet or something else. This won't be a part of your public profile.
+                    </p>
+                </div>
+
+                <div class="col-span-1 labels flex justify-end items-center">
+                    <label class="text-black-600 font-semibold"></label>
+                </div>
+                <div class="col-span-3 ml-10 items-center flex justify-between">
+                    <button class="bg-yellow-600 rounded-md text-white pt-1 pb-1 pr-2 pl-2">Submit<button>
+                    <span class="font-semibold text-sm text-yellow-600 mr-20">Temporarily deactivate account</span>
+                </div>
+
+                
                 <!-- <div class="col-span-1 labels flex justify-end items-center">
                     <label>Username</label>
                 </div>
