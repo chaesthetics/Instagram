@@ -46,7 +46,6 @@
         </aside>
         <div class="col-span-5 w-full">
             <div class="grid grid-cols-4 mt-8 space-y-4 mb-7">
-
                 <div class="col-span-1 labels flex justify-end items-center">
                 @if(Auth::user()->image)
                 {
@@ -60,17 +59,15 @@
                     <p class="leading-none">{{ Auth::user()->username }}</p>
                     <button class="text-sm leading-none hover:text-black font-semibold text-yellow-500">Change profile photo</button>
                 </div>
-
-
             </div>
 
-            <form class="grid grid-cols-4 mt-8 space-y-4 mb-7">
-
+            <form class="grid grid-cols-4 mt-8 space-y-4 mb-7" method="POST" action="{{ url('update_user')}}">
+                {!! csrf_field() !!}
                 <div class="col-span-1 labels flex justify-end items-center">
                     <label class="text-black-600 font-semibold">Username</label>
                 </div>
                 <div class="col-span-3 ml-10 items-center justify-start">
-                    <input class="text-sm h-8 w-[320px] border-gray-300 focus:ring-0 focus:ring-offset-0" type="text">
+                    <input name="username" placeholder="Enter your username" value="{{ Auth::user()->username }}" class="text-sm h-8 w-[320px] border-gray-300 focus:ring-0 focus:ring-offset-0" type="text">
                 </div>
 
                 <div class="col-span-1 labels flex justify-end items-center">
@@ -86,7 +83,7 @@
                     <label class="text-black-600 font-semibold">Fullname</label>
                 </div>
                 <div class="col-span-3 ml-10 items-center justify-start">
-                    <input class="text-sm h-8 w-[320px] border-gray-300 focus:ring-0 focus:ring-offset-0" type="text">
+                    <input name="fullname" placeholder="Enter your fullname" value="{{ Auth::user()->fullname }}" class="text-sm h-8 w-[320px] border-gray-300 focus:ring-0 focus:ring-offset-0" type="text">
                 </div>
 
                 <div class="col-span-1 labels flex justify-end items-center ml-10">
@@ -100,14 +97,14 @@
                     <label class="text-black-600 font-semibold">Bio</label>
                 </div>
                 <div class="col-span-3 ml-10 items-center justify-start">
-                    <textarea class="text-sm w-[320px] border-gray-300 focus:ring-0 focus:ring-offset-0" placeholder="Wag masyadong mahaba, hayop ka." type="text"></textarea>
+                    <textarea name="bio" class="text-sm w-[320px] border-gray-300 focus:ring-0 focus:ring-offset-0" placeholder="Describe your self">{{ Auth::user()->bio }}</textarea>
                 </div>
 
                 <div class="col-span-1 labels flex justify-end items-center">
                     <label class="text-black-600 font-semibold">Email</label>
                 </div>
                 <div class="col-span-3 ml-10 items-center justify-start">
-                    <input class="text-sm h-8 w-[320px] border-gray-300 focus:ring-0 focus:ring-offset-0" type="email">
+                    <input name="email" placeholder="Enter your email" value="{{ Auth::user()->email }}" class="text-sm h-8 w-[320px] border-gray-300 focus:ring-0 focus:ring-offset-0" type="email">
                 </div>
 
                 <div class="col-span-1 labels flex justify-end items-center">
@@ -124,18 +121,10 @@
                     <label class="text-black-600 font-semibold"></label>
                 </div>
                 <div class="col-span-3 ml-10 items-center flex justify-between items-center">
-                    <button class="bg-yellow-600 rounded-md text-sm  text-white pt-2 pb-2 pr-4 font-semibold pl-4 mt-5 ">Submit<button>
+                    <button type="submit" value="save" class="bg-yellow-600 rounded-md text-sm  text-white pt-2 pb-2 pr-4 font-semibold pl-4 mt-5 ">Submit<button>
                     <span class="font-semibold text-sm text-yellow-600 mr-20">Temporarily deactivate account</span>
                 </div>
-                
 
-                
-                <!-- <div class="col-span-1 labels flex justify-end items-center">
-                    <label>Username</label>
-                </div>
-                <div class="col-span-3 ml-10 bg-red-600 flex items-center">
-                    <input type="text">
-                </div> -->
             </form>
         </div>
     </div>

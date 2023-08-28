@@ -24,8 +24,11 @@
                     <p><b>1.2M</b> followers</p>
                     <p><b>0</b> following</p>
                 </div>
-                <div class="flex mt-3 text-md font-semibold">
+                <div class="flex mt-3 text-sm font-semibold leading-none">
                     <p>{{ Auth::user()->fullname }}</p>
+                </div>
+                <div class="flex mt-3 text-sm leading-none mt-1">
+                    <p>{{ Auth::user()->bio }}</p>
                 </div>
             </div>
         </div>
