@@ -63,6 +63,18 @@ class UserController extends Controller
         return view('instagram.edit_profile')->with('user', $user)->withAuthor($initial);
     }
 
+    public function change_password()
+    {
+        $user = User::all();
+        $full_name = Auth::user()->fullname;
+        $initial = explode(' ', $full_name);
+        $first = mb_substr($initial[0], 0, 1);
+        $last = mb_substr(end($initial), 0, 1);
+        $initial = $first.$last;
+        
+        return view('instagram.change_password')->with('user', $user)->withAuthor($initial);
+    }
+
     public function signup()
     {
         return view('instagram.signup');   
