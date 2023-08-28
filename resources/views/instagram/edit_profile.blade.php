@@ -47,22 +47,25 @@
         <div class="col-span-5 w-full">
             <div class="grid grid-cols-4 mt-8 space-y-4 mb-7">
                 <div class="col-span-1 labels flex justify-end items-center">
-                @if(Auth::user()->image)
-                {
-                <!--<img class="h-[30px] w-[30px] rounded-full" src="{{ asset('img/bg.jpg') }}"> -->
-                }
+                <form method="POST" action="{{ url('update_user')}}" enctype="multipart/form-data">
+                {!! csrf_field() !!}
+                @if(Auth::user()->avatar)
+                    <img id="default" class="h-[50px] w-[50px] rounded-full object-cover" src="{{ Auth::user()->avatar }}">
+                    <img id="output" class="rounded-full mt-3 flex h-[0px] w-[0px] static opacity-0 object-cover">
                 @else
-                <button class="h-[40px] w-[40px] mt-3 rounded-full bg-yellow-600 text-white text-[15px] font-semibold  inline-flex items-center justify-center">{{ $author }}</button>
+                <button id="default" class="h-[50px] w-[50px] mt-3 rounded-full bg-yellow-600 text-white text-[15px] font-semibold  inline-flex items-center justify-center">{{ $author }}</button>
+                <img id="output" class="rounded-full mt-3 flex h-[0px] w-[0px] static opacity-0 object-cover">
                 @endif   
-                </div>
+                </div>               
+
                 <div class="col-span-3 ml-10 justify-start">
                     <p class="leading-none">{{ Auth::user()->username }}</p>
-                    <button class="text-sm leading-none hover:text-black font-semibold text-yellow-500">Change profile photo</button>
+                    <button class="text-sm leading-none flex hover:text-black font-semibold text-yellow-500">
+                        <input class="absolute z-50 h-[12px] w-[140px] opacity-0" name="avatar" type="file" id="avatar" onchange="loadFile(event)">
+                        <p class="absolute items-center">Change profile photo</p>
+                    </button>
                 </div>
-            </div>
-
-            <form class="grid grid-cols-4 mt-8 space-y-4 mb-7" method="POST" action="{{ url('update_user')}}">
-                {!! csrf_field() !!}
+            
                 <div class="col-span-1 labels flex justify-end items-center">
                     <label class="text-black-600 font-semibold">Username</label>
                 </div>
@@ -124,8 +127,8 @@
                     <button type="submit" value="save" class="bg-yellow-600 rounded-md text-sm  text-white pt-2 pb-2 pr-4 font-semibold pl-4 mt-5 ">Submit<button>
                     <span class="font-semibold text-sm text-yellow-600 mr-20">Temporarily deactivate account</span>
                 </div>
-
-            </form>
+                </form>
+            </div>
         </div>
     </div>
     <div class="w-[900px] ml-auto mr-auto">
@@ -151,4 +154,14 @@
         </div>
     </div>
 </div>
+<script>
+    var loadFile = function(event){
+        var output = document.getElementById('output');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.style.opacity = "1";
+        output.style.height = "50px";
+        output.style.width = "50px";
+        document.getElementById("default").remove();
+    }
+</script>
 @endsection

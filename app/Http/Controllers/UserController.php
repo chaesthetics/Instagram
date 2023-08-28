@@ -54,6 +54,7 @@ class UserController extends Controller
     public function edit_profile()
     {
         $user = User::all();
+        
         $full_name = Auth::user()->fullname;
         $initial = explode(' ', $full_name);
         $first = mb_substr($initial[0], 0, 1);
@@ -120,7 +121,7 @@ class UserController extends Controller
         $data= $request->all();
 
         $filename = '';
-
+    
         if($request->hasFile('image')){
             $filename = $request->getSchemeAndHttpHost() . '/assets/img/' . time() . '.' . $request->image->extension();
             $request->image->move(public_path('/assets/img/'), $filename);
@@ -142,11 +143,20 @@ class UserController extends Controller
         $user = User::all();
         $user = User::find(Auth::user()->id);
         
+        $filename = '';
+        
+        if($request->hasFile('avatar')){
+            $filename = $request->getSchemeAndHttpHost() . '/assets/img/' . time() . '.' . $request->avatar->extension();
+            $request->avatar->move(public_path('/assets/img/'), $filename);
+        }
+
+        
         $user->update([
             'username' => $request->username,
             'fullname' => $request->fullname,
             'bio' => $request->bio,
             'email' => $request->email,
+            'avatar' => $filename,
         ]);
 
         $posts = User::find(Auth::user()->id)->posts;

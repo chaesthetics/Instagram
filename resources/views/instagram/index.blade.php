@@ -47,10 +47,8 @@
     <div class="sidebar-card w-10/12 mt-10">
         <div class="card-header flex items-center justify-between">
             <div class="personal-info flex space-x-4">
-                @if(Auth::user()->image)
-                {
-                <!--<img class="h-[45px] w-[45px] rounded-full" src="{{ asset('img/bg.jpg') }}"> -->
-                }
+                @if(Auth::user()->avatar)
+                    <img class="h-[45px] w-[45px] rounded-full object-cover" src="{{ Auth::user()->avatar }}">
                 @else
                  <button class="h-[45px] w-[45px] rounded-full bg-yellow-600 text-white text-[15px] font-semibold  inline-flex items-center justify-center">{{ $author }}</button>
                 @endif   
