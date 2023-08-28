@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table){
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->text('text');
-            $table->string('image')->nullable();
+            $table->text('text')->nullable();
+            $table->string('image');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
             $table->timestamps();
         });

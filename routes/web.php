@@ -30,6 +30,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/home', UserController::class);
     Route::get('/profile', [UserController::class, 'profile']);
     Route::post('/userPost', [UserController::class, 'userPost']);
+    Route::get('/edit_profile', [UserController::class, 'edit_profile']);
+    Route::get('/change_password', [UserController::class, 'change_password']);
 });
 
 
