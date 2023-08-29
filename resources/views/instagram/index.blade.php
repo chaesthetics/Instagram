@@ -6,7 +6,11 @@
         <div class="mr-auto ml-auto  mt-10 w-4/6">
             <div class="card-header flex justify-between items-center">
                 <div class="header-info flex items-center">
-                    <img class="h-9 w-9 rounded-full " src="{{ asset('img/post.jpg') }}">  
+                    @if($item->user->avatar)
+                    <img class="h-9 w-9 rounded-full object-cover" src="{{ $item->user->avatar }}">
+                    @else
+                    <button class="h-9 w-9 rounded-full bg-yellow-800 text-white text-[10px] font-semibold  inline-flex items-center justify-center">{{ $item->initials }}</button>
+                    @endif   
                     <span class="font-bold text-sm text-gray-700 ml-3">{{ $item->user->username }}</span> 
                     <span class="ml-1 text-sm text-gray-500 ">•  {{ $item->created_at->diffForHumans() }}</span>
                 </div>
@@ -47,10 +51,8 @@
     <div class="sidebar-card w-10/12 mt-10">
         <div class="card-header flex items-center justify-between">
             <div class="personal-info flex space-x-4">
-                @if(Auth::user()->image)
-                {
-                <!--<img class="h-[45px] w-[45px] rounded-full" src="{{ asset('img/bg.jpg') }}"> -->
-                }
+                @if(Auth::user()->avatar)
+                    <img class="h-[45px] w-[45px] rounded-full object-cover" src="{{ Auth::user()->avatar }}">
                 @else
                  <button class="h-[45px] w-[45px] rounded-full bg-yellow-600 text-white text-[15px] font-semibold  inline-flex items-center justify-center">{{ $author }}</button>
                 @endif   

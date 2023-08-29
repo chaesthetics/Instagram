@@ -16,18 +16,28 @@ class UserController extends Controller
      */
     public function index()
     {
-        //$posts = Post::all();
+    
 
-        // $user_id = Auth::user()->id;                        // dinefine ko ito
-        //$post = Post::with('user')->find($userPost);        // kasi di niya kilala si user_id
         $allPost = Post::with('user')->get();
-
+        
+        
         $full_name = Auth::user()->fullname;
+        
         $initial = explode(' ', $full_name);
         $first = mb_substr($initial[0], 0, 1);
         $last = mb_substr(end($initial), 0, 1);
         $initial = $first.$last;
-       
+        
+        $allPost->map(function($allPost){
+            $fullnames = $allPost->user->fullname; 
+            $initials = explode(' ', $fullnames);
+            $firsts = mb_substr($initials[0], 0, 1);
+            $lasts = mb_substr(end($initials), 0, 1);
+            $initials = $firsts.$lasts;
+
+            $allPost['initials'] = $initials;
+        });
+        
         return view('instagram.index')->with('posts', $allPost)->withAuthor($initial); // return view ng home
     }
 
@@ -54,6 +64,7 @@ class UserController extends Controller
     public function edit_profile()
     {
         $user = User::all();
+        
         $full_name = Auth::user()->fullname;
         $initial = explode(' ', $full_name);
         $first = mb_substr($initial[0], 0, 1);
@@ -120,7 +131,7 @@ class UserController extends Controller
         $data= $request->all();
 
         $filename = '';
-
+    
         if($request->hasFile('image')){
             $filename = $request->getSchemeAndHttpHost() . '/assets/img/' . time() . '.' . $request->image->extension();
             $request->image->move(public_path('/assets/img/'), $filename);
@@ -142,11 +153,21 @@ class UserController extends Controller
         $user = User::all();
         $user = User::find(Auth::user()->id);
         
+        $filename = '';
+        
+        if($request->hasFile('avatar')){
+            $filename = $request->getSchemeAndHttpHost() . '/assets/img/' . time() . '.' . $request->avatar->extension();
+            $request->avatar->move(public_path('/assets/img/'), $filename);
+        }else{
+            $filename = Auth::user()->avatar;
+        }
+        
         $user->update([
             'username' => $request->username,
             'fullname' => $request->fullname,
             'bio' => $request->bio,
             'email' => $request->email,
+            'avatar' => $filename,
         ]);
 
         $posts = User::find(Auth::user()->id)->posts;
