@@ -11,7 +11,46 @@
                     @else
                     <button class="h-9 w-9 rounded-full bg-yellow-800 text-white text-[10px] font-semibold  inline-flex items-center justify-center">{{ $item->initials }}</button>
                     @endif   
-                    <span class="font-bold text-sm text-gray-700 ml-3">{{ $item->user->username }}</span> 
+                    <span class="font-bold text-sm text-gray-700 ml-3" data-popover-target="popover-user{{ $item->user->username }}">{{ $item->user->username }}
+                        
+                    </span> 
+                            
+                    <div data-popover id="popover-user{{ $item->user->username }}" role="tooltip" class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600">
+                        <div class="p-3">
+                            <div class="flex items-center justify-between mb-2">
+                                <a href="#">
+                                    <img class="w-10 h-10 rounded-full" src="{{ $item->user->avatar }}" alt="Auriel">
+                                </a>
+                                <div>
+                                    <button type="button" class="text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-xs px-3 py-1.5 dark:bg-yellow-600 dark:hover:bg-yellow-700 focus:outline-none dark:focus:ring-yellow-800">Follow</button>
+                                </div>
+                            </div>
+                            <p class="text-base font-semibold leading-none text-gray-900 dark:text-white">
+                                <a href="#">{{ $item->user->username }}</a>
+                            </p>
+                            <p class="mb-3 text-sm font-normal">
+                                <a href="#" class="hover:underline">{{ $item->user->fullname }}</a>
+                            </p>
+                            <p class="mb-4 text-sm">{{ $item->user->bio }}</p>
+                            <ul class="flex text-sm">
+                                <li class="mr-2">
+                                    <a href="#" class="hover:underline">
+                                        <span class="font-semibold text-gray-900 dark:text-white">799</span>
+                                        <span>Following</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="hover:underline">
+                                        <span class="font-semibold text-gray-900 dark:text-white">3,758</span>
+                                        <span>Followers</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div data-popper-arrow></div>
+                    </div>
+
+
                     <span class="ml-1 text-sm text-gray-500 ">•  {{ $item->created_at->diffForHumans() }}</span>
                 </div>
                 <div class="header-button text-grey-600">
