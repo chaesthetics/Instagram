@@ -58,7 +58,7 @@ class UserController extends Controller
           
         });
         
-        return view('instagram.index')->with('posts', $allPost)->withAuthor($initial); // return view ng home
+        return view('instagram.index')->with('posts', $allPost)->withAuthor($initial); 
     }
 
     public function profile()
