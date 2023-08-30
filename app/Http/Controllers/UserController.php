@@ -18,7 +18,6 @@ class UserController extends Controller
 
         $allPost = Post::with('user')->get();
         
-        
         $full_name = Auth::user()->fullname;
         
         $initial = explode(' ', $full_name);
@@ -26,14 +25,37 @@ class UserController extends Controller
         $last = mb_substr(end($initial), 0, 1);
         $initial = $first.$last;
         
+        
         $allPost->map(function($allPost){
+            $posts = User::find($allPost->user_id)->posts;
+    
             $fullnames = $allPost->user->fullname; 
             $initials = explode(' ', $fullnames);
             $firsts = mb_substr($initials[0], 0, 1);
             $lasts = mb_substr(end($initials), 0, 1);
             $initials = $firsts.$lasts;
-
-            $allPost['initials'] = $initials;
+            $allPost['initials'] = $initials;    
+            $value = count($posts);
+            
+            if($value>=3){
+                $allPost['p0'] = $posts[$value-1]->image;
+                $allPost['p1'] = $posts[$value-2]->image;
+                $allPost['p2'] = $posts[$value-3]->image;
+            }
+            elseif($value==2){
+                $allPost['p0'] = $posts[$value-1]->image;
+                $allPost['p1'] = $posts[$value-2]->image;
+            }
+            elseif($value==1){
+                $allPost['p0'] = $posts[$value-1]->image;
+            }
+            else{
+                $allPost['p0'] = '';
+                $allPost['p1'] = '';
+                $allPost['p2'] = '';
+            
+            }
+          
         });
         
         return view('instagram.index')->with('posts', $allPost)->withAuthor($initial); // return view ng home

@@ -15,7 +15,7 @@
                         
                     </span> 
                             
-                    <div data-popover id="popover-user{{ $item->user->username }}" role="tooltip" class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600">
+                    <!-- <div data-popover id="popover-user{{ $item->user->username }}" role="tooltip" class="absolute left-10 z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600">
                         <div class="p-3">
                             <div class="flex items-center justify-between mb-2">
                                 <a href="#">
@@ -46,6 +46,54 @@
                                     </a>
                                 </li>
                             </ul>
+                        </div>
+                        <div data-popper-arrow></div>
+                    </div> -->
+
+                    <div data-popover id="popover-user{{ $item->user->username }}" role="tooltip" class="absolute w-[380px] z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600">
+                        <div class="pt-6 pb-6 shadow-xl ">
+                            <div class="pl-6 flex items-center mb-2">
+                                <a href="#">
+                                    <img class="w-[65px] h-[65px] rounded-full" src="{{ $item->user->avatar }}" alt="Auriel">
+                                </a>
+                                <div class="ml-5 mt-3">
+                                <p class="text-base font-semibold leading-none text-black dark:text-white">
+                                    <a href="#">{{ $item->user->username }}</a>
+                                    <p class="mb-3 text-sm font-normal">
+                                    <a href="#" class="hover:underline">{{ $item->user->fullname }}</a>
+                                </p>
+                                </div>
+                            </p>
+                            </div>
+                            <div class="grid grid-cols-3 w-full justify-center text-center">
+                                <div class="col-span-1">
+                                    <p class="font-bold text-neutral-900 text-md">{{ $item->user->posts->count(); }}</p>
+                                    <p>posts</p>
+                                </div>
+                                <div class="col-span-1">
+                                    <p class="font-bold text-neutral-900 text-md">1.2M</p>
+                                    <p>followers</p>
+                                </div>
+                                <div class="col-span-1">
+                                    <p class="font-bold text-neutral-900 text-md">0</p>
+                                    <p>following</p>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-3 w-full justify-center gap-1 mt-2">
+                                <div class="col-span-1">
+                                   <img class="w-full h-[120px] object-cover" src="{{ $item->p0 }}">
+                                </div>
+                                <div class="col-span-1">
+                                   <img class="w-full h-[120px] object-cover" src="{{ $item->p1 }}">
+                                </div>
+                                <div class="col-span-1">
+                                   <img class="w-full h-[120px] object-cover" src="{{ $item->p2 }}">
+                                </div>
+                            </div>
+                            <div class="flex justify-around items-center mt-5 h-full pb-1">
+                                <button class="bg-yellow-700 text-white font-semibold pt-2 pb-2 w-[170px] rounded-lg">Message</button>
+                                <button class="bg-slate-200 text-black font-semibold pt-2 pb-2 w-[170px] rounded-lg">Follow</button>
+                            </div>
                         </div>
                         <div data-popper-arrow></div>
                     </div>
