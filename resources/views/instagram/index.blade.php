@@ -35,7 +35,7 @@
                                     <p>posts</p>
                                 </div>
                                 <div class="col-span-1">
-                                    <p class="font-bold text-neutral-900 text-md">1.2M</p>
+                                    <p class="font-bold text-neutral-900 text-md">0</p>
                                     <p>followers</p>
                                 </div>
                                 <div class="col-span-1">
@@ -81,7 +81,6 @@
                 </div>
             </div>
             <div class="likes flex items-center mt-2">
-                <!-- <img class="h-3.5 w-3.5 rounded-full" src="{{ asset('img/post.jpg') }}"> -->
             <span class="text-sm text-gray-700 font-semibold">141,150 likes</span>
             </div>
             <div class="post-text">

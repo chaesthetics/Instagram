@@ -19,7 +19,7 @@
                 </div>
                 <div class="interactions flex text-md space-x-5 mt-3">
                     <p><b>{{ $posts->count(); }}</b> posts</p>
-                    <p><b>1.2M</b> followers</p>
+                    <p><b>0</b> followers</p>
                     <p><b>0</b> following</p>
                 </div>
                 <div class="flex mt-3 text-sm font-semibold leading-none">
@@ -57,11 +57,11 @@
                 <div class="absolute flex w-2/4 justify-between items-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white flex opacity-0 group-hover:opacity-100 duration-300 space-x-1">
                     <div class="flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill text-white" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/> </svg>
-                        <p class="ml-1">131,971</p>
+                        <p class="ml-1">141,150</p>
                     </div>
                     <div class="flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-fill" viewBox="0 0 16 16"> <path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9.06 9.06 0 0 0 8 15z"/> </svg>
-                        <p class="ml-1">931</p>
+                        <p class="ml-1">0</p>
                     </div>
                 </div>
             </button>
