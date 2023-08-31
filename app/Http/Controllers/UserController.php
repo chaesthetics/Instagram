@@ -64,6 +64,7 @@ class UserController extends Controller
     public function profile()
     {
         $posts = User::find(Auth::user()->id)->posts;
+        
         $full_name = Auth::user()->fullname;
         $initial = explode(' ', $full_name);
         $first = mb_substr($initial[0], 0, 1);
@@ -71,6 +72,20 @@ class UserController extends Controller
         $initial = $first.$last;
         
         return view('instagram.profile')->with('posts', $posts)->withAuthor($initial);
+    }
+
+    public function profileview($userid)
+    {
+        $posts = User::find($userid)->posts;
+        $user = User::find($userid);
+        
+        $full_name = $user->fullname;
+        $initial = explode(' ', $full_name);
+        $first = mb_substr($initial[0], 0, 1);
+        $last = mb_substr(end($initial), 0, 1);
+        $initial = $first.$last;
+        
+        return view('instagram.profileview')->with('posts', $posts)->withAuthor($initial)->with('userinfo', $user);
     }
 
 
