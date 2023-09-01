@@ -6,8 +6,92 @@
         <div class="mr-auto ml-auto  mt-10 w-4/6">
             <div class="card-header flex justify-between items-center">
                 <div class="header-info flex items-center">
-                    <img class="h-9 w-9 rounded-full " src="{{ asset('img/post.jpg') }}">  
-                    <span class="font-bold text-sm text-gray-700 ml-3">{{ $item->user->username }}</span> 
+                    @if($item->user->avatar)
+                    <img class="h-9 w-9 rounded-full object-cover" src="{{ $item->user->avatar }}">
+                    @else
+                    <button class="h-9 w-9 rounded-full bg-yellow-800 text-white text-[10px] font-semibold  inline-flex items-center justify-center">{{ $item->initials }}</button>
+                    @endif 
+
+                    @if($item->user->id == Auth::user()->id)
+                    <button class="font-bold text-sm text-gray-700 ml-3" data-popover-target="popover-user{{ $item->user->username }}"><a href="{{ URL('/profile')}}">{{ $item->user->username }}</a>
+                    </button> 
+                    @else
+                    <button class="font-bold text-sm text-gray-700 ml-3" data-popover-target="popover-user{{ $item->user->username }}"><a href="{{ URL('/profile/'.$item->user->id )}}">{{ $item->user->username }}</a>
+                    </button> 
+                    @endif
+                    
+                    <div data-popover id="popover-user{{ $item->user->username }}" role="tooltip" class="absolute w-[380px] z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600">
+                        <div class="pt-6 pb-6 shadow-xl ">
+                            <div class="pl-6 flex items-center mb-2">
+                                <a href="#">
+                                @if($item->user->avatar)
+                                    <img class="h-[65px] w-[65px] rounded-full object-cover" src="{{ $item->user->avatar }}">
+                                @else
+                                    <button class="h-[65px] w-[65px]  rounded-full bg-yellow-800 text-white text-[20px] font-semibold  inline-flex items-center justify-center">{{ $item->initials }}</button>
+                                @endif   
+                                </a>
+                                <div class="ml-5 mt-3">
+                                <p class="text-base font-semibold leading-none text-black dark:text-white">
+                                    <a href="">{{ $item->user->username }}</a>
+                                    <p class="mb-3 text-sm font-normal">
+                                    <a href="#" class="hover:underline">{{ $item->user->fullname }}</a>
+                                </p>
+                                </div>
+                            </p>
+                            </div>
+                            <div class="grid grid-cols-3 w-full justify-center text-center">
+                                <div class="col-span-1">
+                                    <p class="font-bold text-neutral-900 text-md">{{ $item->user->posts->count(); }}</p>
+                                    <p>posts</p>
+                                </div>
+                                <div class="col-span-1">
+                                    <p class="font-bold text-neutral-900 text-md">0</p>
+                                    <p>followers</p>
+                                </div>
+                                <div class="col-span-1">
+                                    <p class="font-bold text-neutral-900 text-md">0</p>
+                                    <p>following</p>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-3 w-full justify-center gap-1 mt-2">
+                            @if($item->user->posts->count() >= 3)
+                                <div class="col-span-1">
+                                   <img class="w-full h-[120px] object-cover" src="{{ $item->p0 }}">
+                                </div>
+                                <div class="col-span-1">
+                                   <img class="w-full h-[120px] object-cover" src="{{ $item->p1 }}">
+                                </div>
+                                <div class="col-span-1">
+                                   <img class="w-full h-[120px] object-cover" src="{{ $item->p2 }}">
+                                </div>
+                            
+                            @elseif($item->user->posts->count() == 2)
+                                <div class="col-span-1">
+                                   <img class="w-full h-[120px] object-cover" src="{{ $item->p0 }}">
+                                </div>
+                                <div class="col-span-1">
+                                   <img class="w-full h-[120px] object-cover" src="{{ $item->p1 }}">
+                                </div>
+                            
+                            @elseif($item->user->posts->count() == 1)
+                                <div class="col-span-1">
+                                   <img class="w-full h-[120px] object-cover" src="{{ $item->p0 }}">
+                                </div>
+                            @else
+
+                            
+
+                            @endif
+                            </div>
+                            <div class="flex justify-around items-center mt-5 h-full pb-1">
+                                <button class="bg-yellow-700 text-white font-semibold pt-2 pb-2 w-[170px] rounded-lg">Message</button>
+                                <button class="bg-slate-200 text-black font-semibold pt-2 pb-2 w-[170px] rounded-lg">Follow</button>
+                            </div>
+                        </div>
+                        <div data-popper-arrow></div>
+                    </div>
+
+
                     <span class="ml-1 text-sm text-gray-500 ">•  {{ $item->created_at->diffForHumans() }}</span>
                 </div>
                 <div class="header-button text-grey-600">
@@ -26,7 +110,6 @@
                 </div>
             </div>
             <div class="likes flex items-center mt-2">
-                <!-- <img class="h-3.5 w-3.5 rounded-full" src="{{ asset('img/post.jpg') }}"> -->
             <span class="text-sm text-gray-700 font-semibold">141,150 likes</span>
             </div>
             <div class="post-text">

@@ -11,29 +11,60 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
-        //$posts = Post::all();
+    
 
-        // $user_id = Auth::user()->id;                        // dinefine ko ito
-        //$post = Post::with('user')->find($userPost);        // kasi di niya kilala si user_id
         $allPost = Post::with('user')->get();
-
+        
         $full_name = Auth::user()->fullname;
+        
         $initial = explode(' ', $full_name);
         $first = mb_substr($initial[0], 0, 1);
         $last = mb_substr(end($initial), 0, 1);
         $initial = $first.$last;
-       
+        
+        
+        $allPost->map(function($allPost){
+            $posts = User::find($allPost->user_id)->posts;
+    
+            $fullnames = $allPost->user->fullname; 
+            $initials = explode(' ', $fullnames);
+            $firsts = mb_substr($initials[0], 0, 1);
+            $lasts = mb_substr(end($initials), 0, 1);
+            $initials = $firsts.$lasts;
+            $allPost['initials'] = $initials;    
+            $value = count($posts);
+            
+            if($value>=3){
+                $allPost['p0'] = $posts[$value-1]->image;
+                $allPost['p1'] = $posts[$value-2]->image;
+                $allPost['p2'] = $posts[$value-3]->image;
+            }
+            elseif($value==2){
+                $allPost['p0'] = $posts[$value-1]->image;
+                $allPost['p1'] = $posts[$value-2]->image;
+            }
+            elseif($value==1){
+                $allPost['p0'] = $posts[$value-1]->image;
+            }
+            else{
+                $allPost['p0'] = '';
+                $allPost['p1'] = '';
+                $allPost['p2'] = '';
+            
+            }
+          
+        });
+        
         return view('instagram.index')->with('posts', $allPost)->withAuthor($initial); // return view ng home
     }
 
     public function profile()
     {
         $posts = User::find(Auth::user()->id)->posts;
+        
         $full_name = Auth::user()->fullname;
         $initial = explode(' ', $full_name);
         $first = mb_substr($initial[0], 0, 1);
@@ -43,13 +74,20 @@ class UserController extends Controller
         return view('instagram.profile')->with('posts', $posts)->withAuthor($initial);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function profileview($userid)
     {
-        //
+        $posts = User::find($userid)->posts;
+        $user = User::find($userid);
+        
+        $full_name = $user->fullname;
+        $initial = explode(' ', $full_name);
+        $first = mb_substr($initial[0], 0, 1);
+        $last = mb_substr(end($initial), 0, 1);
+        $initial = $first.$last;
+        
+        return view('instagram.profileview')->with('posts', $posts)->withAuthor($initial)->with('userinfo', $user);
     }
+
 
     public function edit_profile()
     {
@@ -148,8 +186,9 @@ class UserController extends Controller
         if($request->hasFile('avatar')){
             $filename = $request->getSchemeAndHttpHost() . '/assets/img/' . time() . '.' . $request->avatar->extension();
             $request->avatar->move(public_path('/assets/img/'), $filename);
+        }else{
+            $filename = Auth::user()->avatar;
         }
-
         
         $user->update([
             'username' => $request->username,
@@ -169,35 +208,4 @@ class UserController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }

@@ -4,29 +4,29 @@
     <div class="w-[900px] ml-auto mr-auto">
         <div class="card-header flex items-center justify-center justify-between ml-10 mt-8 mr-auto w-9/12">
             <div class="profilepicture">
-                @if(Auth::user()->avatar)
-                <img class="h-[150px] w-[150px] rounded-full object-cover" src="{{ Auth::user()->avatar }}">
+                @if($userinfo->avatar)
+                <img class="h-[150px] w-[150px] rounded-full object-cover" src="{{ $userinfo->avatar }}">
                 @else
                  <button class="h-[150px] w-[150px] rounded-full bg-yellow-600 text-white text-5xl font-semibold  inline-flex items-center justify-center">{{ $author }}</button>
                 @endif   
             </div>
             <div class="cardinfo">
                 <div class="flex ">
-                    <h1 class="text-xl text-gray-700">{{ Auth::user()->username }}</h1>
-                    <a href="{{ url('edit_profile') }}"class="transition duration-150 bg-gray-200 pt-2 pb-2 pr-4 pl-4 hover:bg-gray-300 text-sm ml-5 font-semibold rounded-md">Edit profile</a>
-                    <button class="transition duration-150 bg-gray-200 pt-2 pb-2 pr-4 pl-4 hover:bg-gray-300 text-sm ml-2 font-semibold rounded-md">View Archive</button>
+                    <h1 class="text-xl text-gray-700">{{ $userinfo->username }}</h1>
+                    <a href="#"class="transition duration-150 bg-gray-200 pt-2 pb-2 pr-4 pl-4 hover:bg-gray-300 text-sm ml-5 font-semibold rounded-md">Following</a>
+                    <button class="transition duration-150 bg-gray-200 pt-2 pb-2 pr-4 pl-4 hover:bg-gray-300 text-sm ml-2 font-semibold rounded-md">Message</button>
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather ml-2 feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>       
                 </div>
                 <div class="interactions flex text-md space-x-5 mt-3">
                     <p><b>{{ $posts->count(); }}</b> posts</p>
-                    <p><b>1.3M</b> followers</p>
+                    <p><b>0</b> followers</p>
                     <p><b>0</b> following</p>
                 </div>
                 <div class="flex mt-3 text-sm font-semibold leading-none">
-                    <p>{{ Auth::user()->fullname }}</p>
+                    <p>{{ $userinfo->fullname }}</p>
                 </div>
                 <div class="flex mt-3 text-sm leading-none mt-1">
-                    <p>{{ Auth::user()->bio }}</p>
+                    <p>{{ $userinfo->bio }}</p>
                 </div>
             </div>
         </div>
@@ -65,9 +65,8 @@
                     </div>
                 </div>
             </button>
-
-<!-- Main modal -->
-<div id="staticModal{{$item->id}}" data-modal-backdrop="dynamic" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <!-- Main modal -->
+<div id="staticModal{{$item->id}}" data-modal-backdrop="dynamic" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-hidden no-scrollbar overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative flex w-10/12 max-w-10/12 h-auto justify-center max-h-[1000px]">
         <img src="{{ $item->image }}" class="max-h-[650px] h-auto w-auto max-w-[700px]" class="object-cover">
         <div class="bg-white w-[470px] divide-y">
@@ -131,7 +130,6 @@
                 </button>
             </div> 
         </div>
-
         @endforeach
         </div>
         <div class="flex mt-5 text-gray-500 text-xs justify-around w-full">
