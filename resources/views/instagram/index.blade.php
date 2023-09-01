@@ -44,6 +44,7 @@
                                 </div>
                             </div>
                             <div class="grid grid-cols-3 w-full justify-center gap-1 mt-2">
+                            @if($item->user->posts->count() >= 3)
                                 <div class="col-span-1">
                                    <img class="w-full h-[120px] object-cover" src="{{ $item->p0 }}">
                                 </div>
@@ -53,6 +54,24 @@
                                 <div class="col-span-1">
                                    <img class="w-full h-[120px] object-cover" src="{{ $item->p2 }}">
                                 </div>
+                            
+                            @elseif($item->user->posts->count() == 2)
+                                <div class="col-span-1">
+                                   <img class="w-full h-[120px] object-cover" src="{{ $item->p0 }}">
+                                </div>
+                                <div class="col-span-1">
+                                   <img class="w-full h-[120px] object-cover" src="{{ $item->p1 }}">
+                                </div>
+                            
+                            @elseif($item->user->posts->count() == 1)
+                                <div class="col-span-1">
+                                   <img class="w-full h-[120px] object-cover" src="{{ $item->p0 }}">
+                                </div>
+                            @else
+
+                            
+
+                            @endif
                             </div>
                             <div class="flex justify-around items-center mt-5 h-full pb-1">
                                 <button class="bg-yellow-700 text-white font-semibold pt-2 pb-2 w-[170px] rounded-lg">Message</button>
