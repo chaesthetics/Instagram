@@ -10,15 +10,25 @@
                     <img class="h-9 w-9 rounded-full object-cover" src="{{ $item->user->avatar }}">
                     @else
                     <button class="h-9 w-9 rounded-full bg-yellow-800 text-white text-[10px] font-semibold  inline-flex items-center justify-center">{{ $item->initials }}</button>
-                    @endif   
+                    @endif 
+
+                    @if($item->user->id == Auth::user()->id)
+                    <button class="font-bold text-sm text-gray-700 ml-3" data-popover-target="popover-user{{ $item->user->username }}"><a href="{{ URL('/profile')}}">{{ $item->user->username }}</a>
+                    </button> 
+                    @else
                     <button class="font-bold text-sm text-gray-700 ml-3" data-popover-target="popover-user{{ $item->user->username }}"><a href="{{ URL('/profile/'.$item->user->id )}}">{{ $item->user->username }}</a>
                     </button> 
+                    @endif
                     
                     <div data-popover id="popover-user{{ $item->user->username }}" role="tooltip" class="absolute w-[380px] z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600">
                         <div class="pt-6 pb-6 shadow-xl ">
                             <div class="pl-6 flex items-center mb-2">
                                 <a href="#">
-                                    <img class="w-[65px] h-[65px] rounded-full" src="{{ $item->user->avatar }}" alt="Auriel">
+                                @if($item->user->avatar)
+                                    <img class="h-[65px] w-[65px] rounded-full object-cover" src="{{ $item->user->avatar }}">
+                                @else
+                                    <button class="h-[65px] w-[65px]  rounded-full bg-yellow-800 text-white text-[20px] font-semibold  inline-flex items-center justify-center">{{ $item->initials }}</button>
+                                @endif   
                                 </a>
                                 <div class="ml-5 mt-3">
                                 <p class="text-base font-semibold leading-none text-black dark:text-white">
@@ -44,6 +54,7 @@
                                 </div>
                             </div>
                             <div class="grid grid-cols-3 w-full justify-center gap-1 mt-2">
+                            @if($item->user->posts->count() >= 3)
                                 <div class="col-span-1">
                                    <img class="w-full h-[120px] object-cover" src="{{ $item->p0 }}">
                                 </div>
@@ -53,6 +64,24 @@
                                 <div class="col-span-1">
                                    <img class="w-full h-[120px] object-cover" src="{{ $item->p2 }}">
                                 </div>
+                            
+                            @elseif($item->user->posts->count() == 2)
+                                <div class="col-span-1">
+                                   <img class="w-full h-[120px] object-cover" src="{{ $item->p0 }}">
+                                </div>
+                                <div class="col-span-1">
+                                   <img class="w-full h-[120px] object-cover" src="{{ $item->p1 }}">
+                                </div>
+                            
+                            @elseif($item->user->posts->count() == 1)
+                                <div class="col-span-1">
+                                   <img class="w-full h-[120px] object-cover" src="{{ $item->p0 }}">
+                                </div>
+                            @else
+
+                            
+
+                            @endif
                             </div>
                             <div class="flex justify-around items-center mt-5 h-full pb-1">
                                 <button class="bg-yellow-700 text-white font-semibold pt-2 pb-2 w-[170px] rounded-lg">Message</button>
