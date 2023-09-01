@@ -76,7 +76,7 @@
                     @if($item->user->avatar)
                     <img class="h-9 w-9 rounded-full object-cover" src="{{ $item->user->avatar }}">
                     @else
-                    <button class="h-9 w-9 rounded-full bg-yellow-800 text-white text-[10px] font-semibold  inline-flex items-center justify-center">{{ $item->initials }}</button>
+                    <button class="h-9 w-9 rounded-full bg-yellow-800 text-white text-[10px] font-semibold  inline-flex items-center justify-center">{{ $author }}</button>
                     @endif   
                     <button class="font-bold text-sm text-gray-700 ml-3" data-popover-target="popover-user{{ $item->user->username }}"><a href="{{ URL('profile')}}">{{ $item->user->username }}</a>
                     </button> 
@@ -91,7 +91,7 @@
                     @if($item->user->avatar)
                     <img class="h-9 w-9 rounded-full object-cover" src="{{ $item->user->avatar }}">
                     @else
-                    <button class="h-9 w-9 rounded-full bg-yellow-800 text-white text-[10px] font-semibold  inline-flex items-center justify-center">{{ $item->initials }}</button>
+                    <button class="h-9 w-9 rounded-full bg-yellow-800 text-white text-[10px] font-semibold  inline-flex items-center justify-center">{{ $author }}</button>
                     @endif   
                     <div class="">
                         <button class="text-black text-sm text-gray-700 ml-3" data-popover-target="popover-user{{ $item->user->username }}"><a class="font-bold text-gray-700" href="{{ URL('profile')}}">{{ $item->user->username }} </a>{{ $item->text }}</button> <br>
