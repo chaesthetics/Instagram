@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-<title>Instagram</title>
+<title>Pウェt❓</title>
 @vite(['resources/css/app.css','resources/js/app.js'])
 </head>
 <body>

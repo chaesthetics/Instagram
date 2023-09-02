@@ -21,7 +21,7 @@
                     @endif
                     
                     <div data-popover id="popover-user{{ $item->user->username }}" role="tooltip" class="absolute w-[380px] z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600">
-                        <div class="pt-6 pb-6 shadow-xl ">
+                        <div class="pt-6 pb-4 shadow-xl ">
                             <div class="pl-6 flex items-center mb-2">
                                 <a href="#">
                                 @if($item->user->avatar)
@@ -31,8 +31,15 @@
                                 @endif   
                                 </a>
                                 <div class="ml-5 mt-3">
-                                <p class="text-base font-semibold leading-none text-black dark:text-white">
-                                    <a href="">{{ $item->user->username }}</a>
+                                <p class="text-base font-semibold leading-none text-black dark:text-white flex">
+                                    <a href=""class="flex">{{ $item->user->username }}
+                                        @if($item->user->username == 'aurieljames11')<img class="ml-1 h-4 w-4" data-tooltip-target="tooltip-verified" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAADP0lEQVR4nO2az08TQRTHN+hR/QNM9ODVqAcvBk3ovBZ/HMATEcXon2CigvFUj+AN8aAJmEjnlYSTnk3UgzcjnozExKghUVQOwr63tQqseWyBWrtlpu2sVHnJO3R3uvP5zryZNzuznrdl/7ApTVdB+1e8VjSVD84qpCXQtJzO0UWvlUzlfVCavgNyGDn9SCGd8DaDZe4HexXSW0AaTqOf6XgSbi+/r5APA/LCOnzkCok7cnykvGw2G7ZJeYV8QyG/Oj4R7HEuADDo/R2MPwPyWErz6Yz2DyjNs5Xwa2U1z0oZKSv/UdF/y8oEvc4FKKTbcYCNutI04lwAIL90J4CnnMK3j37dqTQtOuyBxZO5uV3OBEDe73QFDyWXicFJy0fw9MC1AJA68n6n1Fk3cCbPuwG5SyEPAtIzpanoHpz/CCeZWgH5rkK6oPL+fmMBgDydNDBs5JpfGwtQyENJA55/WKjdI8iDxgJSOjiaJPzlR4Xw3bel8M5UMV7ARNBuLEBSPGj+lCT8zELk1URIxu6ZDLd5Niap3jV8/+NC+L4MXlx+91WEk0Ie9WxN5bg7yZafKcGLqCrlu6wFyKLLFfxATMv3V4cPhcWu9WWJW2NVmSQ8lFaxwmT+MoI8v1ngYW0cEIGmUzXh0+j32WTdjeZukwHbbwC/3hNUVNo/VxUekC+tvMMaPmzkedEYoJGWh0rXtAxI1xoSIPCmIE2FxxoCTENI5mhToGbDq1ohZDOIq83hH+aXwutPC+7g0WAQ20yjtUQ0v+XZfBq1SWRxM0u1awP1xjzWkcjESlsfGz68Wk80bcBiqQdy3G0tADTfM60gTkQz4CHyMSv4lR0zy6VEpYgmwofWy+kMBsfqqWhVRDPhoeTykmUTPjfrrUgGayMDFuJ7YailX+qVpjctva2SxsI+77/Z2Ioz2fZzLSCV89OeK+uYDHeApp8uw6bdRcuXm2yBOxOA/MIpfCSARpyFkKZbf+OIaQ6QxwGDHjVOh2puiGn+Ann/YDSWaBiQP5bfT+vgjHMBchAneUISi2RHWXaYHPLJtcolcTYbtskzSnux04kc8pkYaF9t2mNWm1Br2YPuVZPPDFr2U4Mt88zsF/L7hiBlV3/sAAAAAElFTkSuQmCC">
+                                            <div id="tooltip-verified" role="tooltip" class="absolute z-10 invisible flex inline-block px-3 py-2 text-xs font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                                <p>Founder of  <p class="ml-2">Pウェt❓</p>
+                                                <div class="tooltip-arrow" data-popper-arrow></div>
+                                            </div>
+                                        @endif
+                                    </a>
                                     <p class="mb-3 text-sm font-normal">
                                     <a href="#" class="hover:underline">{{ $item->user->fullname }}</a>
                                 </p>
@@ -45,11 +52,11 @@
                                     <p>posts</p>
                                 </div>
                                 <div class="col-span-1">
-                                    <p class="font-bold text-neutral-900 text-md">0</p>
+                                    <p class="font-bold text-neutral-900 text-md">2.5M</p>
                                     <p>followers</p>
                                 </div>
                                 <div class="col-span-1">
-                                    <p class="font-bold text-neutral-900 text-md">0</p>
+                                    <p class="font-bold text-neutral-900 text-md">23</p>
                                     <p>following</p>
                                 </div>
                             </div>
@@ -78,9 +85,6 @@
                                    <img class="w-full h-[120px] object-cover" src="{{ $item->p0 }}">
                                 </div>
                             @else
-
-                            
-
                             @endif
                             </div>
                             <div class="flex justify-around items-center mt-5 h-full pb-1">
@@ -136,31 +140,111 @@
                  <button class="h-[45px] w-[45px] rounded-full bg-yellow-600 text-white text-[15px] font-semibold  inline-flex items-center justify-center">{{ $author }}</button>
                 @endif   
                 <div>
-                  <span class="font-semibold">{{ Auth::user()->username }}</span>
-                  <p class="text-sm opacity-70">{{ Auth::user()->fullname }}</p>
+                  <span class="font-semibold"><a href="{{ url('profile') }}">{{ Auth::user()->username }}</a></span>
+                  <p class="text-sm opacity-70"><a href="{{ url('profile') }}">{{ Auth::user()->fullname }}</a></p>
                 </div>
             </div>
             <div class="action-button">
-                <span class="font-semibold text-blue-600 text-sm">Switch</span>
+                <button class="font-semibold text-blue-600 text-sm">Switch</button>
             </div>
         </div>
         <div class="card-content flex justify-between mt-5 mb-5 items-center">
            <span class="font-semibold text-sm text-gray-600">Suggested for you</span>
            <p class="text-sm font-semibold">See all</p>
         </div>
+        @foreach($suggestions->reverse() as $suggested)
         <div class="card-content flex mt-3 items-center justify-between">
             <div class="personal-info flex space-x-4">
-                <img class="h-11 w-11 rounded-full" src="{{ asset('img/post2.jpg') }}"> 
+                    @if($suggested->avatar)
+                    <img class="h-11 w-11 rounded-full object-cover" src="{{ $suggested->avatar }}">
+                    @else
+                    <div class="h-11 w-11 rounded-full bg-yellow-800 text-white text-[12px] font-semibold  inline-flex items-center justify-center">{{ $suggested->initials }}</div>
+                    @endif 
                 <div>
-                  <span class="font-semibold">chaesthetics</span>
-                  <p class="text-xs opacity-70">Followed by issalokiii + 25 more</p>
+                  <button class="font-semibold" data-popover-target="popover-user2{{ $suggested->username }}"><a href="{{ URL('/profile/'.$suggested->id )}}">{{ $suggested->username }}</a></button>
+                  <p class="text-xs opacity-70">Suggested for you</p>
                 </div>
             </div>
             <div class="action-button">
-                <span class="font-semibold text-blue-600 hover:text-black text-sm">Follow</span>
+                <button class="font-semibold text-blue-600 hover:text-black text-sm">Follow</button>
             </div>
         </div>
-        <div class="card-content flex mt-3 items-center justify-between">
+        <div data-popover id="popover-user2{{ $suggested->username }}" role="tooltip" class="absolute w-[380px] z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600">
+                        <div class="pt-6 shadow-xl ">
+                            <div class="pl-6 flex items-center mb-2">
+                                <div>
+                                @if($suggested->avatar)
+                                    <img class="h-[65px] w-[65px] rounded-full object-cover" src="{{ $suggested->avatar }}">
+                                @else
+                                    <button class="h-[65px] w-[65px]  rounded-full bg-yellow-800 text-white text-[20px] font-semibold  inline-flex items-center justify-center">{{ $suggested->initials }}</button>
+                                @endif   
+                                </div>
+                                <div class="ml-5 mt-3">
+                                    <div class="text-base font-semibold leading-none text-black dark:text-white">
+                                        <a href="{{ URL('/profile/'.$suggested->id )}}" class="flex">{{ $suggested->username }}
+                                        @if($suggested->username == 'aurieljames11')<img class="ml-1 h-4 w-4" data-tooltip-target="tooltip-verified" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAADP0lEQVR4nO2az08TQRTHN+hR/QNM9ODVqAcvBk3ovBZ/HMATEcXon2CigvFUj+AN8aAJmEjnlYSTnk3UgzcjnozExKghUVQOwr63tQqseWyBWrtlpu2sVHnJO3R3uvP5zryZNzuznrdl/7ApTVdB+1e8VjSVD84qpCXQtJzO0UWvlUzlfVCavgNyGDn9SCGd8DaDZe4HexXSW0AaTqOf6XgSbi+/r5APA/LCOnzkCok7cnykvGw2G7ZJeYV8QyG/Oj4R7HEuADDo/R2MPwPyWErz6Yz2DyjNs5Xwa2U1z0oZKSv/UdF/y8oEvc4FKKTbcYCNutI04lwAIL90J4CnnMK3j37dqTQtOuyBxZO5uV3OBEDe73QFDyWXicFJy0fw9MC1AJA68n6n1Fk3cCbPuwG5SyEPAtIzpanoHpz/CCeZWgH5rkK6oPL+fmMBgDydNDBs5JpfGwtQyENJA55/WKjdI8iDxgJSOjiaJPzlR4Xw3bel8M5UMV7ARNBuLEBSPGj+lCT8zELk1URIxu6ZDLd5Niap3jV8/+NC+L4MXlx+91WEk0Ie9WxN5bg7yZafKcGLqCrlu6wFyKLLFfxATMv3V4cPhcWu9WWJW2NVmSQ8lFaxwmT+MoI8v1ngYW0cEIGmUzXh0+j32WTdjeZukwHbbwC/3hNUVNo/VxUekC+tvMMaPmzkedEYoJGWh0rXtAxI1xoSIPCmIE2FxxoCTENI5mhToGbDq1ohZDOIq83hH+aXwutPC+7g0WAQ20yjtUQ0v+XZfBq1SWRxM0u1awP1xjzWkcjESlsfGz68Wk80bcBiqQdy3G0tADTfM60gTkQz4CHyMSv4lR0zy6VEpYgmwofWy+kMBsfqqWhVRDPhoeTykmUTPjfrrUgGayMDFuJ7YailX+qVpjctva2SxsI+77/Z2Ioz2fZzLSCV89OeK+uYDHeApp8uw6bdRcuXm2yBOxOA/MIpfCSARpyFkKZbf+OIaQ6QxwGDHjVOh2puiGn+Ann/YDSWaBiQP5bfT+vgjHMBchAneUISi2RHWXaYHPLJtcolcTYbtskzSnux04kc8pkYaF9t2mNWm1Br2YPuVZPPDFr2U4Mt88zsF/L7hiBlV3/sAAAAAElFTkSuQmCC">
+                                        <div id="tooltip-verified" role="tooltip" class="absolute z-10 invisible flex inline-block px-3 py-2 text-xs font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                            <p>Founder of   <p class="ml-2">Pウェt❓</p></p>
+                                            <div class="tooltip-arrow" data-popper-arrow></div>
+                                        </div>
+                                        @endif
+                                        </a>
+                                        <p class="mb-3 text-sm font-normal">
+                                        <a href="{{ URL('/profile/'.$suggested->id )}}" class="hover:underline">{{ $suggested->fullname }}</a>
+                                    </div>
+                                </div>
+                            </p>
+                            </div>
+                            <div class="grid grid-cols-3 w-full justify-center text-center">
+                                <div class="col-span-1">
+                                    <p class="font-bold text-neutral-900 text-md">{{ $suggested->posts->count() }}</p>
+                                    <p>posts</p>
+                                </div>
+                                <div class="col-span-1">
+                                    <p class="font-bold text-neutral-900 text-md">2.5M</p>
+                                    <p>followers</p>
+                                </div>
+                                <div class="col-span-1">
+                                    <p class="font-bold text-neutral-900 text-md">23</p>
+                                    <p>following</p>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-3 w-full justify-center gap-1 mt-2">
+                            @if($suggested->posts->count() >= 3)
+                                <div class="col-span-1">
+                                   <img class="w-full h-[120px] object-cover" src="{{ $suggested->p0 }}">
+                                </div>
+                                <div class="col-span-1">
+                                   <img class="w-full h-[120px] object-cover" src="{{ $suggested->p1 }}">
+                                </div>
+                                <div class="col-span-1">
+                                   <img class="w-full h-[120px] object-cover" src="{{ $suggested->p2 }}">
+                                </div>
+                            
+                            @elseif($suggested->posts->count() == 2)
+                                <div class="col-span-1">
+                                   <img class="w-full h-[120px] object-cover" src="{{ $suggested->p0 }}">
+                                </div>
+                                <div class="col-span-1">
+                                   <img class="w-full h-[120px] object-cover" src="{{ $suggested->p1 }}">
+                                </div>
+                            
+                            @elseif($suggested->posts->count() == 1)
+                                <div class="col-span-1">
+                                   <img class="w-full h-[120px] object-cover" src="{{ $suggested->p0 }}">
+                                </div>
+                            @else
+                            @endif
+                            </div>
+                            <div class="flex justify-around items-center mt-5 h-full pb-5">
+                                <button class="bg-yellow-700 text-white font-semibold pt-2 pb-2 w-[170px] rounded-lg">Message</button>
+                                <button class="bg-slate-200 text-black font-semibold pt-2 pb-2 w-[170px] rounded-lg">Follow</button>
+                            </div>
+                        </div>
+                        <div data-popper-arrow></div>
+                    </div>
+        @endforeach
+        <!-- <div class="card-content flex mt-3 items-center justify-between">
             <div class="personal-info flex space-x-4">
                 <img class="h-11 w-11 rounded-full" src="{{ asset('img/post.jpg') }}"> 
                 <div>
@@ -207,7 +291,7 @@
             <div class="action-button">
                 <span class="font-semibold text-blue-600 hover:text-black text-sm">Follow</span>
             </div>
-        </div>
+        </div> -->
         <div class="card-footer mt-10 text-gray-500 text-xs ">
             <p>About . Help . Press . API . Jobs . Privacy . Terms.</p>
             <p>Locations . Language . Meta Verified</p>
