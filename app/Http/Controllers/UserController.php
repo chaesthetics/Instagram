@@ -18,6 +18,37 @@ class UserController extends Controller
 
         $allPost = Post::with('user')->get();
         
+        $suggested = User::all()->except(Auth::user()->id)->random(5);
+
+        $suggested->map(function($suggested){
+            $initials = explode(' ', $suggested->fullname);
+            $firsts = mb_substr($initials[0], 0, 1);
+            $lasts = mb_substr(end($initials), 0, 1);
+            $initials = $firsts.$lasts;
+            $suggested['initials'] = $initials;   
+            
+            $posts = user::find($suggested->id)->posts;
+            $value = count($posts);
+            
+            if($value>=3){
+                $suggested['p0'] = $posts[$value-1]->image;
+                $suggested['p1'] = $posts[$value-2]->image;
+                $suggested['p2'] = $posts[$value-3]->image;
+            }
+            elseif($value==2){
+                $suggested['p0'] = $posts[$value-1]->image;
+                $suggested['p1'] = $posts[$value-2]->image;
+            }
+            elseif($value==1){
+                $suggested['p0'] = $posts[$value-1]->image;
+            }
+            else{
+                $suggested['p0'] = '';
+                $suggested['p1'] = '';
+                $suggested['p2'] = '';    
+            }
+        });
+       
         $full_name = Auth::user()->fullname;
         
         $initial = explode(' ', $full_name);
@@ -27,6 +58,7 @@ class UserController extends Controller
         
         
         $allPost->map(function($allPost){
+
             $posts = User::find($allPost->user_id)->posts;
     
             $fullnames = $allPost->user->fullname; 
@@ -52,13 +84,12 @@ class UserController extends Controller
             else{
                 $allPost['p0'] = '';
                 $allPost['p1'] = '';
-                $allPost['p2'] = '';
-            
+                $allPost['p2'] = '';    
             }
-          
         });
-        
-        return view('instagram.index')->with('posts', $allPost)->withAuthor($initial); // return view ng home
+
+        return view('instagram.index')->with('posts', $allPost)->withAuthor($initial)->with('suggestions', $suggested);
+
     }
 
     public function profile()
