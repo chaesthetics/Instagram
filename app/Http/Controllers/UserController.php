@@ -241,8 +241,29 @@ class UserController extends Controller
         $first = mb_substr($initial[0], 0, 1);
         $last = mb_substr(end($initial), 0, 1);
         $initial = $first.$last;
+
         return redirect('profile')->with('posts', $posts)->withAuthor($initial);
 
+    }
+
+    public function passwordpost(Request $request)
+    {
+        $user = User::find(Auth::user()->id);
+
+        if(Hash::check($request->oldpassword, Auth::user()->password) && 
+        ($request->newpassword == $request->confirmpassword)){
+            
+            $passwordHash = Hash::make($request->newpassword);
+            $user->update([
+                'password' => $passwordHash,
+            ]);
+
+            return redirect()->back()->with('users', $user);
+        }
+        else{
+
+            return redirect()->back()->with('users', $user);
+        }
     }
 
 }
