@@ -1,12 +1,12 @@
 @extends('instagram.layout')
 @section('content')
 <div class="w-full min-w-[100px]">
-    <div class="w-[900px] ml-auto mr-auto grid grid-cols-7 border-solid border-[1px] border-gray-300 mt-7">
+    <div class="w-[900px] ml-auto mr-auto grid grid-cols-7 border-solid border-[1px] border-gray-300 mt-7 space-y-6">
         <aside class="grid col-span-2 border-solid border-r-[1px] border-gray-300">
             <a href="{{ url('edit_profile') }}"class="border-solid border-l-[2px] pt-1 pb-1 border-black border-opacity-0 hover:bg-slate-50 hover:border-opacity-30">
                 <p class="text-start text-sm text-neutral-900 ml-10 pt-2 pb-2">Edit profile</p>
             </button>
-            <a href="{{ url('change_password') }}" class="border-solid border-l-[2px] border-black pt-1 pb-1">
+            <a href="{{ url('change_password') }}" class="border-yellow-500 border-l-[2px] border-black pt-1 pb-1">
                 <p class="text-start text-sm text-neutral-900 ml-10 pt-2 pb-2 font-semibold">Change password</p>
             </a>
             <button class="border-solid border-l-[2px] pt-1 pb-1 border-black border-opacity-0 hover:bg-slate-50 hover:border-opacity-30">
@@ -45,6 +45,49 @@
             
         </aside>
         <div class="grid col-span-5 w-full">
+            <div class="w-11/12 ml-auto mr-auto grid grid-cols-4 mt-3 h-3/5">
+                    <div class="col-span-1 flex justify-end">
+                    <form method="post" action="{{ url('passwordpost') }}">
+                        {!! csrf_field() !!}
+                        @if(Auth::user()->avatar)
+                            <img id="default" class="h-[50px] w-[50px] rounded-full object-cover" src="{{ Auth::user()->avatar }}">
+                        @else
+                            <button id="default" class="h-[50px] w-[50px] mt-3 rounded-full bg-yellow-600 text-white text-[15px] font-semibold  inline-flex items-center justify-center">{{ $author }}</button>
+                        @endif   
+                    </div>
+                    <div class="col-span-3 ml-10 flex ml-10 mt-3">
+                        <p>username</p>
+                    </div>
+                    <div class="col-span-1 text-md font-semibold flex justify-end">
+                        <p>Old password</p>
+                    </div>
+                    <div class="col-span-3 flex ml-10">
+                        <input type="password" name="oldpassword" class="text-sm h-10 border-gray-300 w-10/12 focus:ring-0 focus:ring-offset-0 rounded-md bg-slate-50">
+                    </div>
+                    <div class="col-span-1 text-md font-semibold flex justify-end">
+                        <p>New password</p>
+                    </div>
+                    <div class="col-span-3 flex ml-10">
+                        <input type="password" name="newpassword" class="text-sm h-10 border-gray-300 w-10/12 focus:ring-0 focus:ring-offset-0 rounded-md bg-slate-50">
+                    </div>
+                    <div class="col-span-1 text-md font-semibold flex justify-end">
+                        <p class="">Confirm new <br>password</p>
+                    </div>
+                    <div class="col-span-3 flex ml-10">
+                        <input type="password" name="confirmpassword" class="text-sm h-10 border-gray-300 w-10/12 focus:ring-0 focus:ring-offset-0 rounded-md bg-slate-50">
+                    </div>
+                    <div class="col-span-1 text-md font-semibold flex justify-end">
+                    </div>
+                    <div class="col-span-3 flex ml-10">
+                        <button class="hover:bg-yellow-700 bg-yellow-600 text-sm pl-5 pr-5 pt-0 pb-0 font-semibold text-white rounded-md">Change password</button>
+                    </div>
+                    <div class="col-span-1 text-md font-semibold flex justify-end">
+                    </div>
+                    <div class="col-span-3 flex ml-10 mt-2">
+                        <button type="submit" value="save" class="text-sm font-semibold text-yellow-500">Forgot password?</button>
+                    </form>
+                    </div>           
+            </div>
         </div>
     </div>
     <div class="w-[900px] ml-auto mr-auto">

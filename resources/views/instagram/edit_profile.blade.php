@@ -3,7 +3,7 @@
 <div class="w-full min-w-[100px]">
     <div class="w-[900px] ml-auto mr-auto grid grid-cols-7 border-solid border-[1px] border-gray-300 mt-7">
         <aside class="grid col-span-2 border-solid border-r-[1px] border-gray-300">
-            <a href="{{ url('edit_profile') }}" class="border-solid border-l-[2px] border-black pt-1 pb-1">
+            <a href="{{ url('edit_profile') }}" class="border-yellow-500 border-l-[2px] border-black pt-1 pb-1">
                 <p class="text-start text-sm text-neutral-900 ml-10 pt-2 pb-2 font-semibold">Edit profile</p>
             </a>
             <a href="{{ url('change_password') }}" class="border-solid border-l-[2px] pt-1 pb-1 border-black border-opacity-0 hover:bg-slate-50 hover:border-opacity-30">
@@ -124,7 +124,7 @@
                     <label class="text-black-600 font-semibold"></label>
                 </div>
                 <div class="col-span-3 ml-10 items-center flex justify-between items-center">
-                    <button type="submit" value="save" class="bg-yellow-600 rounded-md text-sm  text-white pt-2 pb-2 pr-4 font-semibold pl-4 mt-5 ">Submit<button>
+                    <button type="submit" value="save" class="hover:bg-yellow-700 bg-yellow-600 rounded-md text-sm  text-white pt-2 pb-2 pr-4 font-semibold pl-4 mt-5 ">Submit<button>
                     <span class="font-semibold text-sm text-yellow-600 mr-20">Temporarily deactivate account</span>
                 </div>
                 </form>

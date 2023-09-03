@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <head>
 <title>Pウェt❓</title>
+<link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}">
 @vite(['resources/css/app.css','resources/js/app.js'])
 </head>
 <body>
