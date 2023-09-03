@@ -47,6 +47,8 @@
         <div class="grid col-span-5 w-full">
             <div class="w-11/12 ml-auto mr-auto grid grid-cols-4 mt-3 h-3/5">
                     <div class="col-span-1 flex justify-end">
+                    <form method="post" action="{{ url('passwordpost') }}">
+                        {!! csrf_field() !!}
                         @if(Auth::user()->avatar)
                             <img id="default" class="h-[50px] w-[50px] rounded-full object-cover" src="{{ Auth::user()->avatar }}">
                         @else
@@ -60,19 +62,19 @@
                         <p>Old password</p>
                     </div>
                     <div class="col-span-3 flex ml-10">
-                        <input type="text" class="text-sm h-10 border-gray-300 w-10/12 focus:ring-0 focus:ring-offset-0 rounded-md bg-slate-50">
+                        <input type="password" name="oldpassword" class="text-sm h-10 border-gray-300 w-10/12 focus:ring-0 focus:ring-offset-0 rounded-md bg-slate-50">
                     </div>
                     <div class="col-span-1 text-md font-semibold flex justify-end">
                         <p>New password</p>
                     </div>
                     <div class="col-span-3 flex ml-10">
-                        <input type="text" class="text-sm h-10 border-gray-300 w-10/12 focus:ring-0 focus:ring-offset-0 rounded-md bg-slate-50">
+                        <input type="password" name="newpassword" class="text-sm h-10 border-gray-300 w-10/12 focus:ring-0 focus:ring-offset-0 rounded-md bg-slate-50">
                     </div>
                     <div class="col-span-1 text-md font-semibold flex justify-end">
                         <p class="">Confirm new <br>password</p>
                     </div>
                     <div class="col-span-3 flex ml-10">
-                        <input type="text" class="text-sm h-10 border-gray-300 w-10/12 focus:ring-0 focus:ring-offset-0 rounded-md bg-slate-50">
+                        <input type="password" name="confirmpassword" class="text-sm h-10 border-gray-300 w-10/12 focus:ring-0 focus:ring-offset-0 rounded-md bg-slate-50">
                     </div>
                     <div class="col-span-1 text-md font-semibold flex justify-end">
                     </div>
@@ -82,7 +84,8 @@
                     <div class="col-span-1 text-md font-semibold flex justify-end">
                     </div>
                     <div class="col-span-3 flex ml-10 mt-2">
-                        <button class="text-sm font-semibold text-yellow-500">Forgot password?</button>
+                        <button type="submit" value="save" class="text-sm font-semibold text-yellow-500">Forgot password?</button>
+                    </form>
                     </div>           
             </div>
         </div>
