@@ -58,7 +58,7 @@
 
         <div class="grid grid-cols-3 gap-1">
         @foreach($posts->reverse() as $item)
-            <button class="relative group outline-none" data-modal-target="staticModal{{$item->id}}" data-modal-toggle="staticModal{{$item->id}}" >
+            <button class="relative group outline-none" data-modal-target="staticModal{{$item->id}}" data-modal-toggle="staticModal{{$item->id}}">
                 <div class=""><img class="group-hover:brightness-50 duration-300 object-cover h-[300px] w-[400px]" src="{{ $item->image }}"></div>
                 <div class="absolute flex w-2/4 justify-between items-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white flex opacity-0 group-hover:opacity-100 duration-300 space-x-1">
                     <div class="flex items-center">
@@ -73,7 +73,7 @@
             </button>
 
 <!-- Main modal -->
-<div id="staticModal{{$item->id}}" data-modal-backdrop="dynamic" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+<div id="staticModal{{$item->id}}" data-modal-backdrop="dynamic" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-hidden md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative flex w-10/12 max-w-10/12 h-auto justify-center max-h-[1000px]">
         <img src="{{ $item->image }}" class="max-h-[650px] h-auto w-auto max-w-[700px]" class="object-cover">
         <div class="bg-white w-[470px] divide-y">
@@ -88,9 +88,28 @@
                     </button> 
                 <span class="ml-1 text-sm text-gray-500 "></span>
                 </div>
-                <div class="header-button text-grey-600">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16"><path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/> </svg>
+                <div class="header-button text-gray-800 hover:text-gray-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" id="dropdownHoverButton{{ $item->id}}" data-dropdown-toggle="dropdownHover{{ $item->id}}" data-dropdown-trigger="click" class="bi bi-three-dots" viewBox="0 0 16 16"><path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/> </svg>
                 </div>
+
+                <!-- Dropdown menu -->
+                <div id="dropdownHover{{ $item->id}}" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-md shadow w-44 dark:bg-gray-700">
+                    <ul class="absolute top-0 dark:bg-gray-700 shadow rounded-sm bg-neutral-800 py-2 text-sm text-white dark:text-gray-200" aria-labelledby="dropdownHoverButton{{ $item->id}}">
+                    <li>
+                        <a href="{{ url('/deletepost/' .$item->id)}}" class="block px-6 py-1 hover:bg-yellow-600 dark:hover:bg-yellow-700 dark:hover:text-white">Delete</a>
+                    </li>
+                    <li>
+                        <a href="#" class="block px-6 py-1 hover:bg-yellow-600 dark:hover:bg-yellow-700 dark:hover:text-white">Edit</a>
+                    </li>
+                    <li>
+                        <a href="#" class="block px-6 py-1 hover:bg-yellow-600 dark:hover:bg-yellow-700 dark:hover:text-white">Go to profile</a>
+                    </li>
+                    <li>
+                        <a href="#" class="block px-6 py-1 hover:bg-yellow-600 dark:hover:bg-yellow-700 dark:hover:text-white">Report</a>
+                    </li>
+                    </ul>
+                </div>
+        
                 </div>
                 <div>
                 <div class="header-info flex items-center pt-3 pl-5 pr-5 ">

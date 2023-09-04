@@ -266,4 +266,11 @@ class UserController extends Controller
         }
     }
 
+    public function deletepost($postid)
+    {
+        $post = Post::find($postid);
+        $post->delete();
+        return redirect()->back();
+    }
+
 }

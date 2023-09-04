@@ -35,6 +35,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/update_user', [UserController::class, 'update_user']);
     Route::get('/profile/{userid}', [UserController::class, 'profileview']);
     Route::post('/passwordpost', [UserController::class, 'passwordpost']);
+    Route::get('/deletepost/{postid}', [UserController::class, 'deletepost']);
 });
 
 
