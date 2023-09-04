@@ -96,7 +96,7 @@
                 <div id="dropdownHover{{ $item->id}}" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-md shadow w-44 dark:bg-gray-700">
                     <ul class="absolute top-0 dark:bg-gray-700 shadow rounded-sm bg-neutral-800 py-2 text-sm text-white dark:text-gray-200" aria-labelledby="dropdownHoverButton{{ $item->id}}">
                     <li>
-                        <a href="#" class="block px-6 py-1 hover:bg-yellow-600 dark:hover:bg-yellow-700 dark:hover:text-white">Delete</a>
+                        <a href="{{ url('/deletepost/' .$item->id)}}" class="block px-6 py-1 hover:bg-yellow-600 dark:hover:bg-yellow-700 dark:hover:text-white">Delete</a>
                     </li>
                     <li>
                         <a href="#" class="block px-6 py-1 hover:bg-yellow-600 dark:hover:bg-yellow-700 dark:hover:text-white">Edit</a>
@@ -105,7 +105,7 @@
                         <a href="#" class="block px-6 py-1 hover:bg-yellow-600 dark:hover:bg-yellow-700 dark:hover:text-white">Go to profile</a>
                     </li>
                     <li>
-                        <a href="#" class="block px-6 py-1 hover:bg-yellow-600 dark:hover:bg-yellow-700 dark:hover:text-white">Cancel</a>
+                        <a href="#" class="block px-6 py-1 hover:bg-yellow-600 dark:hover:bg-yellow-700 dark:hover:text-white">Report</a>
                     </li>
                     </ul>
                 </div>
