@@ -1,8 +1,8 @@
 @extends('instagram.layout')
 @section('content')
-<div class="w-full min-w-[100px]">
-    <div class="w-[900px] ml-auto mr-auto">
-        <div class="card-header flex items-center justify-center justify-between ml-10 mt-8 mr-auto w-9/12">
+<div class="w-full min-w-[100px] overflow-x-hidden overflow-y-hidden no-scrollbar">
+    <div class="w-[900px] ml-auto mr-auto overflow-x-hidden overflow-y-hidden no-scrollbar">
+        <div class="card-header flex items-center justify-center justify-between ml-10 mt-8 mr-auto w-9/12 overflow-x-hidden overflow-y-hidden no-scrollbar">
             <div class="profilepicture">
                 @if(Auth::user()->avatar)
                 <img class="h-[150px] w-[150px] rounded-full object-cover" src="{{ Auth::user()->avatar }}">
@@ -14,7 +14,7 @@
                 <div class="flex items-center">
                     <h1 class="text-xl text-gray-700">{{ Auth::user()->username }}</h1>
                     @if(Auth::user()->username == 'aurieljames11')<img class="ml-2 h-6 w-6 " data-tooltip-target="tooltip-verified" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAADP0lEQVR4nO2az08TQRTHN+hR/QNM9ODVqAcvBk3ovBZ/HMATEcXon2CigvFUj+AN8aAJmEjnlYSTnk3UgzcjnozExKghUVQOwr63tQqseWyBWrtlpu2sVHnJO3R3uvP5zryZNzuznrdl/7ApTVdB+1e8VjSVD84qpCXQtJzO0UWvlUzlfVCavgNyGDn9SCGd8DaDZe4HexXSW0AaTqOf6XgSbi+/r5APA/LCOnzkCok7cnykvGw2G7ZJeYV8QyG/Oj4R7HEuADDo/R2MPwPyWErz6Yz2DyjNs5Xwa2U1z0oZKSv/UdF/y8oEvc4FKKTbcYCNutI04lwAIL90J4CnnMK3j37dqTQtOuyBxZO5uV3OBEDe73QFDyWXicFJy0fw9MC1AJA68n6n1Fk3cCbPuwG5SyEPAtIzpanoHpz/CCeZWgH5rkK6oPL+fmMBgDydNDBs5JpfGwtQyENJA55/WKjdI8iDxgJSOjiaJPzlR4Xw3bel8M5UMV7ARNBuLEBSPGj+lCT8zELk1URIxu6ZDLd5Niap3jV8/+NC+L4MXlx+91WEk0Ie9WxN5bg7yZafKcGLqCrlu6wFyKLLFfxATMv3V4cPhcWu9WWJW2NVmSQ8lFaxwmT+MoI8v1ngYW0cEIGmUzXh0+j32WTdjeZukwHbbwC/3hNUVNo/VxUekC+tvMMaPmzkedEYoJGWh0rXtAxI1xoSIPCmIE2FxxoCTENI5mhToGbDq1ohZDOIq83hH+aXwutPC+7g0WAQ20yjtUQ0v+XZfBq1SWRxM0u1awP1xjzWkcjESlsfGz68Wk80bcBiqQdy3G0tADTfM60gTkQz4CHyMSv4lR0zy6VEpYgmwofWy+kMBsfqqWhVRDPhoeTykmUTPjfrrUgGayMDFuJ7YailX+qVpjctva2SxsI+77/Z2Ioz2fZzLSCV89OeK+uYDHeApp8uw6bdRcuXm2yBOxOA/MIpfCSARpyFkKZbf+OIaQ6QxwGDHjVOh2puiGn+Ann/YDSWaBiQP5bfT+vgjHMBchAneUISi2RHWXaYHPLJtcolcTYbtskzSnux04kc8pkYaF9t2mNWm1Br2YPuVZPPDFr2U4Mt88zsF/L7hiBlV3/sAAAAAElFTkSuQmCC">
-                    <div id="tooltip-verified" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                    <div id="tooltip-verified" role="tooltip" class="absolute z-30 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
                         Founder
                         <div class="tooltip-arrow" data-popper-arrow></div>
                     </div>
@@ -58,7 +58,7 @@
 
         <div class="grid grid-cols-3 gap-1">
         @foreach($posts->reverse() as $item)
-            <button class="relative group outline-none" data-modal-target="staticModal{{$item->id}}" data-modal-toggle="staticModal{{$item->id}}" >
+            <button class="relative group outline-none" data-modal-target="staticModal{{$item->id}}" data-modal-toggle="staticModal{{$item->id}}">
                 <div class=""><img class="group-hover:brightness-50 duration-300 object-cover h-[300px] w-[400px]" src="{{ $item->image }}"></div>
                 <div class="absolute flex w-2/4 justify-between items-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white flex opacity-0 group-hover:opacity-100 duration-300 space-x-1">
                     <div class="flex items-center">
@@ -73,7 +73,8 @@
             </button>
 
 <!-- Main modal -->
-<div id="staticModal{{$item->id}}" data-modal-backdrop="dynamic" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+
+<div id="staticModal{{$item->id}}" data-modal-backdrop="dynamic" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-hidden md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative flex w-10/12 max-w-10/12 h-auto justify-center max-h-[1000px]">
         <img src="{{ $item->image }}" class="max-h-[650px] h-auto w-auto max-w-[700px]" class="object-cover">
         <div class="bg-white w-[470px] divide-y">
@@ -88,9 +89,73 @@
                     </button> 
                 <span class="ml-1 text-sm text-gray-500 "></span>
                 </div>
-                <div class="header-button text-grey-600">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16"><path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/> </svg>
+                <div class="header-button text-gray-800 hover:text-gray-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" id="dropdownHoverButton{{ $item->id}}" data-dropdown-toggle="dropdownHover{{ $item->id}}" data-dropdown-trigger="click" class="bi bi-three-dots" viewBox="0 0 16 16"><path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/> </svg>
                 </div>
+
+<div id="popup-modal{{ $item->id }}" tabindex="-1" class="fixed top-0 left-0 right-0 z-60 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="absolute w-full max-w-2xl max-h-full">
+        <div class="relative bg-white rounded-xl shadow drop-shadow-2xl dark:bg-gray-700">
+            <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal{{ $item->id }}">
+                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                </svg>
+                <span class="sr-only">Close modal</span>
+            </button>
+            <div class="p-6 text-center">
+                <form method="post" action="{{ url('/updatepost/' .$item->id)}}">
+                    {!! csrf_field() !!}
+                <h3 class="mb-5 text-lg font-semibold text-gray-900  dark:text-gray-400">Edit Info</h3>
+                <div class="flex pb-4">
+                    <img src="{{ $item->image }}" class="w-1/2">
+                    <div class="w-full border pt-5 pb-5 pl-5 pr-5 border-gray-300">
+                        <div class="flex items-center space-x-3 text-sm font-semibold">
+                        @if($item->user->avatar)
+                            <img class="h-9 w-9 rounded-full object-cover" src="{{ $item->user->avatar }}">
+                            @else
+                            <button class="h-9 w-9 rounded-full bg-yellow-800 text-white text-[10px] font-semibold  inline-flex items-center justify-center">{{ $item->initials }}</button>
+                            @endif 
+                            <p>{{ $item->user->username }}</p>
+                        </div>
+                        
+                        <textarea name="text" class="pt-7 w-full h-3/4 border-none text-sm resize-none focus:outline-none focus:ring-0 focus:ring-offset-0 ring-current">{{ $item->text }}</textarea>
+                        <div class="flex justify-between">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-emoji-smile opacity-50 mb-4" viewBox="0 0 16 16"> <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/> <path d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z"/> </svg>
+                            <p class="text-xs text-gray-800 opacity-50">2,300 letters</p>
+                        </div>
+                        <div class="flex justify-between border-t-1">
+                            <p class="text-md text-gray-800 opacity-50">Add location</p>
+                            <img class="h-5 w-5" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAADuElEQVR4nO2ZWYiOURjHfzRkmbHPZOJCWYZCiNwoW7JEGtkaV24VuZG9xnZBcodsxYWILJESLiQiDLIklEhqLFnGvoxPR/+3TtN8531f3znffCO/euvr/f7vc/bnOec58J9G6QBUAbuAq8BL4Luel3q3E5gLlFCAVAB7gM9AJuHzCdgN9KUAaAdsBn6ocr/U6yuB0Wpgez0VercKuCZtRqO1CWjTVI0wPXlHlakH9gO9U3zfBzhgNegyUE6eGao5byrwABiWg63hwEPZegYMJo8jETXiDNDZg80uwFmrMeX5WBN3rEYUebTdCjhnTbOga2azNZ18jERjI/NIZawhEBXyTvU5rok4RsgBfAS6hyhgj3rKeKfQHFRZ20JE7E/qqSQutgxYB9xUz5rnBrAWKE3oUH7pu2I8UqUeMsEujplAnSOivwdmJLBzXfo5eGSXjJqIHdeIKMAdUySPIvsY4LgVQCtjbK2WdofHdvwZiYwq5ppO0UgsceiWSvMO6ObQjZXuCh55JaP9HJp11kjEcSKBi+0nzQs88k1GXVvvWwlGrWFvGweQjRJpvuKRLzLqirYfpEniZaJKmqno2kVkdDTwRq2MugJUXYqGdLA8WDZ6SPMcj9yX0YEOzU1pjHeKY5y0NQ7NEGnu4pGTMjrboVkrzfEU9qodmnnSHMUjG2R0vUNTqqmSkYvNxnJp3gJdHbqNCRqbmtkyarbZLmYo2GXkYsdqzRRrOkUjYTTTY2xdlDZOl4oyFf5V3sRFpYJdti3K2wSV66Sdtnk64pkbqsiUBNpuCnY1cst12jtVx0yniFkqy4yKd6LIvZfwHEmw1v6a/pbvj5teudBRAdhsPnuFKqRGjTGuMRQLVcb5gGWwwEoOhKAIeKwyzBkoGMWWRzJna9/MtbYlJqsSlC0q7HDAqbuCPFBuLcZBHu1OsA5cJo7kha0BRsUs7qD5rMboaWVVRnmwV6lGvA6U+HNSbZ3yWuZgp7WVxF5AE9AWeKIKzM/BzhLZuOc5l/xX+a5anfrSUmq584k0IS2AS6qISXCnZZ++Ndv7Jmeors9+AiNTfDfJuktMc9MVlOiYez/hvYbJojzVN4soIFoDtxMchyO2W+eNXDxeEIZoitXHZFImKf6Y0+YACpQ16uknWbYZZUqBGs1iCpgi4IKVxjFeLcJModP671SD/wqSnlbSe2UjR+XaUFdqIZimdWDWy2Rgqn4bFz2eZka1RuCNUkDm9zKaIS2AQ1Y+q+GaaVaU6Mbpsu9LTf5VfgNttDSN+ivn8AAAAABJRU5ErkJggg==">
+                        </div>
+                    </div>
+                </div>   
+                    <button data-modal-hide="popup-modal{{ $item->id }}" type="button" class="text-white bg-neutral-900 hover:bg-neutral-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No, cancel</button>
+                    <button data-modal-hide="popup-modal{{ $item->id }}" type="submit" value="save" class="text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                        Update post
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+                <!-- Dropdown menu -->
+                <div id="dropdownHover{{ $item->id}}" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-md shadow w-44 dark:bg-gray-700">
+                    <ul class="absolute top-0 dark:bg-gray-700 shadow rounded-sm bg-neutral-800 py-2 text-sm text-white dark:text-gray-200" aria-labelledby="dropdownHoverButton{{ $item->id}}">
+                    <li>
+                        <a href="{{ url('/deletepost/' .$item->id)}}" class="block px-6 py-1 hover:bg-yellow-600 dark:hover:bg-yellow-700 dark:hover:text-white">Delete</a>
+                    </li>
+                    <li>
+                        <a href="#" class="block px-6 py-1 hover:bg-yellow-600 dark:hover:bg-yellow-700 dark:hover:text-white" data-modal-target="popup-modal{{ $item->id }}" data-modal-toggle="popup-modal{{ $item->id }}" >Edit</a>
+                    </li>
+                    <li>
+                        <a href="#" class="block px-6 py-1 hover:bg-yellow-600 dark:hover:bg-yellow-700 dark:hover:text-white">Go to profile</a>
+                    </li>
+                    <li>
+                        <a href="#" class="block px-6 py-1 hover:bg-yellow-600 dark:hover:bg-yellow-700 dark:hover:text-white">Report</a>
+                    </li>
+                    </ul>
+                </div>
+        
                 </div>
                 <div>
                 <div class="header-info flex items-center pt-3 pl-5 pr-5 ">
@@ -125,7 +190,7 @@
                 <div class="comment h-auto flex justify-between items-center ">
                 <form class="w-full flex items-center pl-3">
                 <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-emoji-smile mt-2 opacity-50" viewBox="0 0 16 16"> <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/> <path d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z"/> </svg>
-                    <textarea id="comment" rows="4" class="ml-4 mt-2 w-full h-8 px-0 text-sm text-gray-900 overflow-hidden bg-white border-none outline-none dark:bg-gray-800 focus:ring-0  dark:placeholder-gray-400 resize-none" placeholder="Add a comment..."></textarea>
+                    <textarea id="comment" rows="4" name="text" class="ml-4 mt-2 w-full h-8 px-0 text-sm text-gray-900 overflow-hidden bg-white border-none outline-none dark:bg-gray-800 focus:ring-0  dark:placeholder-gray-400 resize-none" placeholder="Add a comment..."></textarea>
                 </form>
                 </div>
                 </div>

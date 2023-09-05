@@ -194,7 +194,6 @@ class UserController extends Controller
     {
         
         $data= $request->all();
-
         $filename = '';
     
         if($request->hasFile('image')){
@@ -264,6 +263,23 @@ class UserController extends Controller
 
             return redirect()->back()->with('users', $user);
         }
+    }
+
+    public function deletepost($postid)
+    {
+        $post = Post::find($postid);
+        $post->delete();
+        return redirect()->back();
+    }
+
+    public function updatepost($postid, Request $request)
+    {
+        $post = Post::find($postid);
+        $post->update([
+            'text' => $request->text,
+        ]);
+
+        return redirect()->back();
     }
 
 }
