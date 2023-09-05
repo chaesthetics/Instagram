@@ -194,7 +194,6 @@ class UserController extends Controller
     {
         
         $data= $request->all();
-
         $filename = '';
     
         if($request->hasFile('image')){
@@ -270,6 +269,16 @@ class UserController extends Controller
     {
         $post = Post::find($postid);
         $post->delete();
+        return redirect()->back();
+    }
+
+    public function updatepost($postid, Request $request)
+    {
+        $post = Post::find($postid);
+        $post->update([
+            'text' => $request->text,
+        ]);
+
         return redirect()->back();
     }
 
