@@ -48,7 +48,7 @@
                             <div class="grid grid-cols-3 w-full justify-center text-center">
                                 <div class="col-span-1">
                                     <a href="{{ url('/profile/'.$item->user->id) }}">
-                                        <p class="font-bold text-neutral-900 text-md">{{ $item->user->posts->count(); }}</p>
+                                        <p class="font-bold text-neutral-900 text-md">{{ $item->user->posts->count() }}</p>
                                         <p>posts</p>
                                     </a>
                                 </div>
