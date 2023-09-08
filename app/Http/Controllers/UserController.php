@@ -197,20 +197,24 @@ class UserController extends Controller
         $data= $request->all();
         $filename = '';
     
-        if($request->hasFile('image')){
-            $filename = $request->getSchemeAndHttpHost() . '/assets/img/' . time() . '.' . $request->image->extension();
-            $request->image->move(public_path('/assets/img/'), $filename);
+        if($request->image){
+            if($request->hasFile('image')){
+                $filename = $request->getSchemeAndHttpHost() . '/assets/img/' . time() . '.' . $request->image->extension();
+                $request->image->move(public_path('/assets/img/'), $filename);
+            }
+
+            $data['user_id'] = Auth::user()->id;
+            $data['text'] = $request->input('text');
+            $data['image'] = $filename;
+            
+            $status=Post::create($data);
+            
+            $users = User::all();
+        
+            return redirect()->back()->with('users', $users);
         }
 
-        $data['user_id'] = Auth::user()->id;
-        $data['text'] = $request->input('text');
-        $data['image'] = $filename;
-        
-        $status=Post::create($data);
-        
-        $users = User::all();
-    
-        return redirect()->back()->with('users', $users);
+        return redirect()->back();
     }
 
     public function update_user(Request $request)
