@@ -23,16 +23,28 @@
                     <div data-popover id="popover-user{{ $item->id }}" role="tooltip" class="absolute w-[380px] z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600">
                         <div class="pt-6 pb-4 shadow-xl ">
                             <div class="pl-6 flex items-center mb-2">
-                                <a href="{{ url('/profile/'.$item->user->id) }}">
+                                @if($item->user->id == Auth::user()->id)
+                                    <a href="{{ url('profile') }}">
+                                @else
+                                    <a href="{{ url('/profile/'.$item->user->id) }}">
+                                @endif
                                 @if($item->user->avatar)
-                                    <img class="h-[65px] w-[65px] rounded-full object-cover" src="{{ $item->user->avatar }}"><a href="{{ url('/profile/'.$item->user->id) }}"></a></img>
+                                    @if($item->user->id == Auth::user()->id)
+                                        <img class="popover{{ $item->id }} h-[65px] w-[65px] rounded-full object-cover" src="{{ $item->user->avatar }}"><a class="UserPopover{{ $item->id }}" href="{{ url('profile') }}"></a></img>
+                                    @else
+                                        <img class="popover{{ $item->id }} h-[65px] w-[65px] rounded-full object-cover" src="{{ $item->user->avatar }}"><a class="OtherUserPopover{{ $item->id }}" href="{{ url('/profile/'.$item->user->id) }}"></a></img>
+                                    @endif
                                 @else
                                     <button class="h-[65px] w-[65px]  rounded-full bg-yellow-800 text-white text-[20px] font-semibold  inline-flex items-center justify-center">{{ $item->initials }}</button>
                                 @endif   
                                 </a>
                                 <div class="ml-5 mt-3">
                                 <p class="text-base font-semibold leading-none text-black dark:text-white">
+                                    @if($item->user->id == Auth::user()->id)
+                                    <a href="{{ url('profile') }}" class="flex">{{ $item->user->username }}
+                                    @else
                                     <a href="{{ url('/profile/'.$item->user->id) }}" class="flex">{{ $item->user->username }}
+                                    @endif
                                         @if($item->user->username == 'aurieljames11')<img class="ml-1 h-4 w-4" data-tooltip-target="tooltip-verified" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAADP0lEQVR4nO2az08TQRTHN+hR/QNM9ODVqAcvBk3ovBZ/HMATEcXon2CigvFUj+AN8aAJmEjnlYSTnk3UgzcjnozExKghUVQOwr63tQqseWyBWrtlpu2sVHnJO3R3uvP5zryZNzuznrdl/7ApTVdB+1e8VjSVD84qpCXQtJzO0UWvlUzlfVCavgNyGDn9SCGd8DaDZe4HexXSW0AaTqOf6XgSbi+/r5APA/LCOnzkCok7cnykvGw2G7ZJeYV8QyG/Oj4R7HEuADDo/R2MPwPyWErz6Yz2DyjNs5Xwa2U1z0oZKSv/UdF/y8oEvc4FKKTbcYCNutI04lwAIL90J4CnnMK3j37dqTQtOuyBxZO5uV3OBEDe73QFDyWXicFJy0fw9MC1AJA68n6n1Fk3cCbPuwG5SyEPAtIzpanoHpz/CCeZWgH5rkK6oPL+fmMBgDydNDBs5JpfGwtQyENJA55/WKjdI8iDxgJSOjiaJPzlR4Xw3bel8M5UMV7ARNBuLEBSPGj+lCT8zELk1URIxu6ZDLd5Niap3jV8/+NC+L4MXlx+91WEk0Ie9WxN5bg7yZafKcGLqCrlu6wFyKLLFfxATMv3V4cPhcWu9WWJW2NVmSQ8lFaxwmT+MoI8v1ngYW0cEIGmUzXh0+j32WTdjeZukwHbbwC/3hNUVNo/VxUekC+tvMMaPmzkedEYoJGWh0rXtAxI1xoSIPCmIE2FxxoCTENI5mhToGbDq1ohZDOIq83hH+aXwutPC+7g0WAQ20yjtUQ0v+XZfBq1SWRxM0u1awP1xjzWkcjESlsfGz68Wk80bcBiqQdy3G0tADTfM60gTkQz4CHyMSv4lR0zy6VEpYgmwofWy+kMBsfqqWhVRDPhoeTykmUTPjfrrUgGayMDFuJ7YailX+qVpjctva2SxsI+77/Z2Ioz2fZzLSCV89OeK+uYDHeApp8uw6bdRcuXm2yBOxOA/MIpfCSARpyFkKZbf+OIaQ6QxwGDHjVOh2puiGn+Ann/YDSWaBiQP5bfT+vgjHMBchAneUISi2RHWXaYHPLJtcolcTYbtskzSnux04kc8pkYaF9t2mNWm1Br2YPuVZPPDFr2U4Mt88zsF/L7hiBlV3/sAAAAAElFTkSuQmCC">
                                             <div id="tooltip-verified" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-xs font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
                                                 <p>Founder</p>
@@ -40,26 +52,42 @@
                                         @endif
                                     </a>
                                     <p class="mb-3 text-sm font-normal">
+                                    @if($item->user->id == Auth::user()->id)
+                                    <a href="{{ url('/profile') }}" class="hover:underline">{{ $item->user->fullname }}</a>
+                                    @else
                                     <a href="{{ url('/profile/'.$item->user->id) }}" class="hover:underline">{{ $item->user->fullname }}</a>
+                                    @endif
                                 </p>
                                 </div>
                             </p>
                             </div>
                             <div class="grid grid-cols-3 w-full justify-center text-center">
                                 <div class="col-span-1">
+                                    @if($item->user->id == Auth::user()->id)
+                                    <a href="{{ url('/profile') }}">
+                                    @else
                                     <a href="{{ url('/profile/'.$item->user->id) }}">
+                                    @endif
                                         <p class="font-bold text-neutral-900 text-md">{{ $item->user->posts->count() }}</p>
                                         <p>posts</p>
                                     </a>
                                 </div>
                                 <div class="col-span-1">
+                                    @if($item->user->id == Auth::user()->id)
+                                    <a href="{{ url('/profile') }}">
+                                    @else
                                     <a href="{{ url('/profile/'.$item->user->id) }}">
+                                    @endif
                                         <p class="font-bold text-neutral-900 text-md">2.5M</p>
                                         <p>followers</p>
                                     </a>
                                 </div>
                                 <div class="col-span-1">
+                                    @if($item->user->id == Auth::user()->id)
+                                    <a href="{{ url('/profile') }}">
+                                    @else
                                     <a href="{{ url('/profile/'.$item->user->id) }}">
+                                    @endif
                                         <p class="font-bold text-neutral-900 text-md">23</p>
                                         <p>following</p>
                                     </a>
@@ -68,36 +96,60 @@
                             <div class="grid grid-cols-3 w-full justify-center gap-1 mt-2">
                             @if($item->user->posts->count() >= 3)
                                 <div class="col-span-1">
+                                    @if($item->user->id == Auth::user()->id)
+                                    <a href="{{ url('/profile') }}">
+                                    @else
                                     <a href="{{ url('/profile/'.$item->user->id) }}">
+                                    @endif
                                         <img class="w-full h-[120px] object-cover" src="{{ $item->p0 }}">
                                     </a>
                                 </div>
                                 <div class="col-span-1">
+                                    @if($item->user->id == Auth::user()->id)
+                                    <a href="{{ url('/profile') }}">
+                                    @else
                                     <a href="{{ url('/profile/'.$item->user->id) }}">
+                                    @endif
                                         <img class="w-full h-[120px] object-cover" src="{{ $item->p1 }}">
                                     </a>
                                 </div>
                                 <div class="col-span-1">
+                                    @if($item->user->id == Auth::user()->id)
+                                    <a href="{{ url('/profile') }}">
+                                    @else
                                     <a href="{{ url('/profile/'.$item->user->id) }}">
+                                    @endif
                                         <img class="w-full h-[120px] object-cover" src="{{ $item->p2 }}">
                                     </a>
                                 </div>
                             
                             @elseif($item->user->posts->count() == 2)
                                 <div class="col-span-1">
+                                    @if($item->user->id == Auth::user()->id)
+                                    <a href="{{ url('/profile') }}">
+                                    @else
                                     <a href="{{ url('/profile/'.$item->user->id) }}">
+                                    @endif
                                         <img class="w-full h-[120px] object-cover" src="{{ $item->p0 }}">
                                     </a>
                                 </div>
                                 <div class="col-span-1">
+                                    @if($item->user->id == Auth::user()->id)
+                                    <a href="{{ url('/profile') }}">
+                                    @else
                                     <a href="{{ url('/profile/'.$item->user->id) }}">
+                                    @endif
                                         <img class="w-full h-[120px] object-cover" src="{{ $item->p1 }}">
                                     </a>
                                 </div>
                             
                             @elseif($item->user->posts->count() == 1)
                                 <div class="col-span-1">
+                                    @if($item->user->id == Auth::user()->id)
+                                    <a href="{{ url('/profile') }}">
+                                    @else
                                     <a href="{{ url('/profile/'.$item->user->id) }}">
+                                    @endif
                                         <img class="w-full h-[120px] object-cover" src="{{ $item->p0 }}">
                                     </a>
                                 </div>
