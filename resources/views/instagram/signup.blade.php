@@ -21,12 +21,12 @@
                 <div class="mb-6">
                     <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Username</label>
                     <input type="text" id="username" name="username" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500 dark:shadow-sm-light" 
-                        placeholder="aurieljames11"
+                        placeholder="Enter a username"
                     required>
                 </div>
                 <div class="mb-6 mt-10">
                     <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Fullname</label>
-                    <input type="text" id="fullname" name="fullname" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500 dark:shadow-sm-light" placeholder="Auriel James Fernandez" required>
+                    <input type="text" id="fullname" name="fullname" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500 dark:shadow-sm-light" placeholder="Enter your fullname" required>
                 </div>
                 <div class="mb-6">
                     <label for="repeat-password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Password</label>

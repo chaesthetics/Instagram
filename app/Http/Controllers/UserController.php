@@ -147,13 +147,14 @@ class UserController extends Controller
 
     public function signup()
     {
-        if(Auth::user()->id){
-
+        if(Auth::user() !=""){
             $users = User::all();
             return redirect()->back()->with('users', $users);
-    
         }
-        return view('instagram.signup');   
+        else{
+            return view('instagram.signup');  
+        }
+       
     }
 
     public function signin()
