@@ -2,7 +2,8 @@
 <html>
 <head>
     @vite(['resources/css/app.css','resources/js/app.js'])
-    <title>Signup</title>
+    <title>Sign up</title>
+    <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}">
 </head>
 <body>
     <div class="grid grid-cols-1 sm:grid-cols-2 h-screen w-full items-center">
