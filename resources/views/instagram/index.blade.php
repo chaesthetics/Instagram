@@ -368,25 +368,24 @@
                             <div class="grid grid-cols-3 w-full justify-center gap-1 mt-2">
                             @if($suggested->posts->count() >= 3)
                                 <div class="col-span-1">
-                                   <img class="w-full h-[120px] object-cover" src="{{ $suggested->p0 }}">
+                                   <img class="w-full h-[120px] object-cover" src="{{ $suggested->userpost[0]->image }}">
                                 </div>
                                 <div class="col-span-1">
-                                   <img class="w-full h-[120px] object-cover" src="{{ $suggested->p1 }}">
+                                   <img class="w-full h-[120px] object-cover" src="{{ $suggested->userpost[1]->image }}">
                                 </div>
                                 <div class="col-span-1">
-                                   <img class="w-full h-[120px] object-cover" src="{{ $suggested->p2 }}">
+                                   <img class="w-full h-[120px] object-cover" src="{{ $suggested->userpost[2]->image }}">
                                 </div>
-                            
                             @elseif($suggested->posts->count() == 2)
                                 <div class="col-span-1">
-                                   <img class="w-full h-[120px] object-cover" src="{{ $suggested->p0 }}">
+                                   <img class="w-full h-[120px] object-cover" src="{{ $suggested->userpost[0]->image }}">
                                 </div>
                                 <div class="col-span-1">
-                                   <img class="w-full h-[120px] object-cover" src="{{ $suggested->p1 }}">
+                                   <img class="w-full h-[120px] object-cover" src="{{ $suggested->userpost[1]->image }}">
                                 </div>
                             @elseif($suggested->posts->count() == 1)
                                 <div class="col-span-1">
-                                   <img class="w-full h-[120px] object-cover" src="{{ $suggested->p0 }}">
+                                   <img class="w-full h-[120px] object-cover" src="{{ $suggested->userpost[0]->image }}">
                                 </div>
                             @else
                             @endif
