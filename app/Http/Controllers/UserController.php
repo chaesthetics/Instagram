@@ -24,10 +24,7 @@ class UserController extends Controller
         $suggested = User::all()->except(Auth::user()->id)->random(5);
 
         $suggested->map(function ($suggested) {
-            $initials = explode(' ', $suggested->fullname);
-            $firsts = mb_substr($initials[0], 0, 1);
-            $lasts = mb_substr(end($initials), 0, 1);
-            $initials = $firsts . $lasts;
+            $initials = $this->getInitial($suggested->fullname);
             $suggested['initials'] = $initials;
 
             $posts = user::find($suggested->id)->posts;

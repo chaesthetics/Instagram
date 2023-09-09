@@ -122,7 +122,6 @@
                                         <img class="w-full h-[120px] object-cover" src="{{ $item->p2 }}">
                                     </a>
                                 </div>
-                            
                             @elseif($item->user->posts->count() == 2)
                                 <div class="col-span-1">
                                     @if($item->user->id == Auth::user()->id)
