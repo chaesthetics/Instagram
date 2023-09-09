@@ -3,89 +3,78 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Post;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\StorePostRequest;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    
+
     public function index()
     {
-    
+
 
         $allPost = Post::with('user')->get();
-        
+
         $suggested = User::all()->except(Auth::user()->id)->random(5);
 
-        $suggested->map(function($suggested){
-            $initials = explode(' ', $suggested->fullname);
-            $firsts = mb_substr($initials[0], 0, 1);
-            $lasts = mb_substr(end($initials), 0, 1);
-            $initials = $firsts.$lasts;
-            $suggested['initials'] = $initials;   
-            
+        $suggested->map(function ($suggested) {
+            $initials = $this->getInitial($suggested->fullname);
+            $suggested['initials'] = $initials;
+
             $posts = user::find($suggested->id)->posts;
             $value = count($posts);
-            
-            if($value>=3){
-                $suggested['p0'] = $posts[$value-1]->image;
-                $suggested['p1'] = $posts[$value-2]->image;
-                $suggested['p2'] = $posts[$value-3]->image;
-            }
-            elseif($value==2){
-                $suggested['p0'] = $posts[$value-1]->image;
-                $suggested['p1'] = $posts[$value-2]->image;
-            }
-            elseif($value==1){
-                $suggested['p0'] = $posts[$value-1]->image;
-            }
-            else{
+
+            if ($value >= 3) {
+                $suggested['p0'] = $posts[$value - 1]->image;
+                $suggested['p1'] = $posts[$value - 2]->image;
+                $suggested['p2'] = $posts[$value - 3]->image;
+            } elseif ($value == 2) {
+                $suggested['p0'] = $posts[$value - 1]->image;
+                $suggested['p1'] = $posts[$value - 2]->image;
+            } elseif ($value == 1) {
+                $suggested['p0'] = $posts[$value - 1]->image;
+            } else {
                 $suggested['p0'] = '';
                 $suggested['p1'] = '';
-                $suggested['p2'] = '';    
+                $suggested['p2'] = '';
             }
         });
-       
+
         $full_name = Auth::user()->fullname;
-        
-        $initial = explode(' ', $full_name);
-        $first = mb_substr($initial[0], 0, 1);
-        $last = mb_substr(end($initial), 0, 1);
-        $initial = $first.$last;
-        
-        
-        $allPost->map(function($allPost){
+
+        $initial = $this->getInitial($full_name);
+
+
+        $allPost->map(function ($allPost) {
 
             $posts = User::find($allPost->user_id)->posts;
-    
-            $fullnames = $allPost->user->fullname; 
-            $initials = explode(' ', $fullnames);
-            $firsts = mb_substr($initials[0], 0, 1);
-            $lasts = mb_substr(end($initials), 0, 1);
-            $initials = $firsts.$lasts;
-            $allPost['initials'] = $initials;    
+
+            $fullnames = $allPost->user->fullname;
+            $initials = $this->getInitial($fullnames);
+            $allPost['initials'] = $initials;
             $value = count($posts);
-            
-            if($value>=3){
-                $allPost['p0'] = $posts[$value-1]->image;
-                $allPost['p1'] = $posts[$value-2]->image;
-                $allPost['p2'] = $posts[$value-3]->image;
-            }
-            elseif($value==2){
-                $allPost['p0'] = $posts[$value-1]->image;
-                $allPost['p1'] = $posts[$value-2]->image;
-            }
-            elseif($value==1){
-                $allPost['p0'] = $posts[$value-1]->image;
-            }
-            else{
+
+            if ($value >= 3) {
+                $allPost['p0'] = $posts[$value - 1]->image;
+                $allPost['p1'] = $posts[$value - 2]->image;
+                $allPost['p2'] = $posts[$value - 3]->image;
+            } elseif ($value == 2) {
+                $allPost['p0'] = $posts[$value - 1]->image;
+                $allPost['p1'] = $posts[$value - 2]->image;
+            } elseif ($value == 1) {
+                $allPost['p0'] = $posts[$value - 1]->image;
+            } else {
                 $allPost['p0'] = '';
                 $allPost['p1'] = '';
-                $allPost['p2'] = '';    
+                $allPost['p2'] = '';
             }
+
         });
 
         return view('instagram.index')->with('posts', $allPost)->withAuthor($initial)->with('suggestions', $suggested);
@@ -95,13 +84,9 @@ class UserController extends Controller
     public function profile()
     {
         $posts = User::find(Auth::user()->id)->posts;
-        
+
         $full_name = Auth::user()->fullname;
-        $initial = explode(' ', $full_name);
-        $first = mb_substr($initial[0], 0, 1);
-        $last = mb_substr(end($initial), 0, 1);
-        $initial = $first.$last;
-        
+        $initial = $this->getInitial($full_name);
         return view('instagram.profile')->with('posts', $posts)->withAuthor($initial);
     }
 
@@ -109,13 +94,9 @@ class UserController extends Controller
     {
         $posts = User::find($userid)->posts;
         $user = User::find($userid);
-        
         $full_name = $user->fullname;
-        $initial = explode(' ', $full_name);
-        $first = mb_substr($initial[0], 0, 1);
-        $last = mb_substr(end($initial), 0, 1);
-        $initial = $first.$last;
-        
+        $initial = $this->getInitial($full_name);
+
         return view('instagram.profileview')->with('posts', $posts)->withAuthor($initial)->with('userinfo', $user);
     }
 
@@ -123,13 +104,10 @@ class UserController extends Controller
     public function edit_profile()
     {
         $user = User::all();
-        
+
         $full_name = Auth::user()->fullname;
-        $initial = explode(' ', $full_name);
-        $first = mb_substr($initial[0], 0, 1);
-        $last = mb_substr(end($initial), 0, 1);
-        $initial = $first.$last;
-        
+        $initial = $this->getInitial($full_name);
+
         return view('instagram.edit_profile')->with('user', $user)->withAuthor($initial);
     }
 
@@ -137,24 +115,21 @@ class UserController extends Controller
     {
         $user = User::all();
         $full_name = Auth::user()->fullname;
-        $initial = explode(' ', $full_name);
-        $first = mb_substr($initial[0], 0, 1);
-        $last = mb_substr(end($initial), 0, 1);
-        $initial = $first.$last;
-        
+        $initial = $this->getInitial($full_name);
+
         return view('instagram.change_password')->with('user', $user)->withAuthor($initial);
     }
 
     public function signup()
     {
-        if(Auth::user() !=""){
+
+        if (Auth::user() != "") {
             $users = User::all();
             return redirect()->back()->with('users', $users);
+        } else {
+            return view('instagram.signup')->with('username_message');
         }
-        else{
-            return view('instagram.signup');  
-        }
-       
+
     }
 
     public function signin()
@@ -170,35 +145,62 @@ class UserController extends Controller
         } else {
             return redirect('login')->withErrors(['username' => 'Invalid credentials']);
         }
-       
+
     }
 
     public function signUpPost(Request $request)
     {
-        $user = new User; 
-        $passwordHash = Hash::make($request->password);
         
+        $customMessages = [        
+            'username.required' => 'The name field is required.',  
+            'username.string' => 'Username must be string.',
+            'username.max' => 'Username should have maximum of 25 characters.',
+            'username.unique' => 'Username already exist.',
+            'fullname.required' => 'Fullname field is required',
+            'fullname.string' => 'Fullname should atleast 5 characters.',
+            'password.required' => 'Password field is required',
+            'password.min' => 'Password should have atleast 7 character',
+            'password.regex' => 'Password should have atleast 1 uppercase',
+
+        ];
+
+        $validatedData = $request->validate([        
+            'username' => 'required|string|max:25|unique:users',        
+            'fullname' => 'required|string|min:5',        
+            'password' => 'required|min:7|regex:[A-Z]',    
+        ], $customMessages);
+
+        if($validatedData->fails()) {            
+            return redirect()->back()->withErrors($validatedData);        
+        }
+        
+        $user = new User;
+        $passwordHash = Hash::make($request->password);
+
+        dd($request);
+
         $user->username = $request->username;
         $user->fullname = $request->fullname;
-		$user->password = $passwordHash;
-		$user->save();  
+        $user->password = $passwordHash;
 
-        return redirect('login')->with('flash_message', 'User is Added!');
+        $user->save();
+
+        return redirect('login');
     }
 
     public function logout()
     {
-        return redirect('login')->with(Auth::logout()); 
+        return redirect('login')->with(Auth::logout());
     }
 
     public function userPost(Request $request, User $user)
     {
-        
-        $data= $request->all();
+
+        $data = $request->all();
         $filename = '';
-    
-        if($request->image){
-            if($request->hasFile('image')){
+
+        if ($request->image) {
+            if ($request->hasFile('image')) {
                 $filename = $request->getSchemeAndHttpHost() . '/assets/img/' . time() . '.' . $request->image->extension();
                 $request->image->move(public_path('/assets/img/'), $filename);
             }
@@ -206,11 +208,11 @@ class UserController extends Controller
             $data['user_id'] = Auth::user()->id;
             $data['text'] = $request->input('text');
             $data['image'] = $filename;
-            
-            $status=Post::create($data);
-            
+
+            $status = Post::create($data);
+
             $users = User::all();
-        
+
             return redirect()->back()->with('users', $users);
         }
 
@@ -219,18 +221,18 @@ class UserController extends Controller
 
     public function update_user(Request $request)
     {
-        $user = User::all();
+        
         $user = User::find(Auth::user()->id);
-        
+
         $filename = '';
-        
-        if($request->hasFile('avatar')){
+
+        if ($request->hasFile('avatar')) {
             $filename = $request->getSchemeAndHttpHost() . '/assets/img/' . time() . '.' . $request->avatar->extension();
             $request->avatar->move(public_path('/assets/img/'), $filename);
-        }else{
+        } else {
             $filename = Auth::user()->avatar;
         }
-        
+
         $user->update([
             'username' => $request->username,
             'fullname' => $request->fullname,
@@ -241,30 +243,37 @@ class UserController extends Controller
 
         $posts = User::find(Auth::user()->id)->posts;
         $full_name = Auth::user()->fullname;
+        $initial = $this->getInitial($full_name);
+        return redirect('profile')->with('posts', $posts)->withAuthor($initial);
+
+    }
+
+    public function getInitial($full_name)
+    {
         $initial = explode(' ', $full_name);
         $first = mb_substr($initial[0], 0, 1);
         $last = mb_substr(end($initial), 0, 1);
-        $initial = $first.$last;
-
-        return redirect('profile')->with('posts', $posts)->withAuthor($initial);
-
+        $initial = $first . $last;
+        
+        return $initial; 
     }
 
     public function passwordpost(Request $request)
     {
         $user = User::find(Auth::user()->id);
 
-        if(Hash::check($request->oldpassword, Auth::user()->password) && 
-        ($request->newpassword == $request->confirmpassword)){
-            
+        if (
+            Hash::check($request->oldpassword, Auth::user()->password) &&
+            ($request->newpassword == $request->confirmpassword)
+        ) {
+
             $passwordHash = Hash::make($request->newpassword);
             $user->update([
                 'password' => $passwordHash,
             ]);
 
             return redirect()->back()->with('users', $user);
-        }
-        else{
+        } else {
 
             return redirect()->back()->with('users', $user);
         }
