@@ -110,55 +110,56 @@
                     <p class="text-md font-semibold text-yellow-700">Start the conversation.</p>
                 </div> 
 
-<div id="popup-modal{{ $item->id }}" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="w-full max-w-2xl max-h-full">
-        <div class="bg-white rounded-xl shadow drop-shadow-2xl dark:bg-gray-700">
-            <button type="button "class="absolute top-3 right-2.5 text-gray-400 z-50 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal{{ $item->id }}">
-                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14" data-modal-hide="popup-modal{{ $item->id }}" type="button">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                </svg>
-                <span class="sr-only">Close modal</span>
-            </button>
-            <div class="p-6 text-center flex h-full relative">
-                <form method="post" action="{{ url('/updatepost/' .$item->id)}}">
-                    {!! csrf_field() !!}
-                <h3 class="mb-5 text-lg font-semibold text-gray-900 dark:text-gray-400">Edit Info</h3>
-                <div class="flex pb-4">
-                    <img src="{{ $item->image }}" class="w-1/2 h-auto">
-                    <div class="w-full h-auto border pt-5 pb-5 pl-5 pr-5 border-gray-300">
-                        <div class="flex items-center space-x-3 text-sm font-semibold">
-                        @if($item->user->avatar)
-                            <img class="h-9 w-9 rounded-full object-cover" src="{{ $item->user->avatar }}">
-                            @else
-                            <button class="h-9 w-9 rounded-full bg-yellow-800 text-white text-[10px] font-semibold  inline-flex items-center justify-center">{{ $item->initials }}</button>
-                            @endif 
-                            <p>{{ $item->user->username }}</p>
-                        </div>
-                        <div class="flex flex-col h-full pb-5 justify-between">
-                        <textarea name="text" class="pt-7 w-full h-1/2 border-none text-sm resize-none focus:outline-none focus:ring-0 focus:ring-offset-0 ring-current">{{ $item->text }}</textarea>
-                        <div class="">
-                        <div class="flex justify-between">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-emoji-smile opacity-50 mb-3 relative" viewBox="0 0 16 16"> <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/> <path d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z"/> </svg>
-                            <p class="text-xs text-gray-800 opacity-50">2,300 letters</p>
-                        </div>
-                        <div class="flex justify-between border-t-1">
-                            <p class="text-md text-gray-800 opacity-50">Add location</p>
-                            <img class="h-5 w-5" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAADuElEQVR4nO2ZWYiOURjHfzRkmbHPZOJCWYZCiNwoW7JEGtkaV24VuZG9xnZBcodsxYWILJESLiQiDLIklEhqLFnGvoxPR/+3TtN8531f3znffCO/euvr/f7vc/bnOec58J9G6QBUAbuAq8BL4Luel3q3E5gLlFCAVAB7gM9AJuHzCdgN9KUAaAdsBn6ocr/U6yuB0Wpgez0VercKuCZtRqO1CWjTVI0wPXlHlakH9gO9U3zfBzhgNegyUE6eGao5byrwABiWg63hwEPZegYMJo8jETXiDNDZg80uwFmrMeX5WBN3rEYUebTdCjhnTbOga2azNZ18jERjI/NIZawhEBXyTvU5rok4RsgBfAS6hyhgj3rKeKfQHFRZ20JE7E/qqSQutgxYB9xUz5rnBrAWKE3oUH7pu2I8UqUeMsEujplAnSOivwdmJLBzXfo5eGSXjJqIHdeIKMAdUySPIvsY4LgVQCtjbK2WdofHdvwZiYwq5ppO0UgsceiWSvMO6ObQjZXuCh55JaP9HJp11kjEcSKBi+0nzQs88k1GXVvvWwlGrWFvGweQjRJpvuKRLzLqirYfpEniZaJKmqno2kVkdDTwRq2MugJUXYqGdLA8WDZ6SPMcj9yX0YEOzU1pjHeKY5y0NQ7NEGnu4pGTMjrboVkrzfEU9qodmnnSHMUjG2R0vUNTqqmSkYvNxnJp3gJdHbqNCRqbmtkyarbZLmYo2GXkYsdqzRRrOkUjYTTTY2xdlDZOl4oyFf5V3sRFpYJdti3K2wSV66Sdtnk64pkbqsiUBNpuCnY1cst12jtVx0yniFkqy4yKd6LIvZfwHEmw1v6a/pbvj5teudBRAdhsPnuFKqRGjTGuMRQLVcb5gGWwwEoOhKAIeKwyzBkoGMWWRzJna9/MtbYlJqsSlC0q7HDAqbuCPFBuLcZBHu1OsA5cJo7kha0BRsUs7qD5rMboaWVVRnmwV6lGvA6U+HNSbZ3yWuZgp7WVxF5AE9AWeKIKzM/BzhLZuOc5l/xX+a5anfrSUmq584k0IS2AS6qISXCnZZ++Ndv7Jmeors9+AiNTfDfJuktMc9MVlOiYez/hvYbJojzVN4soIFoDtxMchyO2W+eNXDxeEIZoitXHZFImKf6Y0+YACpQ16uknWbYZZUqBGs1iCpgi4IKVxjFeLcJModP671SD/wqSnlbSe2UjR+XaUFdqIZimdWDWy2Rgqn4bFz2eZka1RuCNUkDm9zKaIS2AQ1Y+q+GaaVaU6Mbpsu9LTf5VfgNttDSN+ivn8AAAAABJRU5ErkJggg==">
-                        </div>
-                        </div>
+                <div id="popup-modal{{ $item->id }}" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                    <div class="w-full max-w-2xl max-h-full">
+                        <div class="bg-white rounded-xl shadow drop-shadow-2xl dark:bg-gray-700">
+                            <button type="button "class="absolute top-3 right-2.5 text-gray-400 z-50 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal{{ $item->id }}">
+                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14" data-modal-hide="popup-modal{{ $item->id }}" type="button">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                </svg>
+                                <span class="sr-only">Close modal</span>
+                            </button>
+                            <div class="p-6 text-center flex h-full relative">
+                                <form method="post" action="{{ url('/updatepost/' .$item->id)}}">
+                                    {!! csrf_field() !!}
+                                <h3 class="mb-5 text-lg font-semibold text-gray-900 dark:text-gray-400">Edit Info</h3>
+                                <div class="flex pb-4">
+                                    <img src="{{ $item->image }}" class="w-1/2 h-auto">
+                                    <div class="w-full h-auto border pt-5 pb-5 pl-5 pr-5 border-gray-300">
+                                        <div class="flex items-center space-x-3 text-sm font-semibold">
+                                        @if($item->user->avatar)
+                                            <img class="h-9 w-9 rounded-full object-cover" src="{{ $item->user->avatar }}">
+                                            @else
+                                            <button class="h-9 w-9 rounded-full bg-yellow-800 text-white text-[10px] font-semibold  inline-flex items-center justify-center">{{ $item->initials }}</button>
+                                            @endif 
+                                            <p>{{ $item->user->username }}</p>
+                                        </div>
+                                        <div class="flex flex-col h-full pb-5 justify-between">
+                                        <textarea name="text" class="pt-7 w-full h-1/2 border-none text-sm resize-none focus:outline-none focus:ring-0 focus:ring-offset-0 ring-current">{{ $item->text }}</textarea>
+                                        <div class="">
+                                        <div class="flex justify-between">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-emoji-smile opacity-50 mb-3 relative" viewBox="0 0 16 16"> <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/> <path d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z"/> </svg>
+                                            <p class="text-xs text-gray-800 opacity-50">2,300 letters</p>
+                                        </div>
+                                        <div class="flex justify-between border-t-1">
+                                            <p class="text-md text-gray-800 opacity-50">Add location</p>
+                                            <img class="h-5 w-5" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAADuElEQVR4nO2ZWYiOURjHfzRkmbHPZOJCWYZCiNwoW7JEGtkaV24VuZG9xnZBcodsxYWILJESLiQiDLIklEhqLFnGvoxPR/+3TtN8531f3znffCO/euvr/f7vc/bnOec58J9G6QBUAbuAq8BL4Luel3q3E5gLlFCAVAB7gM9AJuHzCdgN9KUAaAdsBn6ocr/U6yuB0Wpgez0VercKuCZtRqO1CWjTVI0wPXlHlakH9gO9U3zfBzhgNegyUE6eGao5byrwABiWg63hwEPZegYMJo8jETXiDNDZg80uwFmrMeX5WBN3rEYUebTdCjhnTbOga2azNZ18jERjI/NIZawhEBXyTvU5rok4RsgBfAS6hyhgj3rKeKfQHFRZ20JE7E/qqSQutgxYB9xUz5rnBrAWKE3oUH7pu2I8UqUeMsEujplAnSOivwdmJLBzXfo5eGSXjJqIHdeIKMAdUySPIvsY4LgVQCtjbK2WdofHdvwZiYwq5ppO0UgsceiWSvMO6ObQjZXuCh55JaP9HJp11kjEcSKBi+0nzQs88k1GXVvvWwlGrWFvGweQjRJpvuKRLzLqirYfpEniZaJKmqno2kVkdDTwRq2MugJUXYqGdLA8WDZ6SPMcj9yX0YEOzU1pjHeKY5y0NQ7NEGnu4pGTMjrboVkrzfEU9qodmnnSHMUjG2R0vUNTqqmSkYvNxnJp3gJdHbqNCRqbmtkyarbZLmYo2GXkYsdqzRRrOkUjYTTTY2xdlDZOl4oyFf5V3sRFpYJdti3K2wSV66Sdtnk64pkbqsiUBNpuCnY1cst12jtVx0yniFkqy4yKd6LIvZfwHEmw1v6a/pbvj5teudBRAdhsPnuFKqRGjTGuMRQLVcb5gGWwwEoOhKAIeKwyzBkoGMWWRzJna9/MtbYlJqsSlC0q7HDAqbuCPFBuLcZBHu1OsA5cJo7kha0BRsUs7qD5rMboaWVVRnmwV6lGvA6U+HNSbZ3yWuZgp7WVxF5AE9AWeKIKzM/BzhLZuOc5l/xX+a5anfrSUmq584k0IS2AS6qISXCnZZ++Ndv7Jmeors9+AiNTfDfJuktMc9MVlOiYez/hvYbJojzVN4soIFoDtxMchyO2W+eNXDxeEIZoitXHZFImKf6Y0+YACpQ16uknWbYZZUqBGs1iCpgi4IKVxjFeLcJModP671SD/wqSnlbSe2UjR+XaUFdqIZimdWDWy2Rgqn4bFz2eZka1RuCNUkDm9zKaIS2AQ1Y+q+GaaVaU6Mbpsu9LTf5VfgNttDSN+ivn8AAAAABJRU5ErkJggg==">
+                                        </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>   
+                                    <button data-modal-hide="popup-modal{{ $item->id }}" type="button" class="text-white bg-neutral-900 hover:bg-neutral-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No, cancel</button>
+                                    <button data-modal-hide="popup-modal{{ $item->id }}" type="submit" value="save" class="text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                                        Update post
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>   
-                    <button data-modal-hide="popup-modal{{ $item->id }}" type="button" class="text-white bg-neutral-900 hover:bg-neutral-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No, cancel</button>
-                    <button data-modal-hide="popup-modal{{ $item->id }}" type="submit" value="save" class="text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
-                        Update post
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+                </div>
                 <!-- Dropdown menu -->
+                
                 <div id="dropdownHover{{ $item->id}}" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-md shadow w-44 dark:bg-gray-700">
                     <ul class="absolute top-0 dark:bg-gray-700 shadow rounded-sm bg-neutral-800 py-2 text-sm text-white dark:text-gray-200" aria-labelledby="dropdownHoverButton{{ $item->id}}">
                     <li>
@@ -168,7 +169,7 @@
                         <a href="#" onclick="hidepost()" class="block px-6 py-1 hover:bg-yellow-600 dark:hover:bg-yellow-700 dark:hover:text-white" data-modal-target="popup-modal{{ $item->id }}" data-modal-toggle="popup-modal{{ $item->id }}" >Edit</a>
                     </li>
                     <li>
-                        <a href="#" class="block px-6 py-1 hover:bg-yellow-600 dark:hover:bg-yellow-700 dark:hover:text-white">Go to profile</a>
+                        <a href="{{ url('profile') }}" class="block px-6 py-1 hover:bg-yellow-600 dark:hover:bg-yellow-700 dark:hover:text-white">Go to profile</a>
                     </li>
                     <li>
                         <a href="#" class="block px-6 py-1 hover:bg-yellow-600 dark:hover:bg-yellow-700 dark:hover:text-white">Report</a>
