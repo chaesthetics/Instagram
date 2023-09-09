@@ -27,23 +27,9 @@ class UserController extends Controller
             $initials = $this->getInitial($suggested->fullname);
             $suggested['initials'] = $initials;
 
-            $posts = user::find($suggested->id)->posts;
-            $value = count($posts);
+            $post = user::find($suggested->id)->posts->reverse()->values()->take(3);
+            $suggested['userpost'] = $post;
 
-            if ($value >= 3) {
-                $suggested['p0'] = $posts[$value - 1]->image;
-                $suggested['p1'] = $posts[$value - 2]->image;
-                $suggested['p2'] = $posts[$value - 3]->image;
-            } elseif ($value == 2) {
-                $suggested['p0'] = $posts[$value - 1]->image;
-                $suggested['p1'] = $posts[$value - 2]->image;
-            } elseif ($value == 1) {
-                $suggested['p0'] = $posts[$value - 1]->image;
-            } else {
-                $suggested['p0'] = '';
-                $suggested['p1'] = '';
-                $suggested['p2'] = '';
-            }
         });
 
         $full_name = Auth::user()->fullname;
@@ -56,7 +42,7 @@ class UserController extends Controller
             $fullnames = $allPost->user->fullname;
             $initials = $this->getInitial($fullnames);
             $allPost['initials'] = $initials;
-            
+
             $post = User::find($allPost->user_id)->posts->reverse()->values()->take(3);
             $allPost['userpost'] = $post;
         });
@@ -138,10 +124,11 @@ class UserController extends Controller
         $customMessages = [        
             'username.required' => 'The name field is required.',  
             'username.string' => 'Username must be string.',
-            'username.max' => 'Username should have maximum of 25 characters.',
+            'username.max' => 'Username must be no longer than 25 characters.',
             'username.unique' => 'Username already exist.',
             'fullname.required' => 'Fullname field is required',
             'fullname.string' => 'Fullname should atleast 5 characters.',
+            'fullname.max' => 'Fullname must be no longer than 25 characters.',
             'password.required' => 'Password field is required',
             'password.min' => 'Password should have atleast 7 character',
             'password.regex' => 'Password should have atleast 1 uppercase',
@@ -150,7 +137,7 @@ class UserController extends Controller
 
         $validatedData = $request->validate([        
             'username' => 'required|string|max:25|unique:users',        
-            'fullname' => 'required|string|min:5',        
+            'fullname' => 'required|string|min:5|max:30',        
             'password' => 'required|min:7|regex:[A-Z]',    
         ], $customMessages);
 
