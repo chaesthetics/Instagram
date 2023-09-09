@@ -147,12 +147,13 @@ class UserController extends Controller
 
     public function signup()
     {
+
         if(Auth::user() !=""){
             $users = User::all();
             return redirect()->back()->with('users', $users);
         }
         else{
-            return view('instagram.signup');  
+            return view('instagram.signup')->with('username_message');  
         }
        
     }
@@ -178,12 +179,21 @@ class UserController extends Controller
         $user = new User; 
         $passwordHash = Hash::make($request->password);
         
+        $exist = User::where('username', '=', $request->username)->exists();
+        $username_message = 'Username already exist';
+
+        if($exist){
+            return view('instagram.signup')->with('username_message', $username_message);
+        }
+
+       
+        
         $user->username = $request->username;
         $user->fullname = $request->fullname;
 		$user->password = $passwordHash;
 		$user->save();  
 
-        return redirect('login')->with('flash_message', 'User is Added!');
+        return redirect('login')->with('flash_message', '');
     }
 
     public function logout()
