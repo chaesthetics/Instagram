@@ -21,22 +21,27 @@
                 {!! csrf_field() !!}
                 <div class="mb-6 mt-10">
                     <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Username</label>
-                    @if($username_message)
-                        <span class="text-xs text-red-600 font-semibold">{{ $username_message }}</span>
-                    @else
-                        <span class="text-xs text-red-600">{{ $username_message }}</span>
-                    @endif
-                    <input type="text" id="username" name="username" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500 dark:shadow-sm-light" 
-                        placeholder="Enter a username"
+                    <input type="text" id="username" value="{{ old('username') }}" name="username" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500 dark:shadow-sm-light" 
+                        placeholder="Enter a username" 
                     >
+                    @error('username')       
+                        <div class="alert alert-danger text-red-500 font-semibold text-xs">{{ $message }}</div>    
+                    @enderror
                 </div>
+              
                 <div class="mb-6">
                     <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Fullname</label>
                     <input type="text" id="fullname" name="fullname" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500 dark:shadow-sm-light" placeholder="Enter your fullname" >
+                    @error('fullname')       
+                        <div class="alert alert-danger text-red-500 font-semibold text-xs">{{ $message }}</div>    
+                    @enderror
                 </div>
                 <div class="mb-6">
                     <label for="repeat-password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Password</label>
                     <input type="password" id="password" name="password" placeholder="6+ Characters, 1 Capital letter" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500 dark:shadow-sm-light">
+                    @error('password')       
+                        <div class="alert alert-danger text-red-500 font-semibold text-xs">{{ $message }}</div>    
+                    @enderror
                 </div>
                 <div class="flex items-start mb-6">
                     <div class="flex items-center h-5">
