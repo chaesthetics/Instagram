@@ -20,12 +20,18 @@
                 <form action="{{ url('signInPost') }}" method="post">
                 {!! csrf_field() !!}
                 <div class="mb-6 mt-20">
-                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Username</label>
-                    <input type="text" id="email" name="username" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500 dark:shadow-sm-light" placeholder="Enter your username" required>
+                    <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Username</label>
+                    <input type="text" id="username" name="username" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500 dark:shadow-sm-light" placeholder="Enter your username">
+                    @error('username')       
+                        <div class="alert alert-danger text-red-700 font-semibold text-xs">{{ $message }}</div>    
+                    @enderror
                 </div>
                 <div class="mb-6">
                     <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Password</label>
-                    <input type="password" id="password" name="password" placeholder="Enter your password" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500 dark:shadow-sm-light" required>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500 dark:shadow-sm-light">
+                    @error('password')       
+                        <div class="alert alert-danger text-red-700 font-semibold text-xs">{{ $message }}</div>    
+                    @enderror
                 </div>
                 <div class="flex items-start mb-6">
                     <div class="flex items-center h-5">

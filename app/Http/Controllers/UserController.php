@@ -109,13 +109,26 @@ class UserController extends Controller
 
     public function signInPost(Request $request)
     {
+        $customMessages = [
+            'username.required' => 'Username field is required',
+            'username.exists' => 'Username does not exist in our record',
+            'password.required' => 'Password field is required',
+        ];
+        
+        $validatedData = $request->validate([
+            'username' => 'required|exists:users,username',
+            'password' => 'required',
+        ]);
+
+        if($validatedData->fails()){
+            return redirect()->back()->withErrors($validatedData);   
+        }
         $credentials = $request->only('username', 'password');
         if (Auth::attempt($credentials)) {
             return redirect()->intended('home');
         } else {
-            return redirect('login')->withErrors(['username' => 'Invalid credentials']);
+            return redirect('login')->withErrors($validatedData);
         }
-
     }
 
     public function signUpPost(Request $request)
