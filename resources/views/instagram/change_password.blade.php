@@ -56,7 +56,7 @@
                         @endif   
                     </div>
                     <div class="col-span-3 ml-10 flex ml-10 mt-3">
-                        <p>username</p>
+                        <p>{{ Auth::user()->username }}</p>
                     </div>
                     <div class="col-span-1 text-md font-semibold flex justify-end">
                         <p>Old password</p>
