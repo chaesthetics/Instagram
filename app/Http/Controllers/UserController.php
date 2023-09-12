@@ -114,20 +114,17 @@ class UserController extends Controller
             'username.exists' => 'Username does not exist in our record',
             'password.required' => 'Password field is required',
         ];
-        
+
         $validatedData = $request->validate([
             'username' => 'required|exists:users,username',
             'password' => 'required',
-        ]);
+        ], $customMessages);
 
-        if($validatedData->fails()){
-            return redirect()->back()->withErrors($validatedData);   
-        }
         $credentials = $request->only('username', 'password');
         if (Auth::attempt($credentials)) {
             return redirect()->intended('home');
         } else {
-            return redirect('login')->withErrors($validatedData);
+            return redirect('login')->withErrors(['password' => 'Incorrect password']);
         }
     }
 

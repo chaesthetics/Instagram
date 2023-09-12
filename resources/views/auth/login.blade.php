@@ -21,7 +21,7 @@
                 {!! csrf_field() !!}
                 <div class="mb-6 mt-20">
                     <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Username</label>
-                    <input type="text" id="username" name="username" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500 dark:shadow-sm-light" placeholder="Enter your username">
+                    <input type="text" id="username" name="username" value="{{ old('username') }}" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500 dark:shadow-sm-light" placeholder="Enter your username">
                     @error('username')       
                         <div class="alert alert-danger text-red-700 font-semibold text-xs">{{ $message }}</div>    
                     @enderror
