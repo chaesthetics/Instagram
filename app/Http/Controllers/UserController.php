@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StorePostRequest;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
 
 class UserController extends Controller
 {
@@ -124,13 +125,13 @@ class UserController extends Controller
         if (Auth::attempt($credentials)) {
             return redirect()->intended('home');
         } else {
-            return redirect('login')->withErrors(['password' => 'Incorrect password']);
+            return redirect('login')->withErrors(['password' => 'Incorrect password'])->withInput($request->all());
         }
     }
 
     public function signUpPost(Request $request)
     {
-        
+
         $customMessages = [        
             'username.required' => 'The name field is required.',  
             'username.string' => 'Username must be string.',
@@ -150,15 +151,9 @@ class UserController extends Controller
             'fullname' => 'required|string|min:5|max:30',        
             'password' => 'required|min:7|regex:[A-Z]',    
         ], $customMessages);
-
-        if($validatedData->fails()) {            
-            return redirect()->back()->withErrors($validatedData);        
-        }
         
         $user = new User;
         $passwordHash = Hash::make($request->password);
-
-        dd($request);
 
         $user->username = $request->username;
         $user->fullname = $request->fullname;
@@ -225,6 +220,7 @@ class UserController extends Controller
         $posts = User::find(Auth::user()->id)->posts;
         $full_name = Auth::user()->fullname;
         $initial = $this->getInitial($full_name);
+
         return redirect('profile')->with('posts', $posts)->withAuthor($initial);
 
     }
