@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StorePostRequest;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
 
 class UserController extends Controller
 {
@@ -122,15 +123,15 @@ class UserController extends Controller
 
         $credentials = $request->only('username', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('home');
+            return redirect()->intended('home')->with('successmessage','Logged in successfully');;
         } else {
-            return redirect('login')->withErrors(['password' => 'Incorrect password']);
+            return redirect('login')->withErrors(['password' => 'Incorrect password'])->withInput($request->all());
         }
     }
 
     public function signUpPost(Request $request)
     {
-        
+
         $customMessages = [        
             'username.required' => 'The name field is required.',  
             'username.string' => 'Username must be string.',
@@ -141,24 +142,17 @@ class UserController extends Controller
             'fullname.max' => 'Fullname must be no longer than 25 characters.',
             'password.required' => 'Password field is required',
             'password.min' => 'Password should have atleast 7 character',
-            'password.regex' => 'Password should have atleast 1 uppercase',
-
+            'password.regex' => 'Password should have atleast 1 lowercase, 1 uppercase, and number',
         ];
 
         $validatedData = $request->validate([        
             'username' => 'required|string|max:25|unique:users',        
             'fullname' => 'required|string|min:5|max:30',        
-            'password' => 'required|min:7|regex:[A-Z]',    
+            'password' => 'required|min:7|regex:/^(?=.*[a-zA-Z])(?=.*\d).+$/',    
         ], $customMessages);
-
-        if($validatedData->fails()) {            
-            return redirect()->back()->withErrors($validatedData);        
-        }
         
         $user = new User;
         $passwordHash = Hash::make($request->password);
-
-        dd($request);
 
         $user->username = $request->username;
         $user->fullname = $request->fullname;
@@ -166,7 +160,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect('login');
+        return redirect('login')->with('successmessage','data saved successfully');
     }
 
     public function logout()
@@ -225,6 +219,7 @@ class UserController extends Controller
         $posts = User::find(Auth::user()->id)->posts;
         $full_name = Auth::user()->fullname;
         $initial = $this->getInitial($full_name);
+
         return redirect('profile')->with('posts', $posts)->withAuthor($initial);
 
     }
