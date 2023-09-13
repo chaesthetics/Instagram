@@ -123,7 +123,7 @@ class UserController extends Controller
 
         $credentials = $request->only('username', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('home');
+            return redirect()->intended('home')->with('successmessage','Logged in successfully');;
         } else {
             return redirect('login')->withErrors(['password' => 'Incorrect password'])->withInput($request->all());
         }
@@ -142,14 +142,13 @@ class UserController extends Controller
             'fullname.max' => 'Fullname must be no longer than 25 characters.',
             'password.required' => 'Password field is required',
             'password.min' => 'Password should have atleast 7 character',
-            'password.regex' => 'Password should have atleast 1 uppercase',
-
+            'password.regex' => 'Password should have atleast 1 lowercase, 1 uppercase, and number',
         ];
 
         $validatedData = $request->validate([        
             'username' => 'required|string|max:25|unique:users',        
             'fullname' => 'required|string|min:5|max:30',        
-            'password' => 'required|min:7|regex:[A-Z]',    
+            'password' => 'required|min:7|regex:/^(?=.*[a-zA-Z])(?=.*\d).+$/',    
         ], $customMessages);
         
         $user = new User;
@@ -161,7 +160,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect('login');
+        return redirect('login')->with('successmessage','data saved successfully');
     }
 
     public function logout()
