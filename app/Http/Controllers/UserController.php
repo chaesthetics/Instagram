@@ -226,7 +226,7 @@ class UserController extends Controller
                 'username' => 'required|string|max:25|unique:users',
                 'fullname' => 'required|string|max:25',
                 'bio' => 'max:200',
-                'email' => 'email',
+                'email' => 'email|nullable',
             ], $customMessage);
         }
 
@@ -242,7 +242,7 @@ class UserController extends Controller
             $validatedData = $request->validate([
                 'fullname' => 'required|string|max:25',
                 'bio' => 'max:200',
-                'email' => 'email',
+                'email' => 'email|nullable',
             ], $customMessage);
         }
         
@@ -276,20 +276,29 @@ class UserController extends Controller
     {
         $user = User::find(Auth::user()->id);
 
-        if (
-            Hash::check($request->oldpassword, Auth::user()->password) &&
-            ($request->newpassword == $request->confirmpassword)
-        ) {
+
+        if (Hash::check($request->oldpassword, Auth::user()->password)){
+            $customMessage = [
+                'newpassword.required' => 'Password field is required',
+                'newpassword.min' => 'Password should have atleast 7 character',
+                'newpassword.regex' => 'Password should have atleast 1 lowercase, 1 uppercase, and number',
+                'confirmpassword.required' => 'Confirm password is required', 
+                'confirmpassword.same' => 'New password and confirm password did not match',
+            ];
+
+            $validatedData = $request->validate([
+                'newpassword' => 'required|min:7|regex:/^(?=.*[a-zA-Z])(?=.*\d).+$/',
+                'confirmpassword' => 'required|same:newpassword',
+            ], $customMessage);
 
             $passwordHash = Hash::make($request->newpassword);
             $user->update([
                 'password' => $passwordHash,
             ]);
-
-            return redirect()->back()->with('users', $user);
-        } else {
-
-            return redirect()->back()->with('users', $user);
+            return redirect()->back()->with('users', $user)->with('passUpdateSuccess', 'Password Update Successfully');
+        }
+        else{
+            return redirect()->back()->withErrors(['oldpassword' => 'Incorrect old password'])->with('passUpdateFailed', 'Update failed');
         }
     }
 
