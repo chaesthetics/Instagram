@@ -208,6 +208,44 @@ class UserController extends Controller
             $filename = Auth::user()->avatar;
         }
 
+        if($request->username != Auth::user()->username){
+            $customMessage = [
+                'username.required' => 'Username field is required',
+                'username.string' => 'Username must be a string',
+                'username.max' => 'Username shoud be no longer than 25 characters',
+                'username.unique' => 'Username is already taken',
+                'fullname.required' => 'Fullname field is required', 
+                'fullname.string' => 'Fullname should be a string',
+                'fullname.max' => 'Fullname should be no longer than 25 characters',
+                'bio.max' => 'Bio should be no longer than 200 characters',
+                'email.regex' => 'Must be a valid email',
+                'email.email' => 'Must be a valid email',
+            ];
+
+            $validatedData = $request->validate([
+                'username' => 'required|string|max:25|unique:users',
+                'fullname' => 'required|string|max:25',
+                'bio' => 'max:200',
+                'email' => 'email',
+            ], $customMessage);
+        }
+
+        else{
+            $customMessage = [
+                'fullname.required' => 'Fullname field is required', 
+                'fullname.string' => 'Fullname should be a string',
+                'fullname.max' => 'Fullname should be no longer than 25 characters',
+                'bio.max' => 'Bio should be no longer than 200 characters',
+                'email.email' => 'Must be a valid email',
+            ];
+
+            $validatedData = $request->validate([
+                'fullname' => 'required|string|max:25',
+                'bio' => 'max:200',
+                'email' => 'email',
+            ], $customMessage);
+        }
+        
         $user->update([
             'username' => $request->username,
             'fullname' => $request->fullname,
@@ -220,7 +258,7 @@ class UserController extends Controller
         $full_name = Auth::user()->fullname;
         $initial = $this->getInitial($full_name);
 
-        return redirect('profile')->with('posts', $posts)->withAuthor($initial);
+        return redirect('profile')->with('posts', $posts)->withAuthor($initial)->with('successupdate','User updated successfully');
 
     }
 
