@@ -184,7 +184,7 @@
                             <form method="post" action="{{ url('/updatepost/' .$item->id)}}">
                                 {!! csrf_field() !!}
                             <h3 class="mb-5 text-lg font-semibold text-gray-900 dark:text-gray-400">Edit Info</h3>
-                            <div class="flex pb-4">
+                            <div class="flex pb-4">           
                                 <img src="{{ $item->image }}" class="w-1/2 h-auto">
                                 <div class="w-full h-auto border pt-5 pb-5 pl-5 pr-5 border-gray-300">
                                     <div class="flex items-center space-x-3 text-sm font-semibold">
@@ -253,7 +253,11 @@
                     </div>
                 @endif
             </div>
-            <img class="mt-2 mb-2 rounded-md max-h-[600px] w-full object-cover" src="{{ $item->image }}">
+            @if(pathinfo($item->image, PATHINFO_EXTENSION) == "mp4")
+                <video class="mt-2 mb-2 rounded-md max-h-[600px] w-full object-cover" controls> <source src="{{ $item->image }}" type="video/mp4"></video>  
+            @else
+                <img class="mt-2 mb-2 rounded-md max-h-[600px] w-full object-cover" src="{{ $item->image }}">
+            @endif
             <div class="card-footer flex justify-between items-center mt-3">
                 <div class="interaction flex text-bold">
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16"> <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/> </svg>
