@@ -180,12 +180,16 @@
                             </svg>
                             <span class="sr-only">Close modal</span>
                         </button>
-                        <div class="p-6 text-center flex h-full relative">
+                        <div class="p-6 text-center flex h-full relative justify-center">
                             <form method="post" action="{{ url('/updatepost/' .$item->id)}}">
                                 {!! csrf_field() !!}
                             <h3 class="mb-5 text-lg font-semibold text-gray-900 dark:text-gray-400">Edit Info</h3>
-                            <div class="flex pb-4">           
-                                <img src="{{ $item->image }}" class="w-1/2 h-auto">
+                            <div class="flex pb-4">        
+                            @if(pathinfo($item->image, PATHINFO_EXTENSION) == "mp4")
+                            <video class="w-1/2 h-auto max-h-[500px] object-cover"> <source src="{{ $item->image }}" type="video/mp4"></video>  
+                            @else   
+                                <img src="{{ $item->image }}" class="w-1/2 h-auto max-h-[500px] object-cover">
+                            @endif
                                 <div class="w-full h-auto border pt-5 pb-5 pl-5 pr-5 border-gray-300">
                                     <div class="flex items-center space-x-3 text-sm font-semibold">
                                     @if($item->user->avatar)
@@ -254,7 +258,7 @@
                 @endif
             </div>
             @if(pathinfo($item->image, PATHINFO_EXTENSION) == "mp4")
-                <video class="mt-2 mb-2 rounded-md max-h-[600px] w-full object-cover" controls> <source src="{{ $item->image }}" type="video/mp4"></video>  
+                <video class="{$item->id} mt-2 mb-2 rounded-md w-full max-h-[600px] bg-black" controls><source src="{{ $item->image }}" type="video/mp4"></video>  
             @else
                 <img class="mt-2 mb-2 rounded-md max-h-[600px] w-full object-cover" src="{{ $item->image }}">
             @endif
