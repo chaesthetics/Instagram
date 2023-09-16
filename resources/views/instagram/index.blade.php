@@ -101,7 +101,11 @@
                                     @else
                                     <a href="{{ url('/profile/'.$item->user->id) }}">
                                     @endif
-                                        <img class="w-full h-[120px] object-cover" src="{{ $item->userpost[0]->image }}">
+                                        @if(pathinfo($item->userpost[0]->image, PATHINFO_EXTENSION) == "mp4")
+                                            <video class="w-full h-[120px] object-cover"><source src="{{ $item->userpost[0]->image }}" type="video/mp4"></video>  
+                                        @else 
+                                            <img class="w-full h-[120px] object-cover" src="{{ $item->userpost[0]->image }}">
+                                        @endif
                                     </a>
                                 </div>
                                 <div class="col-span-1">
@@ -110,7 +114,11 @@
                                     @else
                                     <a href="{{ url('/profile/'.$item->user->id) }}">
                                     @endif
-                                        <img class="w-full h-[120px] object-cover" src="{{ $item->userpost[1]->image }}">
+                                        @if(pathinfo($item->userpost[1]->image, PATHINFO_EXTENSION) == "mp4")
+                                            <video class="w-full h-[120px] object-cover"><source src="{{ $item->userpost[1]->image }}" type="video/mp4"></video>  
+                                        @else 
+                                            <img class="w-full h-[120px] object-cover" src="{{ $item->userpost[1]->image }}">
+                                        @endif
                                     </a>
                                 </div>
                                 <div class="col-span-1">
@@ -119,7 +127,11 @@
                                     @else
                                     <a href="{{ url('/profile/'.$item->user->id) }}">
                                     @endif
-                                        <img class="w-full h-[120px] object-cover" src="{{ $item->userpost[2]->image }}">
+                                        @if(pathinfo($item->userpost[2]->image, PATHINFO_EXTENSION) == "mp4")
+                                            <video class="w-full h-[120px] object-cover"><source src="{{ $item->userpost[2]->image }}" type="video/mp4"></video>  
+                                        @else 
+                                            <img class="w-full h-[120px] object-cover" src="{{ $item->userpost[2]->image }}">
+                                        @endif
                                     </a>
                                 </div>
                             
@@ -130,7 +142,11 @@
                                     @else
                                     <a href="{{ url('/profile/'.$item->user->id) }}">
                                     @endif
-                                        <img class="w-full h-[120px] object-cover" src="{{ $item->userpost[0]->image }}">
+                                        @if(pathinfo($item->userpost[0]->image, PATHINFO_EXTENSION) == "mp4")
+                                            <video class="w-full h-[120px] object-cover"><source src="{{ $item->userpost[0]->image }}" type="video/mp4"></video>  
+                                        @else 
+                                            <img class="w-full h-[120px] object-cover" src="{{ $item->userpost[0]->image }}">
+                                        @endif
                                     </a>
                                 </div>
                                 <div class="col-span-1">
@@ -139,7 +155,11 @@
                                     @else
                                     <a href="{{ url('/profile/'.$item->user->id) }}">
                                     @endif
+                                        @if(pathinfo($item->userpost[1]->image, PATHINFO_EXTENSION) == "mp4")
+                                            <video class="w-full h-[120px] object-cover"><source src="{{ $item->userpost[1]->image }}" type="video/mp4"></video>  
+                                        @else 
                                         <img class="w-full h-[120px] object-cover" src="{{ $item->userpost[1]->image }}">
+                                        @endif
                                     </a>
                                 </div>
                             
@@ -150,7 +170,11 @@
                                     @else
                                     <a href="{{ url('/profile/'.$item->user->id) }}">
                                     @endif
+                                        @if(pathinfo($item->userpost[0]->image, PATHINFO_EXTENSION) == "mp4")
+                                            <video class="w-full h-[120px] object-cover"><source src="{{ $item->userpost[0]->image }}" type="video/mp4"></video>  
+                                        @else 
                                         <img class="w-full h-[120px] object-cover" src="{{ $item->userpost[0]->image }}">
+                                        @endif
                                     </a>
                                 </div>
                             @else
@@ -376,24 +400,48 @@
                             <div class="grid grid-cols-3 w-full justify-center gap-1 mt-2">
                             @if($suggested->posts->count() >= 3)
                                 <div class="col-span-1">
+                                @if(pathinfo($suggested->userpost[0]->image, PATHINFO_EXTENSION) == "mp4")
+                                    <video class="w-full h-[120px] object-cover"><source src="{{ $suggested->userpost[0]->image }}" type="video/mp4"></video>  
+                                @else   
                                    <img class="w-full h-[120px] object-cover" src="{{ $suggested->userpost[0]->image }}">
+                                @endif
                                 </div>
                                 <div class="col-span-1">
+                                @if(pathinfo($suggested->userpost[1]->image, PATHINFO_EXTENSION) == "mp4")
+                                    <video class="w-full h-[120px] object-cover"><source src="{{ $suggested->userpost[1]->image }}" type="video/mp4"></video>  
+                                @else   
                                    <img class="w-full h-[120px] object-cover" src="{{ $suggested->userpost[1]->image }}">
+                                @endif
                                 </div>
                                 <div class="col-span-1">
+                                @if(pathinfo($suggested->userpost[2]->image, PATHINFO_EXTENSION) == "mp4")
+                                    <video class="w-full h-[120px] object-cover"><source src="{{ $suggested->userpost[2]->image }}" type="video/mp4"></video>  
+                                @else   
                                    <img class="w-full h-[120px] object-cover" src="{{ $suggested->userpost[2]->image }}">
+                                @endif
                                 </div>
                             @elseif($suggested->posts->count() == 2)
                                 <div class="col-span-1">
+                                @if(pathinfo($suggested->userpost[0]->image, PATHINFO_EXTENSION) == "mp4")
+                                    <video class="w-full h-[120px] object-cover"><source src="{{ $suggested->userpost[0]->image }}" type="video/mp4"></video>  
+                                @else   
                                    <img class="w-full h-[120px] object-cover" src="{{ $suggested->userpost[0]->image }}">
+                                @endif
                                 </div>
                                 <div class="col-span-1">
+                                @if(pathinfo($suggested->userpost[1]->image, PATHINFO_EXTENSION) == "mp4")
+                                    <video class="w-full h-[120px] object-cover"><source src="{{ $suggested->userpost[1]->image }}" type="video/mp4"></video>  
+                                @else   
                                    <img class="w-full h-[120px] object-cover" src="{{ $suggested->userpost[1]->image }}">
+                                @endif
                                 </div>
                             @elseif($suggested->posts->count() == 1)
                                 <div class="col-span-1">
+                                @if(pathinfo($suggested->userpost[0]->image, PATHINFO_EXTENSION) == "mp4")
+                                    <video class="w-full h-[120px] object-cover"><source src="{{ $suggested->userpost[0]->image }}" type="video/mp4"></video>  
+                                @else   
                                    <img class="w-full h-[120px] object-cover" src="{{ $suggested->userpost[0]->image }}">
+                                @endif
                                 </div>
                             @else
                             @endif
